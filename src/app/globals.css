@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/Raleway/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(0 0% 0%);
+  
+  --primary: hsl(154 100% 33%); /* Vibrant Nigerian Green #00A859 */
+  --primary-foreground: hsl(0 0% 100%);
+  --on-primary: hsl(0 0% 100%);
+  
+  --secondary: hsl(154 100% 33%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --on-secondary: hsl(0 0% 100%);
+  
+  --surface: hsl(0 0% 100%);
+  --on-surface: hsl(0 0% 0%);
+  --surface-container-low: hsl(154 20% 98%);
+  --surface-container: hsl(154 20% 96%);
+  --surface-variant: hsl(154 20% 94%);
+  
+  --on-surface-variant: hsl(0 0% 40%);
+  --outline: hsl(154 10% 88%);
+
+  --radius: 0.5rem;
+
+  --grid-line: hsl(0 0% 0% / 0.05);
+  --grid-dot: hsl(0 0% 0% / 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-on-primary: var(--on-primary);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-on-secondary: var(--on-secondary);
+  
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-variant: var(--surface-variant);
+  
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+
+  --font-headline: "Raleway", sans-serif;
+  --font-body: "Raleway", sans-serif;
+
+  --spacing-section-y: clamp(5.5rem, 10vw, 10rem);
+  --spacing-section-x: clamp(1.5rem, 5vw, 5rem);
+
+  --animate-scroll-horizontal: scroll-horizontal 40s linear infinite;
+  --animate-scroll-vertical: scroll-vertical 30s linear infinite;
+
+  @keyframes scroll-horizontal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-vertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, .font-headline {
+  font-family: var(--font-headline);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.pause-on-hover:hover,
+.pause-on-focus:focus-within {
+  animation-play-state: paused;
+}
+
+@utility section-py {
+  padding-top: var(--spacing-section-y);
+  padding-bottom: var(--spacing-section-y);
+}
+
+@utility section-px {
+  padding-left: var(--spacing-section-x);
+  padding-right: var(--spacing-section-x);
+}
