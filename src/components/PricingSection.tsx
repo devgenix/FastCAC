@@ -96,8 +96,8 @@ export const PricingSection = () => {
   const selected = PACKAGE_CONFIG[selectedPackage];
 
   return (
-    <section id="pricing-v3" className="py-20 md:py-32 bg-white relative font-body">
-      <div className="max-w-[1320px] section-px mx-auto px-6 md:px-12">
+    <section id="pricing" className="py-20 md:py-32 bg-white relative font-body">
+      <div className="max-w-[1320px] section-px mx-auto">
 
         {/* HEADER */}
         <div className="text-center mb-16 md:mb-24">

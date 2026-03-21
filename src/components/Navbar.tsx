@@ -45,7 +45,7 @@ export function Navbar() {
           <Link href="#how-it-works" className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm">
             Process
           </Link>
-          <Link href="#pricing-v3" className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm">
+          <Link href="#pricing" className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm">
             Packages
           </Link>
           <Link

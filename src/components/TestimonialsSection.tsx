@@ -59,52 +59,79 @@ const testimonials = [
   },
 ];
 
+const TestimonialCard = ({
+  name,
+  role,
+  location,
+  avatar,
+  color,
+  quote,
+}: (typeof testimonials)[0]) => (
+  <div className="w-full lg:w-[400px] flex-shrink-0 bg-white border border-outline/10 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+    {/* Quote mark */}
+    <div className="text-4xl leading-none font-black text-secondary/20 select-none font-headline">
+      "
+    </div>
+    <p className="text-on-surface/70 text-sm font-body leading-relaxed flex-grow -mt-3">
+      {quote}
+    </p>
+    <div className="flex items-center gap-3 pt-3 border-t border-outline/5">
+      <div
+        className={`w-10 h-10 rounded-full bg-gradient-to-br ${color} flex items-center justify-center text-white text-xs font-black shrink-0`}
+      >
+        {avatar}
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-on-surface font-headline">{name}</p>
+        <p className="text-xs text-on-surface/40 font-body">
+          {role} · {location}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
 export function TestimonialsSection() {
+  const scrollItems = [...testimonials, ...testimonials, ...testimonials];
+
   return (
-    <section className="py-20 md:py-32 bg-slate-50">
-      <div className="max-w-[1320px] mx-auto px-6 md:px-12">
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-            1,200+ businesses
-            <br className="hidden md:block" />
-            <span className="text-[#00A859]"> started and counting.</span>
-          </h2>
-          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-medium">
-            Nigerian entrepreneurs in every industry trust FastCAC to get them registered, branded, and online.
-          </p>
+    <section className="section-py bg-surface-container-low overflow-hidden">
+      {/* Header */}
+      <div className="max-w-[1320px] section-px mx-auto mb-12">
+        <h2 className="text-2xl lg:text-3xl font-headline font-black tracking-tight">
+          1,200+ BUSINESSES STARTED AND COUNTING
+        </h2>
+        <p className="mt-2 text-on-surface/50 font-body text-sm lg:text-base">
+          Nigerian entrepreneurs in every industry trust FastCAC to get them registered, branded, and online.
+        </p>
+      </div>
+
+      {/* Desktop Horizontal Scroll */}
+      <div className="hidden lg:block max-w-[1320px] mx-auto section-px">
+        <div className="relative group overflow-hidden">
+          <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover">
+            {scrollItems.map((item, index) => (
+              <TestimonialCard key={`desktop-${index}`} {...item} />
+            ))}
+          </div>
+          {/* Fade edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none" />
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm flex flex-col gap-5 hover:shadow-md transition-shadow"
-            >
-              {/* Quote mark */}
-              <div className="text-5xl leading-none font-black text-[#00A859]/20 select-none">
-                "
-              </div>
-
-              <p className="text-slate-700 text-base leading-relaxed font-medium flex-grow -mt-4">
-                {t.quote}
-              </p>
-
-              <div className="flex items-center gap-3 pt-2 border-t border-slate-50">
-                <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-white text-xs font-black shrink-0`}
-                >
-                  {t.avatar}
-                </div>
-                <div>
-                  <p className="text-sm font-black text-slate-900">{t.name}</p>
-                  <p className="text-xs text-slate-400 font-medium">
-                    {t.role} · {t.location}
-                  </p>
-                </div>
-              </div>
+      {/* Mobile Vertical Scroll */}
+      <div className="lg:hidden relative h-[600px] overflow-hidden group">
+        <div className="flex flex-col gap-6 h-max animate-scroll-vertical pause-on-hover">
+          {scrollItems.map((item, index) => (
+            <div key={`mobile-${index}`} className="section-px">
+              <TestimonialCard {...item} />
             </div>
           ))}
         </div>
+        {/* Fade edges */}
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-surface-container-low to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface-container-low to-transparent z-10 pointer-events-none" />
       </div>
     </section>
   );
