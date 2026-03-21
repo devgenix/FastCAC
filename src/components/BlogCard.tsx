@@ -27,7 +27,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
       
       <div className="p-8 flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-mono font-bold text-on-surface/30 uppercase tracking-[0.2em]">
+          <span className="text-[10px] font-mono font-bold text-on-surface/65 uppercase tracking-[0.2em]">
             {post.date}
           </span>
           <span className="w-1 h-1 rounded-full bg-on-surface/20" />
@@ -40,7 +40,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           {post.title}
         </h3>
         
-        <p className="text-on-surface/50 font-body text-sm leading-relaxed line-clamp-3 mb-8 flex-1">
+        <p className="text-on-surface/70 font-body text-sm leading-relaxed line-clamp-3 mb-8 flex-1">
           {post.description}
         </p>
         

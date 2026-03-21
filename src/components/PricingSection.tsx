@@ -110,11 +110,11 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
         <div className="text-center mb-12 md:mb-24">
           <h2 className="text-3xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 px-4">
             Join{" "}
-            <span className="text-[#00A859]">1,200+ businesses.</span>
+            <span className="text-primary">1,200+ businesses.</span>
             <br className="hidden md:block" />
             Start from &#x20A6;100k.
           </h2>
-          <p className="text-lg md:text-2xl text-slate-500 max-w-3xl mx-auto font-medium">
+          <p className="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto font-medium">
             Name, logo, website &amp; CAC registration — all done for you. Government fees included. No hidden charges.
           </p>
         </div>
@@ -146,7 +146,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
             href={waLink(WA_MESSAGES.consultation)}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#00A859] font-semibold hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
             Chat with us on WhatsApp →
           </Link>
@@ -158,7 +158,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
         ${isStickyVisible ? "translate-y-0" : "translate-y-full"}`}>
         <div className="bg-white/90 backdrop-blur-xl px-6 py-4 flex items-center justify-between border-t border-slate-100">
           <div>
-            <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest block mb-0.5 font-mono">
+            <span className="text-[10px] uppercase font-black text-slate-600 tracking-widest block mb-0.5 font-mono">
               {selectedPackage === "full" ? "Starting at" : "Start for only:"}
             </span>
             <div className="text-2xl font-black text-slate-900 tracking-tight font-mono">
@@ -166,7 +166,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
             </div>
           </div>
           <Link href={getWaLink(selectedPackage, selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
-            <button className="bg-[#00A859] text-white px-8 py-5 rounded-xl font-black shadow-[0_8px_20px_rgba(0,168,89,0.3)] active:scale-95 transition-all text-sm uppercase tracking-wider">
+            <button className="bg-primary text-white px-8 py-5 rounded-xl font-black shadow-[0_8px_20px_rgba(0,122,65,0.3)] active:scale-95 transition-all text-sm uppercase tracking-wider">
               {selected.stickyLabel} →
             </button>
           </Link>
@@ -212,14 +212,14 @@ const PricingCard = ({
     }}
     role="button"
     tabIndex={0}
-    aria-selected={isSelected}
+    aria-pressed={isSelected}
     className={`relative p-6 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20
       ${isSelected
-        ? "border-[#00A859] bg-[#00A859]/5 shadow-[0_20px_40px_rgba(0,168,89,0.1)] scale-[1.02]"
+        ? "border-primary bg-primary/5 shadow-[0_20px_40px_rgba(0,122,65,0.1)] scale-[1.02]"
         : "border-slate-100 bg-white hover:border-slate-200"}`}
   >
     {badge && (
-      <div className="absolute top-0 right-8 -translate-y-1/2 bg-[#00A859] text-white text-[11px] uppercase font-black px-5 py-2 rounded-full z-10 shadow-lg shadow-[#00A859]/20 font-mono">
+      <div className="absolute top-0 right-8 -translate-y-1/2 bg-primary text-white text-[11px] uppercase font-black px-5 py-2 rounded-full z-10 shadow-lg shadow-primary/20 font-mono">
         {badge}
       </div>
     )}
@@ -235,7 +235,7 @@ const PricingCard = ({
     <div className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-grow">
       {features.map((feature, i) => (
         <div key={i} className="flex items-center gap-3">
-          <div className="w-5 h-5 rounded-full bg-[#00A859] flex items-center justify-center shrink-0">
+          <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shrink-0">
             <Check className="w-3 h-3 text-white" strokeWidth={4} />
           </div>
           <span className="text-slate-600 font-semibold text-sm md:text-base">{feature}</span>
@@ -252,8 +252,8 @@ const PricingCard = ({
       <button
         className={`w-full py-5 rounded-2xl font-black transition-all active:scale-[0.98] text-lg
           ${isSelected
-            ? "bg-[#00A859] text-white shadow-xl shadow-[#00A859]/30"
-            : "bg-slate-100 text-slate-500 hover:bg-slate-200"}`}
+            ? "bg-primary text-white shadow-xl shadow-primary/30"
+            : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
       >
         {cta}
       </button>

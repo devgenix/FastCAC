@@ -118,19 +118,19 @@ export function Navbar() {
         <div className="hidden md:flex gap-8 items-center">
           <Link
             href="#pricing"
-            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
           >
             Pricing
           </Link>
           <Link
             href="/names"
-            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
           >
             Business Names
           </Link>
           <Link
             href="/blog"
-            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
           >
             Blog
           </Link>
@@ -164,8 +164,8 @@ export function Navbar() {
             </div>
           ) : (
             <div className="space-y-1.5" aria-hidden="true">
-              <div className="w-5 h-0.5 bg-current opacity-70" />
-              <div className="w-5 h-0.5 bg-current opacity-70" />
+              <div className="w-5 h-0.5 bg-current" />
+              <div className="w-5 h-0.5 bg-current" />
             </div>
           )}
         </button>
@@ -186,7 +186,7 @@ export function Navbar() {
               className="text-2xl font-headline tracking-tighter"
               onClick={() => setIsMenuOpen(false)}
             >
-              Fast<span className="opacity-60">CAC</span>
+              Fast<span className="opacity-70">CAC</span>
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}

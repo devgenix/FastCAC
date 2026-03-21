@@ -83,7 +83,7 @@ const TestimonialCard = ({
       </div>
       <div>
         <p className="text-sm font-semibold text-on-surface font-headline">{name}</p>
-        <p className="text-xs text-on-surface/40 font-body">
+        <p className="text-xs text-on-surface/65 font-body">
           {role} · {location}
         </p>
       </div>
@@ -101,7 +101,7 @@ export function TestimonialsSection() {
         <h2 className="text-2xl lg:text-3xl font-headline font-black tracking-tight">
           1,200+ BUSINESSES STARTED AND COUNTING
         </h2>
-        <p className="mt-2 text-on-surface/50 font-body text-sm lg:text-base">
+        <p className="mt-2 text-on-surface/70 font-body text-sm lg:text-base">
           Nigerian entrepreneurs in every industry trust FastCAC to get them registered, branded, and online.
         </p>
       </div>

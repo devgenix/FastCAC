@@ -50,15 +50,15 @@ export function TimelineSection() {
     <section className="py-20 md:py-32 bg-slate-50">
       <div className="max-w-[1320px] mx-auto px-6 md:px-12">
         <div className="text-center mb-16 md:mb-24">
-          <span className="inline-block text-xs font-black uppercase tracking-[0.2em] text-primary opacity-80 mb-4 font-mono">
+          <span className="inline-block text-xs font-black uppercase tracking-[0.2em] text-primary mb-4 font-mono">
             The 5-Day Promise
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-4">
             What happens after
             <br className="hidden md:block" />
-            <span className="text-[#00A859]"> you say yes.</span>
+            <span className="text-primary"> you say yes.</span>
           </h2>
-          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-medium">
             No chasing. No delays. A clear, 5-day process — you watch, we deliver.
           </p>
         </div>
@@ -86,7 +86,7 @@ export function TimelineSection() {
                 <h3 className="text-lg font-black text-slate-900 mb-3">
                   {item.label}
                 </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export function TimelineSection() {
                 <h3 className="text-base font-black text-slate-900 mb-2">
                   {item.label}
                 </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   {item.description}
                 </p>
               </div>

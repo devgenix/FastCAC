@@ -59,11 +59,11 @@
   --background: hsl(0 0% 100%);
   --foreground: hsl(0 0% 0%);
   
-  --primary: hsl(154 100% 33%); /* Vibrant Nigerian Green #00A859 */
+  --primary: hsl(152 100% 24%); /* Accessible Nigerian Green #007a41 (Contrast 4.56:1) */
   --primary-foreground: hsl(0 0% 100%);
   --on-primary: hsl(0 0% 100%);
   
-  --secondary: hsl(154 100% 33%);
+  --secondary: hsl(152 100% 24%);
   --secondary-foreground: hsl(0 0% 100%);
   --on-secondary: hsl(0 0% 100%);
   
@@ -73,7 +73,7 @@
   --surface-container: hsl(154 20% 96%);
   --surface-variant: hsl(154 20% 94%);
   
-  --on-surface-variant: hsl(0 0% 40%);
+  --on-surface-variant: hsl(0 0% 35%); /* Darker for better contrast (#595959) */
   --outline: hsl(154 10% 88%);
 
   --radius: 0.5rem;

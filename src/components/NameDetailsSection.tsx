@@ -17,7 +17,7 @@ export function NameDetailsSection({ name }: NameDetailsSectionProps) {
               <h2 className="text-3xl lg:text-5xl font-headline font-black italic tracking-tight mb-6">
                 Why <span className="text-primary italic">"{name}"</span> is a Great Choice
               </h2>
-              <p className="text-xl text-on-surface/60 font-body leading-relaxed">
+              <p className="text-xl text-on-surface/70 font-body leading-relaxed">
                 This name has been pre-vetted by our branding experts for high recall, 
                 cultural relevance, and digital-first presence in the Nigerian market.
               </p>
@@ -59,20 +59,20 @@ export function NameDetailsSection({ name }: NameDetailsSectionProps) {
 
               <div className="p-6 bg-surface-container-low rounded-2xl border border-outline/5 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-body text-on-surface/50">CAC Availability</span>
+                  <span className="text-sm font-body text-on-surface/70">CAC Availability</span>
                   <span className="text-sm font-mono font-bold text-primary">CLEAR</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-body text-on-surface/50">Domain (.com.ng)</span>
+                  <span className="text-sm font-body text-on-surface/70">Domain (.com.ng)</span>
                   <span className="text-sm font-mono font-bold text-primary">READY</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-body text-on-surface/50">Trademark Risk</span>
+                  <span className="text-sm font-body text-on-surface/70">Trademark Risk</span>
                   <span className="text-sm font-mono font-bold text-primary">LOW</span>
                 </div>
               </div>
 
-              <p className="text-sm text-on-surface/40 font-body font-normal leading-snug">
+              <p className="text-sm text-on-surface/65 font-body font-normal leading-snug">
                 Claiming this name starts the registration process immediately. We will reserve 
                 the name with CAC and secure your domain within 24 hours of payment.
               </p>

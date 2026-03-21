@@ -68,7 +68,7 @@ export function FaqSection() {
                 key={i}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   openIndex === i
-                    ? "border-[#00A859]/30 bg-emerald-50/50 shadow-sm"
+                    ? "border-primary/30 bg-emerald-50/50 shadow-sm"
                     : "border-slate-100 bg-white hover:border-slate-200"
                 }`}
               >
@@ -85,7 +85,7 @@ export function FaqSection() {
                   <span
                     className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 text-sm ${
                       openIndex === i
-                        ? "border-[#00A859] text-[#00A859] rotate-45"
+                        ? "border-primary text-primary rotate-45"
                         : "border-slate-300 text-slate-400"
                     }`}
                   >
@@ -101,7 +101,7 @@ export function FaqSection() {
                     openIndex === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                   } overflow-hidden`}
                 >
-                  <p className="px-6 pb-6 text-slate-500 text-base leading-relaxed">
+                  <p className="px-6 pb-6 text-slate-600 text-base leading-relaxed">
                     {item.a}
                   </p>
                 </div>
@@ -109,13 +109,13 @@ export function FaqSection() {
             ))}
           </div>
 
-          <p className="text-lg text-slate-500 font-medium text-center">
+          <p className="text-lg text-slate-600 font-medium text-center">
             Still unsure?{" "}
             <Link
               href={waLink(WA_MESSAGES.whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#00A859] font-semibold hover:underline"
+              className="text-primary font-semibold hover:underline"
             >
               Chat with us on WhatsApp →
             </Link>

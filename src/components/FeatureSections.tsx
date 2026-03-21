@@ -104,14 +104,14 @@ export function ChecklistSection() {
                     <h4 className="font-headline italic text-xl lg:text-2xl leading-tight mb-1">
                       {item.title}
                     </h4>
-                    <p className="text-on-surface/50 font-body text-sm lg:text-base leading-relaxed">
+                    <p className="text-on-surface/70 font-body text-sm lg:text-base leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
                   {/* Check mark */}
                   <div className="flex-shrink-0 mt-0.5 w-6 h-6 rounded-full border border-outline/10 flex items-center justify-center group-hover:border-secondary/40 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
-                    <Check className="w-3.5 h-3.5 text-on-surface/30 group-hover:text-white transition-colors duration-300" />
+                    <Check className="w-3.5 h-3.5 text-on-surface/60 group-hover:text-white transition-colors duration-300" />
                   </div>
                 </div>
               );
@@ -182,7 +182,7 @@ export function HowItWorks() {
           <h2 className="text-4xl lg:text-6xl font-headline tracking-tighter leading-[0.9] mb-4">
             How FastCAC Works
           </h2>
-          <p className="text-lg lg:text-xl text-on-surface/50 font-body leading-snug">
+          <p className="text-lg lg:text-xl text-on-surface/70 font-body leading-snug">
             Three steps. We do the work.{" "}
             <span className="text-on-surface font-medium underline decoration-secondary decoration-2 underline-offset-4">
               You get a running business.
@@ -207,7 +207,7 @@ export function HowItWorks() {
                     <span className="w-9 h-9 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center">
                       <Icon className="w-4 h-4 text-secondary" />
                     </span>
-                    <span className="font-mono text-xs text-on-surface/40 tracking-widest uppercase">
+                    <span className="font-mono text-xs text-on-surface/60 tracking-widest uppercase">
                       Step {step.phase}
                     </span>
                   </div>
@@ -215,7 +215,7 @@ export function HowItWorks() {
                   <h3 className="font-headline italic text-3xl lg:text-[2.8rem] leading-tight tracking-tight">
                     {step.title}
                   </h3>
-                  <p className="text-on-surface/55 font-body text-base lg:text-lg leading-relaxed max-w-md">
+                  <p className="text-on-surface/70 font-body text-base lg:text-lg leading-relaxed max-w-md">
                     {step.description}
                   </p>
 
@@ -224,7 +224,7 @@ export function HowItWorks() {
                     <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
                       <Check className="w-3 h-3 text-white" />
                     </div>
-                    <span className="text-sm font-body text-on-surface/50">
+                    <span className="text-sm font-body text-on-surface/70">
                       {index === 0 && "Name options in 24 hrs"}
                       {index === 1 && "CAC + logo + website — all handled"}
                       {index === 2 && "Live & legal in 5 business days"}

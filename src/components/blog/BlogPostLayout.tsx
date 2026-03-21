@@ -43,7 +43,7 @@ export function BlogPostLayout({
       <article className="max-w-[1320px] mx-auto section-px">
         <a 
           href="/blog" 
-          className="inline-flex items-center text-sm font-mono text-on-surface/40 hover:text-primary transition-colors mb-8 group"
+          className="inline-flex items-center text-sm font-mono text-on-surface/65 hover:text-primary transition-colors mb-8 group"
         >
           <span className="group-hover:-translate-x-1 transition-transform mr-2">←</span>
           Back to Blog
@@ -54,11 +54,11 @@ export function BlogPostLayout({
           <h1 className="text-4xl lg:text-7xl font-headline font-black italic tracking-tighter leading-[1] mb-8 animate-fade-up">
             {title}
           </h1>
-          <p className="text-xl lg:text-2xl text-on-surface/60 font-body max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up [animation-delay:200ms]">
+          <p className="text-xl lg:text-2xl text-on-surface/70 font-body max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up [animation-delay:200ms]">
             {description}
           </p>
           
-          <div className="flex items-center justify-center gap-6 text-sm font-mono text-on-surface/40 animate-fade-up [animation-delay:400ms]">
+          <div className="flex items-center justify-center gap-6 text-sm font-mono text-on-surface/65 animate-fade-up [animation-delay:400ms]">
             <span>{date}</span>
             <span className="w-1 h-1 rounded-full bg-outline" />
             <span>{readTime}</span>
@@ -101,7 +101,7 @@ export function BlogPostLayout({
                   Start Your Business{" "}
                   <span className="underline decoration-primary decoration-4 underline-offset-8">Today</span>
                 </h2>
-                <p className="text-lg text-on-surface/50 max-w-xl mx-auto font-body">
+                <p className="text-lg text-on-surface/70 max-w-xl mx-auto font-body">
                   Join 1,200+ Nigerian founders who got their business name, logo, website, and CAC certificate — in 5 days or less.
                 </p>
 

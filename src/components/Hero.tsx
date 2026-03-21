@@ -53,7 +53,7 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
               <h1 className="text-[2.2rem] lg:text-6xl font-headline leading-[1] lg:leading-[0.9] text-on-surface">
                 {title || defaultTitle}
               </h1>
-              <p className="text-lg lg:text-2xl text-on-surface/60 max-w-xl leading-snug font-body">
+              <p className="text-lg lg:text-2xl text-on-surface/70 max-w-xl leading-snug font-body">
                 {subtitle || defaultSubtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">

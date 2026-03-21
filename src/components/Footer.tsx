@@ -17,7 +17,7 @@ export function FinalCTA() {
               Start Your Business{" "}
               <span className="underline decoration-secondary decoration-4 underline-offset-8">Today</span>
             </h2>
-            <p className="text-lg lg:text-xl text-on-surface/50 mb-12 max-w-xl mx-auto font-body">
+            <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-xl mx-auto font-body">
               Join 1,200+ Nigerian founders who got their business name, logo, website, and CAC certificate — in 5 days or less.
             </p>
 
@@ -50,12 +50,12 @@ export function Footer() {
               <span className="text-primary">Fast</span>
               <span className="opacity-60">CAC</span>
             </div>
-            <p className="text-on-surface/40 text-sm leading-relaxed font-body">
+            <p className="text-on-surface/65 text-sm leading-relaxed font-body">
               Nigeria's fastest way to get your business registered, branded, and online — in 5 days.
             </p>
           </div>
           <div>
-            <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Ecosystem</h5>
+            <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Ecosystem</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li><a className="hover:text-secondary transition-colors" href="#how-it-works">How it Works</a></li>
               <li><a className="hover:text-secondary transition-colors" href="#pricing">Packages</a></li>
@@ -64,7 +64,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Legal</h5>
+            <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Legal</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li><Link className="hover:text-secondary transition-colors" href="/privacy">Privacy Policy</Link></li>
               <li><Link className="hover:text-secondary transition-colors" href="/terms">Terms of Use</Link></li>
@@ -72,7 +72,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Contact</h5>
+            <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Contact</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li>
                 <a href="mailto:hello@fastcac.com" className="hover:text-secondary transition-colors">hello@fastcac.com</a>
@@ -92,10 +92,10 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-outline/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[10px] font-mono opacity-20 uppercase tracking-widest">
+          <p className="text-[10px] font-mono opacity-60 uppercase tracking-widest">
             © {new Date().getFullYear()} FastCAC
           </p>
-          <div className="flex gap-6 opacity-20 hover:opacity-100 transition-opacity">
+          <div className="flex gap-6 opacity-60 hover:opacity-100 transition-opacity">
             <a href="#" className="font-mono text-[10px] uppercase cursor-pointer hover:text-secondary" aria-label="FastCAC on X (Twitter)">Twitter</a>
             <a href="#" className="font-mono text-[10px] uppercase cursor-pointer hover:text-secondary" aria-label="FastCAC on LinkedIn">LinkedIn</a>
           </div>
