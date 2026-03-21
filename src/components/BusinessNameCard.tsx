@@ -23,14 +23,14 @@ export const BusinessNameCard = ({
 
   return (
     <div className={`
-      group relative p-6 rounded-3xl transition-all duration-500 flex flex-col justify-between overflow-hidden h-full
+      group relative p-6 rounded-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden h-full border
       ${isPremium 
-        ? 'glass-card premium-glow' 
-        : 'bg-white dark:bg-surface-container border border-outline/10 hover:border-primary/30 shadow-sm hover:shadow-xl'
+        ? 'bg-white dark:bg-surface-container border-primary/20 shadow-sm' 
+        : 'bg-white dark:bg-surface-container border-outline/10 shadow-sm'
       }
     `}>
-      {/* Background Decorative Element */}
-      <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors" />
+      {/* Minimal Background Element */}
+      <div className="absolute -right-2 -top-2 w-20 h-20 bg-primary/5 rounded-full blur-xl" />
       
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
@@ -64,7 +64,7 @@ export const BusinessNameCard = ({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 bg-on-surface text-surface dark:bg-primary dark:text-on-primary rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all group-hover:premium-glow"
+            className="w-full py-3 bg-black text-white dark:bg-white dark:text-black rounded-xl font-headline font-bold text-sm flex items-center justify-center gap-2 transition-opacity hover:opacity-90 active:scale-[0.98]"
           >
             <WhatsApp className="w-4 h-4" />
             Get This Name

@@ -25,15 +25,14 @@ export function NameMarketplace() {
   return (
     <div className="min-h-screen bg-surface">
       {/* Interactive Hero Section */}
-      <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-surface-container-low">
-        {/* Animated Background Elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-[120px] animate-pulse delay-700" />
+      <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-surface-container-low border-b border-outline/5">
+        {/* Clean Background */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,var(--primary-foreground),transparent)] opacity-20" />
         
         <div className="max-w-[1320px] section-px mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-headline font-bold mb-8 animate-float">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary text-[10px] font-headline font-bold mb-8">
             <Zap className="w-3 h-3" />
-            <span>READY-TO-USE BUSINESS IDENTITIES</span>
+            <span>CURATED BUSINESS IDENTITIES</span>
           </div>
           
           <h1 className="text-4xl lg:text-8xl font-headline font-black italic tracking-tighter leading-[0.9] mb-8">
@@ -46,11 +45,10 @@ export function NameMarketplace() {
             premium domains and industry-specific taglines.
           </p>
 
-          {/* Premium Search Bar Centerpiece */}
+          {/* Professional Search Bar */}
           <div className="max-w-2xl mx-auto relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-emerald-500/20 rounded-[2rem] blur opacity-25 group-focus-within:opacity-100 transition duration-1000 group-focus-within:duration-200" />
-            <div className="relative flex items-center bg-white dark:bg-black border border-outline/10 focus-within:border-primary/50 rounded-[1.8rem] p-2 pl-6 shadow-2xl transition-all">
-              <Search className="w-6 h-6 text-on-surface/30" />
+            <div className="relative flex items-center bg-white dark:bg-surface-container border border-outline focus-within:border-primary rounded-[1.2rem] p-1.5 pl-6 shadow-sm transition-all">
+              <Search className="w-5 h-5 text-on-surface/40" />
               <input 
                 type="text"
                 placeholder="Search by keyword, industry or name..."
