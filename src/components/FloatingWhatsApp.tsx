@@ -1,11 +1,13 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { WhatsApp } from './Icons';
 import { waLink, WA_MESSAGES } from '@/lib/whatsapp';
 
 export function FloatingWhatsApp() {
   const [isStickyVisible, setIsStickyVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +19,11 @@ export function FloatingWhatsApp() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHomepage = pathname === '/';
+
   return (
     <div className={`fixed left-8 z-[70] flex flex-row items-center gap-3 group transition-all duration-500
-      ${isStickyVisible ? "bottom-[112px] md:bottom-8" : "bottom-8"}`}>
+      ${(isStickyVisible && isHomepage) ? "bottom-[112px] md:bottom-8" : "bottom-8"}`}>
       <Link
         href={waLink(WA_MESSAGES.whatsapp)}
         target="_blank"
