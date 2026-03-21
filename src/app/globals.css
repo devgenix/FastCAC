@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+/* Raleway - Headline */
 @font-face {
   font-family: 'Raleway';
-  src: url('/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -10,10 +11,48 @@
 
 @font-face {
   font-family: 'Raleway';
-  src: url('/Raleway/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/Raleway/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
+}
+
+/* Inter - Body */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Space Mono - Accent */
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* Exclude U+20A6 (₦) — Space Mono maps it to # so we let Inter handle it */
+  unicode-range: U+0000-20A5, U+20A7-FFFF;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/Space_Mono/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  /* Exclude U+20A6 (₦) — Space Mono maps it to # so we let Inter handle it */
+  unicode-range: U+0000-20A5, U+20A7-FFFF;
 }
 
 :root {
@@ -65,7 +104,8 @@
   --color-outline: var(--outline);
 
   --font-headline: "Raleway", sans-serif;
-  --font-body: "Raleway", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Space Mono", "Inter", monospace;
 
   --spacing-section-y: 3.5rem;
   --spacing-section-x: 1rem;

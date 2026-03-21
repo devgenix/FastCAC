@@ -101,11 +101,13 @@ export const PricingSection = () => {
         {/* HEADER */}
         <div className="text-center mb-16 md:mb-24">
           <h2 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-tight mb-6">
-            Pick Your Package. <br className="hidden md:block" />
-            <span className="text-[#00A859]">We Handle Everything.</span>
+            Join{" "}
+            <span className="text-[#00A859]">1,200+ businesses.</span>
+            <br className="hidden md:block" />
+            Start from &#x20A6;100k.
           </h2>
           <p className="text-lg md:text-2xl text-slate-500 max-w-3xl mx-auto font-medium">
-            Name, logo, website, and CAC registration — all done for you. No paperwork, no government queues.
+            Name, logo, website &amp; CAC registration — all done for you. Government fees included. No hidden charges.
           </p>
         </div>
 
@@ -148,10 +150,10 @@ export const PricingSection = () => {
         ${isStickyVisible ? "translate-y-0" : "translate-y-full"}`}>
         <div className="bg-white px-6 py-4 flex items-center justify-between border-t border-slate-100 backdrop-blur-xl bg-white/90">
           <div>
-            <span className="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-0.5">
-              {selectedPackage === "full" ? "Starting at" : "Investment"}
+            <span className="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-0.5 font-mono">
+              {selectedPackage === "full" ? "Starting at" : "Start for only:"}
             </span>
-            <div className="text-2xl font-black text-slate-900 tracking-tight">
+            <div className="text-2xl font-black text-slate-900 tracking-tight font-mono">
               {formatPrice(PRICES[selectedPackage])}
             </div>
           </div>
@@ -199,7 +201,7 @@ const PricingCard = ({
         : "border-slate-100 bg-white hover:border-slate-200"}`}
   >
     {badge && (
-      <div className="absolute top-0 right-8 -translate-y-1/2 bg-[#00A859] text-white text-[11px] uppercase font-black px-5 py-2 rounded-full z-10 shadow-lg shadow-[#00A859]/20">
+      <div className="absolute top-0 right-8 -translate-y-1/2 bg-[#00A859] text-white text-[11px] uppercase font-black px-5 py-2 rounded-full z-10 shadow-lg shadow-[#00A859]/20 font-mono">
         {badge}
       </div>
     )}
@@ -207,8 +209,8 @@ const PricingCard = ({
     <div className="mb-10">
       <h3 className="text-2xl font-black text-slate-900 mb-2">{title}</h3>
       <div className="flex items-baseline gap-1">
-        <span className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">{formatPrice(price)}</span>
-        {isPlus && <span className="text-2xl font-black text-slate-400">+</span>}
+        <span className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight font-mono">{formatPrice(price)}</span>
+        {isPlus && <span className="text-2xl font-black text-slate-400 font-mono">+</span>}
       </div>
     </div>
 

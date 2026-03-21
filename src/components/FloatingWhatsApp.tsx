@@ -5,16 +5,11 @@ import { WhatsApp } from './Icons';
 import { waLink, WA_MESSAGES } from '@/lib/whatsapp';
 
 export function FloatingWhatsApp() {
-  const [isPricingVisible, setIsPricingVisible] = useState(false);
+  const [isStickyVisible, setIsStickyVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const pricingSection = document.getElementById("pricing-v3");
-      if (!pricingSection) return;
-
-      const rect = pricingSection.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-      setIsPricingVisible(isVisible);
+      setIsStickyVisible(window.scrollY > 400);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,7 +19,7 @@ export function FloatingWhatsApp() {
 
   return (
     <div className={`fixed left-8 z-[70] flex flex-row items-center gap-3 group transition-all duration-500
-      ${isPricingVisible ? "bottom-[112px] md:bottom-8" : "bottom-8"}`}>
+      ${isStickyVisible ? "bottom-[112px] md:bottom-8" : "bottom-8"}`}>
       <Link
         href={waLink(WA_MESSAGES.whatsapp)}
         target="_blank"

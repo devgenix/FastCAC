@@ -12,12 +12,12 @@ export function TrustSection() {
   return (
     <section className="py-12 border-y border-outline/5">
       <div className="max-w-[1320px] mx-auto">
-        <div className="flex justify-center items-center opacity-70">
+        <div className="flex justify-center items-center">
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
             {offerings.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 group cursor-default">
-                <item.icon className="w-5 h-5 text-secondary" />
-                <span className="font-headline italic text-lg tracking-tight text-on-surface">
+              <div key={i} className="flex items-center gap-2.5 group cursor-default">
+                <item.icon className="w-5 h-5 text-primary" />
+                <span className="font-headline italic text-lg tracking-tight text-on-surface font-semibold">
                   {item.name}
                 </span>
               </div>

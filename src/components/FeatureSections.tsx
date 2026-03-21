@@ -186,12 +186,8 @@ export function HowItWorks() {
 
         {/* Header */}
         <div className="mb-16 lg:mb-24 max-w-xl">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-mono text-xs tracking-widest uppercase mb-5">
-            The Process
-          </span>
-          <h2 className="text-4xl lg:text-8xl font-headline tracking-tighter leading-[0.9] mb-4">
-            How FastCAC <br />
-            <span className="italic">Works</span>
+          <h2 className="text-4xl lg:text-6xl font-headline tracking-tighter leading-[0.9] mb-4">
+            How FastCAC Works
           </h2>
           <p className="text-lg lg:text-xl text-on-surface/50 font-body leading-snug">
             Three steps. We do the work.{" "}

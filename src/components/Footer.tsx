@@ -9,13 +9,13 @@ export function FinalCTA() {
   return (
     <section className="section-py bg-white">
       <div className="max-w-[1320px] section-px mx-auto">
-        <div className="bg-surface-container rounded-[2rem] p-10 lg:p-24 text-center relative overflow-hidden border border-outline/5">
+        <div className="bg-surface-container rounded-[1rem] px-4 py-6 lg:p-12 text-center relative overflow-hidden border border-outline/5">
           <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
           <div className="relative z-10 space-y-8">
             <h2 className="text-4xl lg:text-7xl font-headline italic tracking-tight leading-[1.1]">
-              Ready to Own Your <br /> Business{" "}
-              <span className="underline decoration-secondary decoration-4 underline-offset-8">Today?</span>
+              Start Your Business{" "}
+              <span className="underline decoration-secondary decoration-4 underline-offset-8">Today</span>
             </h2>
             <p className="text-lg lg:text-xl text-on-surface/50 mb-12 max-w-xl mx-auto font-body">
               Join 1,200+ Nigerian founders who got their business name, logo, website, and CAC certificate — in 5 days or less.
@@ -27,26 +27,6 @@ export function FinalCTA() {
                   Start My Business Now
                 </Button>
               </Link>
-              <Link href={waLink(WA_MESSAGES.consultation)} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="border-outline/10 h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase hover:bg-surface-container-low transition-all">
-                  Book a Free Consultation
-                </Button>
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-8 pt-12 mt-12 border-t border-outline/5 opacity-40">
-              <div className="flex items-center gap-2">
-                <Verified className="w-4 h-4 text-secondary" />
-                <span className="font-mono text-[10px] uppercase tracking-wider">Official CAC Agent</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Rocket className="w-4 h-4 text-secondary" />
-                <span className="font-mono text-[10px] uppercase tracking-wider">5-Day Delivery</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-secondary" />
-                <span className="font-mono text-[10px] uppercase tracking-wider">Secure Payment</span>
-              </div>
             </div>
           </div>
         </div>
