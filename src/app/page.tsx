@@ -4,6 +4,14 @@ import { FinalCTA } from "@/components/Footer";
 import { PricingSection } from "@/components/PricingSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { HowItWorks, ChecklistSection } from "@/components/FeatureSections";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 
 export default function Home() {
   return (

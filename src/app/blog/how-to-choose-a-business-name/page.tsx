@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "How to Choose a Great Business Name | FastCAC Blog",
   description: "Choosing a name is the first step toward building a brand. Learn how to pick a name that is simple, unique, and long-term from the team at FastCAC.",
   alternates: {
-    canonical: "https://fastcac.com/blog/how-to-choose-a-business-name",
+    canonical: "/blog/how-to-choose-a-business-name",
   },
   openGraph: {
     title: "How to Choose a Great Business Name | FastCAC",

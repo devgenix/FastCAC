@@ -2,6 +2,13 @@ import React from "react";
 import { BusinessNamesSection } from "@/components/BusinessNamesSection";
 import { NameGrid } from "@/components/NameGrid";
 import { FinalCTA } from "@/components/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/names",
+  },
+};
 
 export default function NamesPage() {
   return (

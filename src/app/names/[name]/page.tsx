@@ -20,6 +20,9 @@ export async function generateMetadata({ params }: NamePageProps): Promise<Metad
   return {
     title: `Claim ${name} — Business Name & CAC Registration | FastCAC`,
     description: `Register your business as ${name} with CAC, get a professional logo and a website in 5 days. Flat fee, no hidden charges.`,
+    alternates: {
+      canonical: `/names/${rawName}`,
+    },
   };
 }
 

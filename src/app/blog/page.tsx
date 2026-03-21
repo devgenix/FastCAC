@@ -6,6 +6,9 @@ import { BlogCard } from "@/components/BlogCard";
 export const metadata: Metadata = {
   title: "FastCAC Blog — Scaling Your Business in Nigeria",
   description: "Expert guides on branding, business registration, and scaling your startup in Nigeria from the team at FastCAC.",
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
     title: "FastCAC Blog — Scaling Your Business in Nigeria",
     description: "Expert guides on branding, business registration, and scaling your startup in Nigeria.",
