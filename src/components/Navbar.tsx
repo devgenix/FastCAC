@@ -196,7 +196,7 @@ export function Navbar() {
               &times;
             </button>
           </div>
-          <div className="flex flex-col gap-6 text-xl">
+          <div className="flex flex-col gap-8 text-2xl font-headline italic tracking-tight">
             <Link
               href="#pricing"
               onClick={() => setIsMenuOpen(false)}

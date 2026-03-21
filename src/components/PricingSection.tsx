@@ -107,8 +107,8 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
       <div className="max-w-[1320px] section-px mx-auto">
 
         {/* HEADER */}
-        <div className="text-center mb-16 md:mb-24">
-          <h2 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+        <div className="text-center mb-12 md:mb-24">
+          <h2 className="text-3xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 px-4">
             Join{" "}
             <span className="text-[#00A859]">1,200+ businesses.</span>
             <br className="hidden md:block" />
@@ -120,7 +120,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
         </div>
 
         {/* PACKAGE CARDS */}
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-6 mb-12">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-6 mb-12">
           {(Object.entries(PACKAGE_CONFIG) as [PackageType, typeof PACKAGE_CONFIG["starter"]][]).map(([type, config]) => (
             <PricingCard
               key={type}
@@ -213,7 +213,7 @@ const PricingCard = ({
     role="button"
     tabIndex={0}
     aria-selected={isSelected}
-    className={`relative p-8 md:p-10 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20
+    className={`relative p-6 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20
       ${isSelected
         ? "border-[#00A859] bg-[#00A859]/5 shadow-[0_20px_40px_rgba(0,168,89,0.1)] scale-[1.02]"
         : "border-slate-100 bg-white hover:border-slate-200"}`}
@@ -224,21 +224,21 @@ const PricingCard = ({
       </div>
     )}
 
-    <div className="mb-10">
-      <h3 className="text-2xl font-black text-slate-900 mb-2">{title}</h3>
+    <div className="mb-6 md:mb-10">
+      <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-1">{title}</h3>
       <div className="flex items-baseline gap-1">
-        <span className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight font-mono">{formatPrice(price)}</span>
-        {isPlus && <span className="text-2xl font-black text-slate-400 font-mono">+</span>}
+        <span className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight font-mono">{formatPrice(price)}</span>
+        {isPlus && <span className="text-xl md:text-2xl font-black text-slate-400 font-mono">+</span>}
       </div>
     </div>
 
-    <div className="space-y-4 mb-12 flex-grow">
+    <div className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-grow">
       {features.map((feature, i) => (
         <div key={i} className="flex items-center gap-3">
           <div className="w-5 h-5 rounded-full bg-[#00A859] flex items-center justify-center shrink-0">
             <Check className="w-3 h-3 text-white" strokeWidth={4} />
           </div>
-          <span className="text-slate-600 font-semibold">{feature}</span>
+          <span className="text-slate-600 font-semibold text-sm md:text-base">{feature}</span>
         </div>
       ))}
     </div>

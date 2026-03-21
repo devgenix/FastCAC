@@ -22,8 +22,22 @@ export function FloatingWhatsApp() {
   const isHomepage = pathname === '/';
 
   return (
-    <div className={`fixed left-8 z-[70] flex flex-row items-center gap-3 group transition-all duration-500
-      ${(isStickyVisible && isHomepage) ? "bottom-[112px] md:bottom-8" : "bottom-8"}`}>
+    <div
+      className={`fixed transition-all duration-300 z-[100] cursor-pointer group flex flex-row items-center gap-3
+        ${isStickyVisible && isHomepage
+          ? "bottom-[140px]"
+          : "bottom-8 lg:bottom-12"
+        }
+        right-4 lg:right-12`}
+    >
+      <div className="absolute right-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden lg:block">
+        <div className="bg-surface-container-high border border-outline/10 px-4 py-2 rounded-2xl shadow-xl">
+          <p className="text-on-surface font-headline font-bold text-sm tracking-tight italic">
+            Need help? <span className="text-[#25D366]">Chat with us</span>
+          </p>
+        </div>
+      </div>
+
       <Link
         href={waLink(WA_MESSAGES.whatsapp)}
         target="_blank"
@@ -36,10 +50,6 @@ export function FloatingWhatsApp() {
           <WhatsApp className="w-8 h-8 fill-current" />
         </div>
       </Link>
-
-      <div className="bg-white px-4 py-2 rounded-lg shadow-xl border border-gray-100 opacity-0 group-hover:opacity-100 lg:opacity-100 transition-opacity whitespace-nowrap">
-        <p className="text-[#075E54] font-medium text-sm">Need help?</p>
-      </div>
     </div>
   );
 }

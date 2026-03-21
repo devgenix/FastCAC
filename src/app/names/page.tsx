@@ -8,7 +8,7 @@ export default function NamesPage() {
     <div className="min-h-screen">
       <div className="section-py pb-0">
         <div className="max-w-[1320px] section-px mx-auto text-center space-y-6">
-          <h1 className="text-4xl lg:text-7xl font-headline italic tracking-tight leading-[1.1]">
+          <h1 className="text-[2.2rem] lg:text-7xl font-headline italic tracking-tight leading-[1.1]">
             Find the Perfect <br />
             <span className="text-primary italic">Business Name</span>
           </h1>

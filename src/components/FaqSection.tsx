@@ -55,8 +55,8 @@ export function FaqSection() {
   return (
     <section id="faq" className="py-20 md:py-32 bg-white">
       <div className="max-w-[1320px] mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4 px-4">
             Everything you need to know.
           </h2>
         </div>

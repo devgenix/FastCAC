@@ -7,7 +7,7 @@ import { HowItWorks, ChecklistSection } from "@/components/FeatureSections";
 
 export default function Home() {
   return (
-    <div className="selection:bg-primary/20">
+    <div className="selection:bg-primary/20 pb-36 md:pb-0">
       <Hero />
       <ChecklistSection />
       <HowItWorks />
