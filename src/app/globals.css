@@ -67,8 +67,8 @@
   --font-headline: "Raleway", sans-serif;
   --font-body: "Raleway", sans-serif;
 
-  --spacing-section-y: clamp(5.5rem, 10vw, 10rem);
-  --spacing-section-x: clamp(1.5rem, 5vw, 5rem);
+  --spacing-section-y: 3.5rem;
+  --spacing-section-x: 1rem;
 
   --animate-scroll-horizontal: scroll-horizontal 40s linear infinite;
   --animate-scroll-vertical: scroll-vertical 30s linear infinite;
@@ -81,6 +81,20 @@
   @keyframes scroll-vertical {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --spacing-section-x: 2.5rem;
+    --spacing-section-y: 5.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --spacing-section-x: 5rem;
+    --spacing-section-y: 8rem;
   }
 }
 

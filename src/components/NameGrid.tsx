@@ -10,7 +10,7 @@ const names = [
 
 export function NameGrid() {
   return (
-    <section className="section-py max-w-[1440px] mx-auto section-px">
+    <section className="section-py max-w-[1320px] section-px  mx-auto ">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div className="max-w-xl">
           <h2 className="text-3xl lg:text-4xl font-extrabold mb-4 tracking-tight text-on-surface">Ready-to-Own Names</h2>
@@ -45,7 +45,7 @@ export function NameGrid() {
 export function CustomNaming() {
   return (
     <section className="section-py bg-slate-100/50">
-      <div className="max-w-5xl mx-auto section-px bg-white rounded-[2.5rem] p-8 lg:p-16 shadow-sm border border-outline-variant/20 flex flex-col md:flex-row gap-12 items-center">
+      <div className="max-w-5xl mx-auto  bg-white rounded-[2.5rem] p-8 lg:p-16 shadow-sm border border-outline-variant/20 flex flex-col md:flex-row gap-12 items-center">
         <div className="flex-1">
           <h2 className="text-3xl font-extrabold mb-6 tracking-tight">Get a Custom Name & Branding</h2>
           <p className="text-on-surface-variant text-lg leading-relaxed mb-8">

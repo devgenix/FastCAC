@@ -72,7 +72,7 @@ export function BusinessNamesSection() {
 
   return (
     <section className="section-py bg-surface-container-low overflow-hidden">
-      <div className="max-w-[1440px] mx-auto section-px mb-12 flex justify-between items-end">
+      <div className="max-w-[1320px] section-px mb-12 flex justify-between items-end mx-auto">
         <h2 className="text-2xl lg:text-3xl font-headline font-black tracking-tight flex items-center gap-3">
           AVAILABLE BUSINESS NAMES
         </h2>
@@ -85,15 +85,17 @@ export function BusinessNamesSection() {
       </div>
 
       {/* Desktop Horizontal Scroll */}
-      <div className="hidden lg:block relative group overflow-hidden max-w-[1440px] mx-auto section-px">
-        <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover">
-          {scrollItems.map((item, index) => (
-            <BusinessNameCard key={`desktop-${index}`} {...item} />
-          ))}
+      <div className="hidden lg:block max-w-[1320px] mx-auto section-px">
+        <div className="relative group overflow-hidden">
+          <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover">
+            {scrollItems.map((item, index) => (
+              <BusinessNameCard key={`desktop-${index}`} {...item} />
+            ))}
+          </div>
+          {/* Gradients for smooth fade */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none" />
         </div>
-        {/* Gradients for smooth fade */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Mobile Vertical Scroll */}
@@ -118,26 +120,6 @@ export function BusinessNamesSection() {
         >
           View All Names <span className="group-hover/link:translate-x-1 transition-transform">→</span>
         </Link>
-      </div>
-
-      {/* Naming Consultation CTA */}
-      <div className="mt-16 lg:mt-24 max-w-[1440px] mx-auto section-px">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 py-10 lg:py-12 border-t border-outline/10">
-          <div className="flex-1 text-center lg:text-left space-y-2 max-w-2xl">
-            <h3 className="text-2xl lg:text-3xl font-headline italic tracking-tight text-on-surface">
-              Don’t see <span className="not-italic font-bold">a name you like?</span>
-            </h3>
-            <p className="text-base lg:text-lg text-on-surface/50 font-body">
-              Tell us about your business. We’ll curate <span className="text-on-surface font-medium underline decoration-primary/30 underline-offset-4">5 premium name ideas</span> with available domains in <span className="text-on-surface font-medium">24 hours</span>.
-            </p>
-          </div>
-          <Button 
-            className="bg-primary text-white hover:opacity-90 px-10 py-6 h-auto rounded-full font-headline font-bold text-lg shadow-xl shadow-primary/10 transition-all hover:scale-105 active:scale-95 group flex-shrink-0"
-          >
-            Start Naming Consultation
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </div>
       </div>
     </section>
   );

@@ -1,148 +1,242 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Check, Info, Plus, Minus, ShieldCheck, Zap } from "@/components/Icons";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { Check } from "@/components/Icons";
+import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
 
-type PackageType = "starter" | "pro" | "full" | "custom";
+type PackageType = "starter" | "pro" | "full";
 
-const ChevronDown = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="m6 9 6 6 6-6" />
-  </svg>
-);
+const PRICES = {
+  starter: 100000,
+  pro: 200000,
+  full: 500000,
+};
+
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price).replace("NGN", "₦");
+};
+
+const PACKAGE_CONFIG: Record<PackageType, {
+  title: string;
+  cta: string;
+  stickyLabel: string;
+  waMessage: string;
+  stickyMessage: string;
+  badge?: string;
+  highlighted?: boolean;
+  isPlus?: boolean;
+  features: string[];
+}> = {
+  starter: {
+    title: "Name, Logo, Website & CAC",
+    cta: "Get Started — ₦100,000",
+    stickyLabel: "Get Started",
+    waMessage: WA_MESSAGES.pricingStarter,
+    stickyMessage: WA_MESSAGES.stickyStarter,
+    badge: "Most Popular",
+    highlighted: true,
+    features: [
+      "CAC-registered Business Name",
+      "Official CAC Certificate + TIN",
+      "Professional Logo & Brand Colors",
+      "1-page Business Website",
+      "Business Domain (.com.ng / .ng)",
+    ],
+  },
+  pro: {
+    title: "Everything in Starter, Plus More",
+    cta: "Start Pro — ₦200,000",
+    stickyLabel: "Start Pro",
+    waMessage: WA_MESSAGES.pricingPro,
+    stickyMessage: WA_MESSAGES.stickyPro,
+    features: [
+      "Everything in Starter+",
+      "Business Email (yourname@yourbiz.com)",
+      "Multi-page Professional Website",
+      "Social Media Profile Setup",
+    ],
+  },
+  full: {
+    title: "Full Company, Fully Done",
+    cta: "Go All-In — ₦500,000",
+    stickyLabel: "Go All-In",
+    waMessage: WA_MESSAGES.pricingFull,
+    stickyMessage: WA_MESSAGES.stickyFull,
+    isPlus: true,
+    features: [
+      "Everything in Business Pro+",
+      "CAC Company Incorporation (Ltd)",
+      "Premium Brand Identity Package",
+      "Corporate Bank Account Opening",
+    ],
+  },
+};
 
 export const PricingSection = () => {
   const [selectedPackage, setSelectedPackage] = useState<PackageType>("starter");
-  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [isStickyVisible, setIsStickyVisible] = useState(false);
 
-  const [config, setConfig] = useState({
-    naming: false,
-    websiteName: true,
-    branding: "basic" as "basic" | "premium",
-    cacType: "business" as "business" | "limited",
-    pages: 1,
-  });
+  // Show sticky CTA once the user scrolls past the Hero (~400px)
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsStickyVisible(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const PRICES = {
-    starter: 100000,
-    pro: 150000,
-    full: 450000,
-    naming: 15000,
-    websiteName: 20000,
-    brandingBasic: 20000,
-    brandingPremium: 50000,
-    cacBusiness: 80000,
-    cacLimited: 120000,
-    pagePrice: 50000,
-  };
-
-  const calculateTotal = useMemo(() => {
-    if (selectedPackage === "starter") return PRICES.starter;
-    if (selectedPackage === "pro") return PRICES.pro;
-    if (selectedPackage === "full") return PRICES.full;
-
-    let total = 0;
-    if (config.naming) total += PRICES.naming;
-    if (config.websiteName) total += PRICES.websiteName;
-    total += config.branding === "premium" ? PRICES.brandingPremium : PRICES.brandingBasic;
-    total += config.cacType === "limited" ? PRICES.cacLimited : PRICES.cacBusiness;
-    total += config.pages * PRICES.pagePrice;
-    return total;
-  }, [selectedPackage, config, PRICES]);
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-NG", {
-      style: "currency",
-      currency: "NGN",
-      maximumFractionDigits: 0,
-    }).format(price).replace("NGN", "₦");
-  };
+  const selected = PACKAGE_CONFIG[selectedPackage];
 
   return (
-    <section id="legacy-pricing" className="py-24 bg-white font-body border-t border-slate-100">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4">Pricing Plans (V1)</h2>
-          <p className="text-slate-500">The original modular pricing experience.</p>
+    <section id="pricing-v3" className="py-20 md:py-32 bg-white relative font-body">
+      <div className="max-w-[1320px] section-px mx-auto px-6 md:px-12">
+
+        {/* HEADER */}
+        <div className="text-center mb-16 md:mb-24">
+          <h2 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+            Pick Your Package. <br className="hidden md:block" />
+            <span className="text-[#00A859]">We Handle Everything.</span>
+          </h2>
+          <p className="text-lg md:text-2xl text-slate-500 max-w-3xl mx-auto font-medium">
+            Name, logo, website, and CAC registration — all done for you. No paperwork, no government queues.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <LegacyCard 
-            title="Starter" 
-            price={PRICES.starter} 
-            active={selectedPackage === "starter"} 
-            onClick={() => setSelectedPackage("starter")}
-          />
-          <LegacyCard 
-            title="Business Pro" 
-            price={PRICES.pro} 
-            active={selectedPackage === "pro"} 
-            onClick={() => setSelectedPackage("pro")}
-          />
-          <LegacyCard 
-            title="Full Setup" 
-            price={PRICES.full} 
-            active={selectedPackage === "full"} 
-            onClick={() => setSelectedPackage("full")}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto">
-          <div className="lg:col-span-8 space-y-6">
-            <h3 className="text-xl font-black text-slate-900 mb-4">Custom Configuration</h3>
-            <ConfigSection 
-              title="Business Naming" 
-              price={PRICES.naming} 
-              active={config.naming} 
-              onToggle={() => { setConfig({ ...config, naming: !config.naming }); setSelectedPackage("custom"); }}
+        {/* PACKAGE CARDS */}
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-6 mb-12">
+          {(Object.entries(PACKAGE_CONFIG) as [PackageType, typeof PACKAGE_CONFIG["starter"]][]).map(([type, config]) => (
+            <PricingCard
+              key={type}
+              type={type}
+              title={config.title}
+              price={PRICES[type]}
+              badge={config.badge}
+              features={config.features}
+              cta={config.cta}
+              waMessage={config.waMessage}
+              isSelected={selectedPackage === type}
+              onSelect={() => setSelectedPackage(type)}
+              highlighted={config.highlighted}
+              isPlus={config.isPlus}
             />
-            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-              <div>
-                <span className="font-bold block">Website Pages</span>
-                <span className="text-xs text-slate-400">{formatPrice(PRICES.pagePrice)} per extra page</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <button onClick={() => { setConfig({...config, pages: Math.max(1, config.pages - 1)}); setSelectedPackage("custom"); }} className="w-8 h-8 rounded bg-white shadow-sm flex items-center justify-center">-</button>
-                <span className="font-bold">{config.pages}</span>
-                <button onClick={() => { setConfig({...config, pages: config.pages + 1}); setSelectedPackage("custom"); }} className="w-8 h-8 rounded bg-white shadow-sm flex items-center justify-center">+</button>
-              </div>
-            </div>
-          </div>
+          ))}
+        </div>
 
-          <div className="lg:col-span-4">
-            <div className="bg-slate-900 text-white p-8 rounded-3xl sticky top-24">
-              <h4 className="text-sm font-black text-[#008751] uppercase mb-4">Total Investment</h4>
-              <div className="text-3xl font-black mb-8">{formatPrice(calculateTotal)}</div>
-              <button className="w-full bg-[#008751] text-white py-4 rounded-xl font-bold">Proceed</button>
+        {/* SECONDARY CTA — WhatsApp consult */}
+        <div className="text-center mt-6 text-sm text-slate-400">
+          Not sure which package?{" "}
+          <Link
+            href={waLink(WA_MESSAGES.consultation)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#00A859] font-semibold hover:underline"
+          >
+            Chat with us on WhatsApp →
+          </Link>
+        </div>
+      </div>
+
+      {/* STICKY BOTTOM CTA (Mobile) — shows globally after hero */}
+      <div className={`fixed bottom-0 left-0 right-0 z-[60] transition-transform duration-500 md:hidden shadow-[0_-10px_40px_rgba(0,0,0,0.15)]
+        ${isStickyVisible ? "translate-y-0" : "translate-y-full"}`}>
+        <div className="bg-white px-6 py-4 flex items-center justify-between border-t border-slate-100 backdrop-blur-xl bg-white/90">
+          <div>
+            <span className="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-0.5">
+              {selectedPackage === "full" ? "Starting at" : "Investment"}
+            </span>
+            <div className="text-2xl font-black text-slate-900 tracking-tight">
+              {formatPrice(PRICES[selectedPackage])}
             </div>
           </div>
+          <Link href={waLink(selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
+            <button className="bg-[#00A859] text-white px-8 py-5 rounded-xl font-black shadow-[0_8px_20px_rgba(0,168,89,0.3)] active:scale-95 transition-all text-sm uppercase tracking-wider">
+              {selected.stickyLabel} →
+            </button>
+          </Link>
         </div>
       </div>
     </section>
   );
 };
 
-const LegacyCard = ({ title, price, active, onClick }: any) => (
-  <div onClick={onClick} className={`p-8 rounded-3xl border-2 cursor-pointer transition-all ${active ? "border-[#008751] bg-[#008751]/5" : "border-slate-100"}`}>
-    <h3 className="font-black mb-2">{title}</h3>
-    <div className="text-2xl font-black">{new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 }).format(price).replace("NGN", "₦")}</div>
-  </div>
-);
+const PricingCard = ({
+  type,
+  title,
+  price,
+  features,
+  cta,
+  waMessage,
+  isSelected,
+  onSelect,
+  badge,
+  highlighted,
+  isPlus,
+}: {
+  type: PackageType;
+  title: string;
+  price: number;
+  features: string[];
+  cta: string;
+  waMessage: string;
+  isSelected: boolean;
+  onSelect: () => void;
+  badge?: string;
+  highlighted?: boolean;
+  isPlus?: boolean;
+}) => (
+  <div
+    onClick={onSelect}
+    className={`relative p-8 md:p-10 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full
+      ${isSelected
+        ? "border-[#00A859] bg-[#00A859]/5 shadow-[0_20px_40px_rgba(0,168,89,0.1)] scale-[1.02]"
+        : "border-slate-100 bg-white hover:border-slate-200"}`}
+  >
+    {badge && (
+      <div className="absolute top-0 right-8 -translate-y-1/2 bg-[#00A859] text-white text-[11px] uppercase font-black px-5 py-2 rounded-full z-10 shadow-lg shadow-[#00A859]/20">
+        {badge}
+      </div>
+    )}
 
-const ConfigSection = ({ title, price, active, onToggle }: any) => (
-  <div onClick={onToggle} className={`p-6 rounded-2xl border-2 cursor-pointer flex items-center justify-between ${active ? "border-[#008751] bg-[#008751]/5" : "border-slate-100"}`}>
-    <span className="font-bold">{title}</span>
-    <span className="font-black text-slate-500">{new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 }).format(price).replace("NGN", "₦")}</span>
+    <div className="mb-10">
+      <h3 className="text-2xl font-black text-slate-900 mb-2">{title}</h3>
+      <div className="flex items-baseline gap-1">
+        <span className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">{formatPrice(price)}</span>
+        {isPlus && <span className="text-2xl font-black text-slate-400">+</span>}
+      </div>
+    </div>
+
+    <div className="space-y-4 mb-12 flex-grow">
+      {features.map((feature, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <div className="w-5 h-5 rounded-full bg-[#00A859] flex items-center justify-center shrink-0">
+            <Check className="w-3 h-3 text-white" strokeWidth={4} />
+          </div>
+          <span className="text-slate-600 font-semibold">{feature}</span>
+        </div>
+      ))}
+    </div>
+
+    <Link
+      href={waLink(waMessage)}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className={`w-full py-5 rounded-2xl font-black transition-all active:scale-[0.98] text-lg
+          ${isSelected
+            ? "bg-[#00A859] text-white shadow-xl shadow-[#00A859]/30"
+            : "bg-slate-100 text-slate-500 hover:bg-slate-200"}`}
+      >
+        {cta}
+      </button>
+    </Link>
   </div>
 );
