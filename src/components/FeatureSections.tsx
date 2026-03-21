@@ -15,8 +15,8 @@ const CHECKLIST_ITEMS = [
   },
   {
     icon: Globe,
-    title: "Business Domain & Professional Email",
-    desc: "Your .com.ng or .ng domain plus a matching business email — set up and ready to use.",
+    title: "Business Website & Professional Email",
+    desc: "A professional business website, matching .com.ng or .ng domain, and a professional email — all set up and ready to use.",
   },
   {
     icon: Zap,
