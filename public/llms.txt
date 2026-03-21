@@ -1,0 +1,20 @@
+# FastCAC
+
+> Registered, branded, and online in 5 business days. FastCAC is a premium, all-in-one service for entrepreneurs in Nigeria to launch their business with an official CAC certificate, professional logo, and custom website.
+> See [Full Documentation](https://fastcac.com/llms-full.txt) for more details.
+
+## Core Services
+
+- [Business Registration](https://fastcac.com/) - Official CAC registration (BN or Ltd) with TIN generated automatically.
+- [Ready-to-Use Business Names](https://fastcac.com/names) - Curated list of available names with matching domains.
+- [Full Branding & Tech Stack](https://fastcac.com/#whats-included) - Professional logos, brand kits, websites, and business emails included.
+
+## Expert Guides (Blog)
+
+- [How to Choose a Great Business Name](https://fastcac.com/blog/how-to-choose-a-business-name) - Modern naming strategies for Nigerian startups.
+- [CAC Registration Guide](https://fastcac.com/blog/cac-registration-guide) - Complete 2026 guide to CAC registration, TIN, and digital certificates.
+
+## Legal
+
+- [Privacy Policy](https://fastcac.com/privacy)
+- [Terms of Service](https://fastcac.com/terms)
