@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TrustSection } from "@/components/TrustSection";
-import { ArrowRight, Verified } from "@/components/Icons";
+import { ArrowRight } from "@/components/Icons";
 import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
 
 export function Hero() {
@@ -13,11 +14,14 @@ export function Hero() {
 
             {/* Image — shown first on mobile, second on desktop */}
             <div className="flex-1 relative w-full h-full lg:min-h-[400px] order-first lg:order-last">
-              <div className="relative w-full h-full aspect-[4/3] lg:aspect-auto lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl shadow-black/10 transition-all duration-700 hover:scale-[1.02]">
-                <img
-                  src="/images/hero1.jpg"
+              <div className="relative w-full h-full aspect-[4/3] lg:aspect-square lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl shadow-black/10 transition-all duration-700 hover:scale-[1.02]">
+                <Image
+                  src="https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg"
                   alt="Nigerian entrepreneur receiving their CAC certificate, business logo, and website from FastCAC"
-                  className="w-full h-full object-cover lg:object-contain"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 660px"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>

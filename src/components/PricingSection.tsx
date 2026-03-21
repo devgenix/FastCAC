@@ -133,7 +133,7 @@ export const PricingSection = () => {
         </div>
 
         {/* SECONDARY CTA — WhatsApp consult */}
-        <div className="text-center mt-6 text-sm text-slate-400">
+        <div className="text-center mt-6 text-sm text-slate-600">
           Not sure which package?{" "}
           <Link
             href={waLink(WA_MESSAGES.consultation)}
@@ -147,11 +147,11 @@ export const PricingSection = () => {
       </div>
 
       {/* STICKY BOTTOM CTA (Mobile) — shows globally after hero */}
-      <div className={`fixed bottom-0 left-0 right-0 z-[60] transition-transform duration-500 md:hidden shadow-[0_-10px_40px_rgba(0,0,0,0.15)]
+      <div className={`fixed bottom-0 left-0 right-0 z-[60] transition-all duration-500 md:hidden shadow-[0_-10px_40px_rgba(0,0,0,0.15)]
         ${isStickyVisible ? "translate-y-0" : "translate-y-full"}`}>
-        <div className="bg-white px-6 py-4 flex items-center justify-between border-t border-slate-100 backdrop-blur-xl bg-white/90">
+        <div className="bg-white/90 backdrop-blur-xl px-6 py-4 flex items-center justify-between border-t border-slate-100">
           <div>
-            <span className="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-0.5 font-mono">
+            <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest block mb-0.5 font-mono">
               {selectedPackage === "full" ? "Starting at" : "Start for only:"}
             </span>
             <div className="text-2xl font-black text-slate-900 tracking-tight font-mono">
@@ -196,7 +196,16 @@ const PricingCard = ({
 }) => (
   <div
     onClick={onSelect}
-    className={`relative p-8 md:p-10 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onSelect();
+      }
+    }}
+    role="button"
+    tabIndex={0}
+    aria-selected={isSelected}
+    className={`relative p-8 md:p-10 rounded-[2rem] border-2 cursor-pointer transition-all duration-300 flex flex-col h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20
       ${isSelected
         ? "border-[#00A859] bg-[#00A859]/5 shadow-[0_20px_40px_rgba(0,168,89,0.1)] scale-[1.02]"
         : "border-slate-100 bg-white hover:border-slate-200"}`}

@@ -90,8 +90,8 @@ export function Footer() {
             © 2025 FastCAC / Engineered in Nigeria
           </p>
           <div className="flex gap-6 opacity-20 hover:opacity-100 transition-opacity">
-            <span className="font-mono text-[10px] uppercase cursor-pointer">Twitter</span>
-            <span className="font-mono text-[10px] uppercase cursor-pointer">LinkedIn</span>
+            <a href="#" className="font-mono text-[10px] uppercase cursor-pointer hover:text-secondary" aria-label="FastCAC on X (Twitter)">Twitter</a>
+            <a href="#" className="font-mono text-[10px] uppercase cursor-pointer hover:text-secondary" aria-label="FastCAC on LinkedIn">LinkedIn</a>
           </div>
         </div>
       </div>

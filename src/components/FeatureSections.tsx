@@ -37,9 +37,6 @@ export function ChecklistSection() {
 
         {/* Section label */}
         <div className="mb-12 lg:mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-mono text-xs tracking-widest uppercase mb-4">
-            What You Get
-          </span>
           <h2 className="text-3xl lg:text-7xl font-headline italic tracking-tight leading-[1.05] max-w-3xl">
             One package.{" "}
             <span className="relative inline-block">
@@ -79,10 +76,6 @@ export function ChecklistSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
             {/* Text content */}
             <div className="relative z-10 p-6 lg:p-10">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 text-secondary text-xs font-mono tracking-widest uppercase mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-                Included in every package
-              </span>
               <h3 className="text-white font-headline italic text-3xl lg:text-5xl leading-tight mb-2">
                 Official CAC<br />Certificate
               </h3>

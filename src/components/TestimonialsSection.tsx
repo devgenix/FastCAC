@@ -92,7 +92,7 @@ const TestimonialCard = ({
 );
 
 export function TestimonialsSection() {
-  const scrollItems = [...testimonials, ...testimonials, ...testimonials];
+  const scrollItems = [...testimonials, ...testimonials];
 
   return (
     <section className="section-py bg-surface-container-low overflow-hidden">
@@ -107,11 +107,13 @@ export function TestimonialsSection() {
       </div>
 
       {/* Desktop Horizontal Scroll */}
-      <div className="hidden lg:block max-w-[1320px] mx-auto section-px">
+      <div className="hidden lg:block max-w-[1320px] mx-auto section-px" aria-label="Customer Testimonials">
         <div className="relative group overflow-hidden">
-          <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover">
+          <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover" role="list">
             {scrollItems.map((item, index) => (
-              <TestimonialCard key={`desktop-${index}`} {...item} />
+              <div key={`desktop-${index}`} role="listitem" aria-hidden={index >= testimonials.length}>
+                <TestimonialCard {...item} />
+              </div>
             ))}
           </div>
           {/* Fade edges */}
@@ -121,10 +123,10 @@ export function TestimonialsSection() {
       </div>
 
       {/* Mobile Vertical Scroll */}
-      <div className="lg:hidden relative h-[600px] overflow-hidden group">
-        <div className="flex flex-col gap-6 h-max animate-scroll-vertical pause-on-hover">
+      <div className="lg:hidden relative h-[600px] overflow-hidden group" aria-label="Customer Testimonials">
+        <div className="flex flex-col gap-6 h-max animate-scroll-vertical pause-on-hover" role="list">
           {scrollItems.map((item, index) => (
-            <div key={`mobile-${index}`} className="section-px">
+            <div key={`mobile-${index}`} className="section-px" role="listitem" aria-hidden={index >= testimonials.length}>
               <TestimonialCard {...item} />
             </div>
           ))}

@@ -70,11 +70,14 @@ export function Navbar() {
         <button
           className="md:hidden text-on-surface p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
         >
           {isMenuOpen ? (
-            <div className="w-6 h-6 flex items-center justify-center font-bold text-2xl">×</div>
+            <div className="w-6 h-6 flex items-center justify-center font-bold text-2xl" aria-hidden="true">×</div>
           ) : (
-            <div className="space-y-1.5">
+            <div className="space-y-1.5" aria-hidden="true">
               <div className="w-5 h-0.5 bg-current opacity-70" />
               <div className="w-5 h-0.5 bg-current opacity-70" />
             </div>
@@ -84,16 +87,22 @@ export function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-[60] p-6 flex flex-col gap-8 pointer-events-auto">
+        <div 
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className="fixed inset-0 bg-white z-[60] p-6 flex flex-col gap-8 pointer-events-auto"
+        >
           <div className="flex justify-between items-center">
             <Link href="/" className="text-2xl font-headline tracking-tighter" onClick={() => setIsMenuOpen(false)}>
               Fast<span className="opacity-60">CAC</span>
             </Link>
-            <button onClick={() => setIsMenuOpen(false)} className="text-3xl">&times;</button>
+            <button onClick={() => setIsMenuOpen(false)} className="text-3xl" aria-label="Close menu">&times;</button>
           </div>
           <div className="flex flex-col gap-6 text-xl">
             <Link href="#how-it-works" onClick={() => setIsMenuOpen(false)}>Process</Link>
-            <Link href="#pricing-v3" onClick={() => setIsMenuOpen(false)}>Packages</Link>
+            <Link href="#pricing" onClick={() => setIsMenuOpen(false)}>Packages</Link>
             <Link href={waLink(WA_MESSAGES.whatsapp)} target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)}>
               Support (WhatsApp)
             </Link>

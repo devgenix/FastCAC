@@ -73,9 +73,11 @@ export function FaqSection() {
                 }`}
               >
                 <button
-                  className="w-full text-left flex items-center justify-between gap-4 p-6 cursor-pointer"
+                  id={`faq-btn-${i}`}
+                  className="w-full text-left flex items-center justify-between gap-4 p-6 cursor-pointer focus-visible:outline-none focus-visible:bg-primary/5 transition-colors"
                   onClick={() => toggle(i)}
                   aria-expanded={openIndex === i}
+                  aria-controls={`faq-panel-${i}`}
                 >
                   <span className="font-black text-slate-900 text-base leading-snug">
                     {item.q}
@@ -92,6 +94,9 @@ export function FaqSection() {
                 </button>
 
                 <div
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
                   className={`transition-all duration-300 ease-in-out ${
                     openIndex === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                   } overflow-hidden`}
