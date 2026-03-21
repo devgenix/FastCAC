@@ -72,6 +72,8 @@ export function BlogPostLayout({
               <img 
                 src={image} 
                 alt={title} 
+                width={1000}
+                height={563}
                 className="w-full h-full object-cover"
               />
             </div>

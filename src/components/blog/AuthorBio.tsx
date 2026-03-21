@@ -12,7 +12,7 @@ export function AuthorBio({ author }: { author: Author }) {
     <div className="flex flex-col md:flex-row items-center gap-6 p-8 rounded-3xl bg-surface-container/30 border border-outline/10 backdrop-blur-sm">
       <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary font-headline font-bold text-2xl overflow-hidden shrink-0 border-2 border-primary/20">
         {author.avatar ? (
-          <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
+          <img src={author.avatar} alt={author.name} width={80} height={80} className="w-full h-full object-cover" />
         ) : (
           author.name.charAt(0)
         )}

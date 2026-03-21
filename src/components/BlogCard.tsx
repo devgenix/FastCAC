@@ -15,8 +15,9 @@ export function BlogCard({ post }: { post: BlogPost }) {
         <Image
           src={post.thumbnail}
           alt={post.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          width={640}
+          height={360}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">
           <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-mono font-bold text-primary uppercase tracking-wider shadow-sm">

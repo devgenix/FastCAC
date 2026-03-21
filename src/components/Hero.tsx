@@ -40,9 +40,9 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
                 <Image
                   src="https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg"
                   alt="Nigerian entrepreneur receiving their CAC certificate, business logo, and website from FastCAC"
-                  fill
+                  width={660}
+                  height={854}
                   priority
-                  sizes="(max-width: 1024px) 280px, 660px"
                   className="w-full h-full object-contain"
                 />
               </div>

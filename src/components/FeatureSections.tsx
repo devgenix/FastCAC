@@ -66,11 +66,11 @@ export function ChecklistSection() {
           {/* LEFT — Big feature card */}
           <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden bg-surface-container min-h-[360px] lg:min-h-[560px] flex flex-col justify-end group">
             <Image
-              src="/images/checklist_cac.png"
+              src="/images/checklist_cac.webp"
               alt="Official CAC Certificate"
-              fill
-              sizes="(max-width: 1024px) 100vw, 660px"
-              className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+              width={660}
+              height={560}
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-700 w-full h-full"
             />
             {/* Dark gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -147,7 +147,7 @@ const STEPS = [
     description:
       "Tell us your business idea and we'll suggest 5 unique, CAC-available names with matching domains — or choose from our curated ready-to-register list. Done within 24 hours.",
     icon: Search,
-    image: "/images/step1_naming.png",
+    image: "/images/step1_naming.webp",
     accent: "from-emerald-50 to-transparent",
   },
   {
@@ -157,7 +157,7 @@ const STEPS = [
     description:
       "We file your CAC registration (government fees included), design your logo and brand kit, build your website, and set up your domain and business email — all at once. You don't lift a finger.",
     icon: Shield,
-    image: "/images/step2_registering.png",
+    image: "/images/step2_registering.webp",
     accent: "from-sky-50 to-transparent",
   },
   {
@@ -167,7 +167,7 @@ const STEPS = [
     description:
       "Within 5 business days, you'll have your official CAC certificate, a live website, a professional logo, and a business email — everything you need to start trading.",
     icon: Rocket,
-    image: "/images/step3_launching.png",
+    image: "/images/step3_launching.webp",
     accent: "from-violet-50 to-transparent",
   },
 ];
@@ -239,9 +239,9 @@ export function HowItWorks() {
                   <Image
                     src={step.image}
                     alt={step.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 595px"
-                    className="object-cover"
+                    width={595}
+                    height={335}
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>
