@@ -5,45 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "@/components/Icons";
 import { BusinessNameCard } from "./BusinessNameCard";
-
-const BUSINESS_NAMES = [
-  {
-    name: "Paylio",
-    domain: "paylio.com",
-    category: "Fintech",
-    tagline: "Fast, modern payments for Africa",
-  },
-  {
-    name: "Zestly",
-    domain: "zestly.ng",
-    category: "E-commerce",
-    tagline: "Fresh brand for your online store",
-  },
-  {
-    name: "KudaSoft",
-    domain: "kudasoft.com",
-    category: "SaaS",
-    tagline: "Next-gen enterprise solutions",
-  },
-  {
-    name: "FarmBrim",
-    domain: "farmbrim.com",
-    category: "AgriTech",
-    tagline: "Digitizing agricultural value chains",
-  },
-  {
-    name: "HealthQ",
-    domain: "healthq.ng",
-    category: "HealthTech",
-    tagline: "Smart healthcare management",
-  },
-  {
-    name: "EduSpark",
-    domain: "eduspark.com",
-    category: "EdTech",
-    tagline: "Igniting the future of learning",
-  },
-];
+import { BUSINESS_NAMES_DATA } from "@/lib/names-data";
 
 interface BusinessNamesSectionProps {
   title?: string;
@@ -54,8 +16,10 @@ export function BusinessNamesSection({
   title = "AVAILABLE BUSINESS NAMES", 
   showViewAll = true 
 }: BusinessNamesSectionProps) {
-  // Duplicate list to ensure smooth infinite scroll
-  const scrollItems = [...BUSINESS_NAMES, ...BUSINESS_NAMES, ...BUSINESS_NAMES];
+  // Use premium names for this section
+  const premiumNames = BUSINESS_NAMES_DATA.filter(n => n.isPremium);
+  // Duplicate list to ensure smooth infinite scroll on desktop
+  const scrollItems = [...premiumNames, ...premiumNames, ...premiumNames];
 
   return (
     <section className="section-py bg-surface-container-low overflow-hidden">
@@ -78,7 +42,9 @@ export function BusinessNamesSection({
         <div className="relative overflow-hidden">
           <div className="flex gap-6 w-max animate-scroll-horizontal pause-on-hover py-4">
             {scrollItems.map((item, index) => (
-              <BusinessNameCard key={`desktop-${index}`} {...item} />
+              <div key={`desktop-${index}`} className="w-[300px]">
+                <BusinessNameCard {...item} />
+              </div>
             ))}
           </div>
           {/* Gradients for smooth fade */}
@@ -87,18 +53,13 @@ export function BusinessNamesSection({
         </div>
       </div>
 
-      {/* Mobile Vertical Scroll */}
-      <div className="lg:hidden relative h-[600px] overflow-hidden">
-        <div className="flex flex-col gap-6 h-max animate-scroll-vertical pause-on-hover py-4">
-          {scrollItems.map((item, index) => (
-            <div key={`mobile-${index}`} className="section-px">
-              <BusinessNameCard {...item} />
-            </div>
-          ))}
-        </div>
-        {/* Gradients for smooth fade */}
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-surface-container-low to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface-container-low to-transparent z-10 pointer-events-none" />
+      {/* Mobile Horizontal Snap Carousel */}
+      <div className="lg:hidden relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 px-6 py-4">
+        {BUSINESS_NAMES_DATA.filter(n => n.isPremium).map((item, index) => (
+          <div key={`mobile-${index}`} className="snap-center shrink-0 w-[85vw]">
+            <BusinessNameCard {...item} />
+          </div>
+        ))}
       </div>
 
       {/* Mobile-only link */}

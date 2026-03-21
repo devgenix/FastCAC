@@ -1,10 +1,11 @@
 import React from "react";
-import { BusinessNamesSection } from "@/components/BusinessNamesSection";
-import { NameGrid } from "@/components/NameGrid";
+import { NameMarketplace } from "@/components/NameMarketplace";
 import { FinalCTA } from "@/components/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: "Available Business Names | FastCAC",
+  description: "Browse our curated marketplace of brandable business names with premium domains. Find the perfect identity for your startup.",
   alternates: {
     canonical: "/names",
   },
@@ -12,25 +13,9 @@ export const metadata: Metadata = {
 
 export default function NamesPage() {
   return (
-    <div className="min-h-screen">
-      <div className="section-py pb-0">
-        <div className="max-w-[1320px] section-px mx-auto text-center space-y-6">
-          <h1 className="text-[2.2rem] lg:text-7xl font-headline italic tracking-tight leading-[1.1]">
-            Find the Perfect <br />
-            <span className="text-primary italic">Business Name</span>
-          </h1>
-          <p className="text-lg lg:text-xl text-on-surface/50 max-w-2xl mx-auto font-body">
-            Stuck on what to call your business? Browse our curated list of available names 
-            and get registered in minutes.
-          </p>
-        </div>
-      </div>
-
-      <BusinessNamesSection title="TOP PICKED NAMES" showViewAll={false} />
-      
-      <NameGrid />
-
+    <main className="min-h-screen">
+      <NameMarketplace />
       <FinalCTA />
-    </div>
+    </main>
   );
 }
