@@ -197,104 +197,63 @@ export function HowItWorks() {
           </p>
         </div>
 
-        {/* Timeline steps */}
-        <div className="relative">
-          {/* Vertical connector line (desktop) */}
-          <div
-            className="hidden lg:block absolute left-[2.6rem] top-10 bottom-10 w-px bg-outline/10"
-            aria-hidden="true"
-          />
-
-          <div className="flex flex-col gap-8 lg:gap-0">
-            {STEPS.map((step, index) => {
-              const isEven = index % 2 === 0;
-              const Icon = step.icon;
-              return (
-                <div key={index} className="relative lg:grid lg:grid-cols-[5.5rem_1fr] lg:gap-0 group">
-
-                  {/* ── LEFT: Phase number + icon (desktop timeline spine) ── */}
-                  <div className="hidden lg:flex flex-col items-center pt-1">
-                    {/* Phase bubble */}
-                    <div className="relative z-10 w-[5rem] h-[5rem] rounded-2xl border-2 border-outline/10 bg-white group-hover:border-secondary/30 group-hover:bg-secondary/5 transition-all duration-300 flex flex-col items-center justify-center gap-0.5 shadow-sm">
-                      <span className="font-mono text-[10px] text-on-surface/30 tracking-widest">STEP</span>
-                      <span className="font-headline text-2xl font-bold leading-none text-on-surface/80 group-hover:text-secondary transition-colors duration-300">
-                        {step.phase}
-                      </span>
-                    </div>
-                    {/* Spacer that grows to fill the card height */}
-                    {index < STEPS.length - 1 && (
-                      <div className="flex-1 w-px bg-transparent" />
-                    )}
+        {/* Steps */}
+        <div className="flex flex-col gap-6 lg:gap-8">
+          {STEPS.map((step, index) => {
+            const isEven = index % 2 === 0;
+            const Icon = step.icon;
+            return (
+              <div
+                key={index}
+                className={`group rounded-2xl lg:rounded-3xl overflow-hidden border border-outline/5 hover:border-secondary/15 bg-surface-container transition-all duration-300 flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} lg:min-h-[320px]`}
+              >
+                {/* Text content */}
+                <div className="flex-1 p-6 lg:p-10 flex flex-col justify-center gap-4">
+                  {/* Mobile icon + phase row */}
+                  <div className="flex items-center gap-3 lg:hidden">
+                    <span className="w-9 h-9 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center">
+                      <Icon className="w-4 h-4 text-secondary" />
+                    </span>
+                    <span className="font-mono text-xs text-on-surface/40 tracking-widest uppercase">
+                      Step {step.phase}
+                    </span>
                   </div>
 
-                  {/* ── RIGHT: Step card ── */}
-                  <div
-                    className={`lg:ml-8 lg:mb-12 rounded-2xl lg:rounded-3xl overflow-hidden border border-outline/5 group-hover:border-secondary/15 bg-surface-container transition-all duration-300 flex flex-col ${
-                      isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-                    } lg:min-h-[320px]`}
-                  >
-                    {/* Text content */}
-                    <div className="flex-1 p-6 lg:p-10 flex flex-col justify-center gap-4">
-                      {/* Mobile phase + tag row */}
-                      <div className="flex items-center gap-3 lg:hidden">
-                        <span className="w-9 h-9 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center">
-                          <Icon className="w-4 h-4 text-secondary" />
-                        </span>
-                        <span className="font-mono text-xs text-on-surface/40 tracking-widest uppercase">
-                          {step.tag} — {step.phase}
-                        </span>
-                      </div>
+                  <h3 className="font-headline italic text-3xl lg:text-[2.8rem] leading-tight tracking-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-on-surface/55 font-body text-base lg:text-lg leading-relaxed max-w-md">
+                    {step.description}
+                  </p>
 
-                      {/* Desktop tag */}
-                      <div className="hidden lg:flex items-center gap-3">
-                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/15 text-secondary font-mono text-xs tracking-widest uppercase">
-                          <Icon className="w-3.5 h-3.5" />
-                          {step.tag}
-                        </span>
-                      </div>
-
-                      <h3 className="font-headline italic text-3xl lg:text-[2.8rem] leading-tight tracking-tight">
-                        {step.title}
-                      </h3>
-                      <p className="text-on-surface/55 font-body text-base lg:text-lg leading-relaxed max-w-md">
-                        {step.description}
-                      </p>
-
-                      {/* Check indicators */}
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white" />
-                        </div>
-                        <span className="text-sm font-body text-on-surface/50">
-                          {index === 0 && "Name options in 24 hrs"}
-                          {index === 1 && "CAC + logo + website — all handled"}
-                          {index === 2 && "Live & legal in 5 business days"}
-                        </span>
-                      </div>
+                  {/* Check indicator */}
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
+                      <Check className="w-3 h-3 text-white" />
                     </div>
-
-                    {/* Image panel */}
-                    <div
-                      className={`relative w-full lg:w-[45%] aspect-[16/9] lg:aspect-auto bg-gradient-to-br ${step.accent} overflow-hidden flex-shrink-0`}
-                    >
-                      <Image
-                        src={step.image}
-                        alt={step.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 580px"
-                        className="object-cover"
-                      />
-                      {/* Large phase number watermark */}
-                      <span className="absolute bottom-4 right-5 font-headline font-bold text-[5rem] leading-none text-white/10 select-none pointer-events-none">
-                        {step.phase}
-                      </span>
-                    </div>
+                    <span className="text-sm font-body text-on-surface/50">
+                      {index === 0 && "Name options in 24 hrs"}
+                      {index === 1 && "CAC + logo + website — all handled"}
+                      {index === 2 && "Live & legal in 5 business days"}
+                    </span>
                   </div>
-
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Image panel */}
+                <div
+                  className={`relative w-full lg:w-[45%] aspect-[16/9] lg:aspect-auto bg-gradient-to-br ${step.accent} overflow-hidden flex-shrink-0`}
+                >
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 595px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>

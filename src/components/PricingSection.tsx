@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Check } from "@/components/Icons";
+import React, { useState, useEffect } from "react";
 import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
 
 type PackageType = "starter" | "pro" | "full";
@@ -10,7 +10,7 @@ type PackageType = "starter" | "pro" | "full";
 const PRICES = {
   starter: 100000,
   pro: 200000,
-  full: 500000,
+  full: 400000,
 };
 
 const formatPrice = (price: number) => {
@@ -60,11 +60,12 @@ const PACKAGE_CONFIG: Record<PackageType, {
       "Business Email (yourname@yourbiz.com)",
       "Multi-page Professional Website",
       "Social Media Profile Setup",
+      "Business Domain (.com)",
     ],
   },
   full: {
     title: "Full Company, Fully Done",
-    cta: "Go All-In — ₦500,000",
+    cta: "Go All-In — ₦400,000",
     stickyLabel: "Go All-In",
     waMessage: WA_MESSAGES.pricingFull,
     stickyMessage: WA_MESSAGES.stickyFull,
