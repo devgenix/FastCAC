@@ -27,7 +27,7 @@ export function FloatingWhatsApp() {
         className="relative block"
         aria-label="Chat on WhatsApp"
       >
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40"></span>
+        <span className="absolute inset-0 rounded-full bg-[#25D366] lg:animate-ping opacity-40 hidden lg:block"></span>
         <div className="relative bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-90 border-2 border-white/20">
           <WhatsApp className="w-8 h-8 fill-current" />
         </div>

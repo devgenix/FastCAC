@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Check } from "@/components/Icons";
 import React, { useState, useEffect } from "react";
-import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
+import { waLink, WA_MESSAGES, getNameMessage } from "@/lib/whatsapp";
 
 type PackageType = "starter" | "pro" | "full";
 
@@ -79,7 +79,7 @@ const PACKAGE_CONFIG: Record<PackageType, {
   },
 };
 
-export const PricingSection = () => {
+export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
   const [selectedPackage, setSelectedPackage] = useState<PackageType>("starter");
   const [isStickyVisible, setIsStickyVisible] = useState(false);
 
@@ -94,6 +94,13 @@ export const PricingSection = () => {
   }, []);
 
   const selected = PACKAGE_CONFIG[selectedPackage];
+
+  const getWaLink = (packageType: PackageType, defaultMessage: string) => {
+    if (selectedName) {
+      return waLink(getNameMessage(selectedName, packageType));
+    }
+    return waLink(defaultMessage);
+  };
 
   return (
     <section id="pricing" className="py-20 md:py-32 bg-white relative font-body">
@@ -123,7 +130,7 @@ export const PricingSection = () => {
               badge={config.badge}
               features={config.features}
               cta={config.cta}
-              waMessage={config.waMessage}
+              waLink={getWaLink(type, config.waMessage)}
               isSelected={selectedPackage === type}
               onSelect={() => setSelectedPackage(type)}
               highlighted={config.highlighted}
@@ -158,7 +165,7 @@ export const PricingSection = () => {
               {formatPrice(PRICES[selectedPackage])}
             </div>
           </div>
-          <Link href={waLink(selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
+          <Link href={getWaLink(selectedPackage, selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
             <button className="bg-[#00A859] text-white px-8 py-5 rounded-xl font-black shadow-[0_8px_20px_rgba(0,168,89,0.3)] active:scale-95 transition-all text-sm uppercase tracking-wider">
               {selected.stickyLabel} →
             </button>
@@ -175,7 +182,7 @@ const PricingCard = ({
   price,
   features,
   cta,
-  waMessage,
+  waLink: link,
   isSelected,
   onSelect,
   badge,
@@ -187,7 +194,7 @@ const PricingCard = ({
   price: number;
   features: string[];
   cta: string;
-  waMessage: string;
+  waLink: string;
   isSelected: boolean;
   onSelect: () => void;
   badge?: string;
@@ -196,6 +203,7 @@ const PricingCard = ({
 }) => (
   <div
     onClick={onSelect}
+// ... (rest of PricingCard unchanged)
     onKeyDown={(e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -236,7 +244,7 @@ const PricingCard = ({
     </div>
 
     <Link
-      href={waLink(waMessage)}
+      href={link}
       target="_blank"
       rel="noopener noreferrer"
       onClick={(e) => e.stopPropagation()}

@@ -5,7 +5,29 @@ import { TrustSection } from "@/components/TrustSection";
 import { ArrowRight } from "@/components/Icons";
 import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
 
-export function Hero() {
+interface HeroProps {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  ctaText?: string;
+  waMessage?: string;
+}
+
+export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
+  const defaultTitle = (
+    <>
+      Business Name, Website &amp; CAC —
+      <span className="italic font-mono"> For &#x20A6;100k</span>
+    </>
+  );
+
+  const defaultSubtitle = (
+    <>
+      Registered, branded, and online in{" "}
+      <span className="font-mono text-on-surface font-bold">5 business days</span>
+      {" "}— no office visits, no paperwork, no stress.
+    </>
+  );
+
   return (
     <>
       <section className="relative section-py overflow-hidden">
@@ -29,18 +51,15 @@ export function Hero() {
             {/* Text — shown second on mobile, first on desktop */}
             <div className="flex-1 text-center lg:text-left space-y-8 order-last lg:order-first">
               <h1 className="text-4xl lg:text-6xl font-headline leading-[0.9] text-on-surface">
-                Business Name, Website &amp; CAC —
-                <span className="italic font-mono">For &#x20A6;100k</span>
+                {title || defaultTitle}
               </h1>
               <p className="text-xl lg:text-2xl text-on-surface/60 max-w-xl leading-snug font-body">
-                Registered, branded, and online in{" "}
-                <span className="font-mono text-on-surface font-bold">5 business days</span>
-                {" "}— no office visits, no paperwork, no stress.
+                {subtitle || defaultSubtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href={waLink(WA_MESSAGES.hero)} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Link href={waLink(waMessage || WA_MESSAGES.hero)} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                   <Button className="w-full bg-primary text-white hover:opacity-90 px-8 py-6 h-auto rounded-full font-medium text-lg shadow-xl shadow-black/5 transition-all active:scale-95 group">
-                    Get My Business Started — ₦100k
+                    {ctaText || "Get My Business Started — ₦100k"}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

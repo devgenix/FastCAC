@@ -53,23 +53,24 @@ export function Footer() {
             <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Ecosystem</h5>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li><a className="hover:text-secondary transition-colors" href="#how-it-works">How it Works</a></li>
-              <li><a className="hover:text-secondary transition-colors" href="#pricing-v3">Packages</a></li>
+              <li><a className="hover:text-secondary transition-colors" href="#pricing">Packages</a></li>
               <li><a className="hover:text-secondary transition-colors" href="#whats-included">What's Included</a></li>
+              <li><Link className="hover:text-secondary transition-colors" href="/blog">Blog</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Legal</h5>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
-              <li><a className="hover:text-secondary transition-colors" href="#">Privacy Policy</a></li>
-              <li><a className="hover:text-secondary transition-colors" href="#">Terms of Use</a></li>
-              <li><a className="hover:text-secondary transition-colors" href="#">Compliance</a></li>
+              <li><Link className="hover:text-secondary transition-colors" href="/privacy">Privacy Policy</Link></li>
+              <li><Link className="hover:text-secondary transition-colors" href="/terms">Terms of Use</Link></li>
+              <li><Link className="hover:text-secondary transition-colors" href="/names">Business Names</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-30">Contact</h5>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li>
-                <a href="mailto:hello@fastcac.ng" className="hover:text-secondary transition-colors">hello@fastcac.ng</a>
+                <a href="mailto:hello@fastcac.com" className="hover:text-secondary transition-colors">hello@fastcac.com</a>
               </li>
               <li>
                 <Link
@@ -87,7 +88,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-outline/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[10px] font-mono opacity-20 uppercase tracking-widest">
-            © 2025 FastCAC / Engineered in Nigeria
+            © {new Date().getFullYear()} FastCAC
           </p>
           <div className="flex gap-6 opacity-20 hover:opacity-100 transition-opacity">
             <a href="#" className="font-mono text-[10px] uppercase cursor-pointer hover:text-secondary" aria-label="FastCAC on X (Twitter)">Twitter</a>

@@ -24,3 +24,17 @@ export const WA_MESSAGES = {
   consultation: "Hi! I'd like to book a strategy consultation with FastCAC to discuss the right package for my business.",
   whatsapp: "Hi! I found FastCAC online and I have a question about business registration.",
 };
+
+/**
+ * Generates a WhatsApp message for a specific business name and package.
+ * @param name - The chosen business name
+ * @param packageType - The selected package
+ */
+export function getNameMessage(name: string, packageType: string): string {
+  const cases: Record<string, string> = {
+    starter: `Hi! I'd like to claim the name "${name}" with the Starter Package (₦100,000). How do I proceed?`,
+    pro: `Hi! I'd like to claim the name "${name}" with the Business Pro Package (₦200,000). How do I proceed?`,
+    full: `Hi! I'd like to claim the name "${name}" with the Full Setup Package (₦500,000). How do I proceed?`,
+  };
+  return cases[packageType] || `Hi! I'd like to claim the name "${name}". How do I proceed?`;
+}

@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fastcac.ng"),
+  metadataBase: new URL("https://fastcac.com"),
   title: "FastCAC — Start Your Nigerian Business in 5 Days",
   description: "The all-in-one registration engine for Nigerian founders. Name, Domain & CAC certificate included in one flat fee.",
   keywords: ["CAC registration", "Nigeria business", "business name", "logo design", "business website", "startup Nigeria"],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FastCAC — Start Your Nigerian Business in 5 Days",
     description: "Registered, branded, and online in 5 business days — no office visits, no paperwork, no stress.",
-    url: "https://fastcac.ng",
+    url: "https://fastcac.com",
     siteName: "FastCAC",
     images: [
       {
@@ -42,6 +42,9 @@ export const metadata: Metadata = {
 };
 
 import { GridBackground } from "@/components/GridBackground";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 export default function RootLayout({
   children,
@@ -52,7 +55,12 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col font-body bg-surface text-on-surface antialiased overflow-x-hidden">
         <GridBackground />
-        {children}
+        <Navbar />
+        <FloatingWhatsApp />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
