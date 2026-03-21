@@ -154,7 +154,7 @@ const STEPS = [
     description:
       "Tell us your business idea and we'll suggest 5 unique, CAC-available names with matching domains — or choose from our curated ready-to-register list. Done within 24 hours.",
     icon: Search,
-    image: "/images/step1_naming_1773936257689.png",
+    image: "/images/step1_naming.png",
     accent: "from-emerald-50 to-transparent",
   },
   {
@@ -164,7 +164,7 @@ const STEPS = [
     description:
       "We file your CAC registration (government fees included), design your logo and brand kit, build your website, and set up your domain and business email — all at once. You don't lift a finger.",
     icon: Shield,
-    image: "/images/step2_securing_1773936272478.png",
+    image: "/images/step2_registering.png",
     accent: "from-sky-50 to-transparent",
   },
   {
@@ -174,7 +174,7 @@ const STEPS = [
     description:
       "Within 5 business days, you'll have your official CAC certificate, a live website, a professional logo, and a business email — everything you need to start trading.",
     icon: Rocket,
-    image: "/images/step3_launching_1773936288714.png",
+    image: "/images/step3_launching.png",
     accent: "from-violet-50 to-transparent",
   },
 ];
