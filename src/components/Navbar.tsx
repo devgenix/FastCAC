@@ -117,25 +117,22 @@ export function Navbar() {
 
         <div className="hidden md:flex gap-8 items-center">
           <Link
-            href="#how-it-works"
-            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
-          >
-            Process
-          </Link>
-          <Link
             href="#pricing"
             className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
           >
-            Packages
+            Pricing
           </Link>
           <Link
-            href={waLink(WA_MESSAGES.whatsapp)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
+            href="/names"
+            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
           >
-            <WhatsApp className="w-4 h-4 fill-current" />
-            Support
+            Business Names
+          </Link>
+          <Link
+            href="/blog"
+            className="text-on-surface/60 hover:text-primary transition-colors font-medium text-sm"
+          >
+            Blog
           </Link>
           {isScrolled && (
             <Link
@@ -201,21 +198,19 @@ export function Navbar() {
           </div>
           <div className="flex flex-col gap-6 text-xl">
             <Link
-              href="#how-it-works"
+              href="#pricing"
               onClick={() => setIsMenuOpen(false)}
             >
-              Process
+              Pricing
             </Link>
-            <Link href="#pricing" onClick={() => setIsMenuOpen(false)}>
-              Packages
+            <Link href="/names" onClick={() => setIsMenuOpen(false)}>
+              Business Names
             </Link>
             <Link
-              href={waLink(WA_MESSAGES.whatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/blog"
               onClick={() => setIsMenuOpen(false)}
             >
-              Support (WhatsApp)
+              Blog
             </Link>
           </div>
           <Link

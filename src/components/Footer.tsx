@@ -27,6 +27,11 @@ export function FinalCTA() {
                   Start My Business Now
                 </Button>
               </Link>
+              <Link href="/names">
+                <Button variant="outline" className="h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
+                  Get Business Names
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
