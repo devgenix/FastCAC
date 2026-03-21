@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
+import Image from "next/image";
 import { TableOfContents } from "./TableOfContents";
 import { AuthorBio } from "./AuthorBio";
 import { ArrowRight } from "@/components/Icons";
@@ -69,11 +70,12 @@ export function BlogPostLayout({
         {image && (
           <div className="max-w-[1000px] mx-auto mb-16 lg:mb-24 animate-fade-up [animation-delay:600ms]">
             <div className="aspect-[16/9] rounded-[2.5rem] overflow-hidden border border-outline/10 shadow-2xl shadow-primary/5">
-              <img 
+              <Image
                 src={image} 
                 alt={title} 
                 width={1000}
                 height={563}
+                priority
                 className="w-full h-full object-cover"
               />
             </div>

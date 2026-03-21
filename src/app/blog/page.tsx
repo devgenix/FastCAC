@@ -39,8 +39,8 @@ export default function BlogIndexPage() {
       <section className="section-py relative z-10 -mt-20 lg:-mt-32">
         <div className="max-w-[1320px] section-px mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {BLOG_POSTS.map((post) => (
-              <BlogCard key={post.slug} post={post} />
+            {BLOG_POSTS.map((post, index) => (
+              <BlogCard key={post.slug} post={post} priority={index < 3} />
             ))}
           </div>
         </div>
