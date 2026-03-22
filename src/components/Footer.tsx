@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Verified, Rocket, Shield, Globe } from "@/components/Icons";
 import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
+import { usePathname } from "next/navigation";
 
 export function FinalCTA() {
+  const pathname = usePathname();
+  const isNamesPage = pathname === "/names";
   return (
     <section className="section-py bg-white">
       <div className="max-w-[1320px] section-px mx-auto">
-        <div className="bg-surface-container rounded-[1rem] px-4 py-6 lg:p-12 text-center relative overflow-hidden border border-outline/5">
+        <div className="bg-surface-container rounded-[1rem] p-6 lg:p-12 text-center relative overflow-hidden border border-outline/5">
           <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
           <div className="relative z-10 space-y-8">
@@ -17,21 +20,23 @@ export function FinalCTA() {
               Start Your Business{" "}
               <span className="underline decoration-secondary decoration-4 underline-offset-8">Today</span>
             </h2>
-            <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-xl mx-auto font-body">
-              Join 1,200+ Nigerian founders who got their business name, logo, website, and CAC certificate — in 5 days or less.
+            <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-2xl mx-auto font-body">
+              Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — in 5 days or less for ₦100,000</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href={waLink(WA_MESSAGES.finalCTA)} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-secondary text-on-secondary hover:bg-secondary/90 h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all shadow-xl shadow-secondary/10">
+              <Link href={waLink(WA_MESSAGES.finalCTA)} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button className="w-full bg-secondary text-on-secondary hover:bg-secondary/90 h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all shadow-xl shadow-secondary/10">
                   Start My Business Now
                 </Button>
               </Link>
-              <Link href="/names">
-                <Button variant="outline" className="h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
-                  Get Business Names
-                </Button>
-              </Link>
+              {!isNamesPage && (
+                <Link href="/names" className="w-full sm:w-auto">
+                  <Button variant="outline" className="w-full h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
+                    Get Business Names
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

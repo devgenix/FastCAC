@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { WhatsApp, ArrowRight } from "@/components/Icons";
 import { cn } from "@/lib/utils";
 import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
+import { useHeader } from "./HeaderContext";
 
 
 export function Navbar() {
+  const { isSticky } = useHeader();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -45,7 +47,10 @@ export function Navbar() {
   const drawLen = totalLen > 0 ? scrollProgress * totalLen : 0;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none pt-4 transition-all duration-300 max-w-[1320px] mx-auto">
+    <nav className={cn(
+      "left-0 right-0 z-50 flex justify-center pointer-events-none pt-4 transition-all duration-300 max-w-[1320px] mx-auto",
+      isSticky ? "fixed top-0" : "absolute"
+    )}>
       <div
         className={cn(
           "flex justify-between items-center transition-all duration-500 pointer-events-auto p-2 relative",

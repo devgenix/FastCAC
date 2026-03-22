@@ -45,6 +45,7 @@ import { GridBackground } from "@/components/GridBackground";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { HeaderProvider } from "@/components/HeaderContext";
 
 export default function RootLayout({
   children,
@@ -54,13 +55,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col font-body bg-surface text-on-surface antialiased overflow-x-hidden">
-        <GridBackground />
-        <Navbar />
-        <FloatingWhatsApp />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+        <HeaderProvider>
+          <GridBackground />
+          <Navbar />
+          <FloatingWhatsApp />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </HeaderProvider>
       </body>
     </html>
   );
