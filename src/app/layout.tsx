@@ -10,17 +10,17 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://fastcac.com"),
   title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
-  description: "Get your CAC certificate, business name, logo, and website in 5 days for ₦100k.",
+  description: "Get your CAC certificate, business name, logo, and website in 7 days for ₦100k.",
   keywords: ["CAC registration", "Nigeria business", "business name", "logo design", "business website", "startup Nigeria"],
   authors: [{ name: "FastCAC Team" }],
   openGraph: {
-    title: "FastCAC — Start Your Nigerian Business in 5 Days",
-    description: "Registered, branded, and online in 5 business days — no office visits, no paperwork, no stress.",
+    title: "FastCAC — Start Your Nigerian Business in 7 days",
+    description: "Registered, branded, and online in 7 business days — no office visits, no paperwork, no stress.",
     url: "https://fastcac.com",
     siteName: "FastCAC",
     images: [
       {
-        url: "/images/hero1.jpg",
+        url: "https://res.cloudinary.com/dzaxzeuh5/image/upload/hero1_ggu55q.jpg",
         width: 1200,
         height: 630,
         alt: "FastCAC — Nigerian Business Registration Engine",
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
-    description: "Get your CAC certificate, business name, logo, and website in 5 days for ₦100k.",
-    images: ["/images/hero1.jpg"],
+    description: "Get your CAC certificate, business name, logo, and website in 7 days for ₦100k.",
+    images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/hero1_ggu55q.jpg"],
   },
   robots: {
     index: true,

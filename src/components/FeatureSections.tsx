@@ -11,7 +11,7 @@ const CHECKLIST_ITEMS = [
   {
     icon: Verified,
     title: "Official CAC Certificate",
-    desc: "Government-issued RC number and digital seal. Your business is legally recognized within 5 days.",
+    desc: "Government-issued RC number and digital seal. Your business is legally recognized within 7 days.",
   },
   {
     icon: Globe,
@@ -80,7 +80,7 @@ export function ChecklistSection() {
                 Official CAC<br />Certificate
               </h3>
               <p className="text-white/60 font-body text-sm lg:text-base leading-relaxed max-w-sm">
-                Government-issued, RC number registered. Legally yours within 5 business days.
+                Government-issued, RC number registered. Legally yours within 7 business days.
               </p>
             </div>
           </div>
@@ -155,7 +155,7 @@ const STEPS = [
     tag: "We Build & Register",
     title: "We Handle Everything",
     description:
-      "We file your CAC registration (government fees included), design your logo and brand kit, build your website, and set up your domain and business email — all at once. You don't lift a finger.",
+      "We file your CAC registration (government fees included), design your logo and brand kit, build your website, set up your domain and business email, social media accounts and even your Corporate Bank Account(depends on package) — all at once. You don't lift a finger.",
     icon: Shield,
     image: "/images/step2_registering.webp",
     accent: "from-sky-50 to-transparent",
@@ -165,7 +165,7 @@ const STEPS = [
     tag: "Launch",
     title: "You're Open for Business",
     description:
-      "Within 5 business days, you'll have your official CAC certificate, a live website, a professional logo, and a business email — everything you need to start trading.",
+      "Within days, you'll have your official CAC certificate, a live website, a professional logo, and TIN (Tax Identification Number) — everything you need to start trading.",
     icon: Rocket,
     image: "/images/step3_launching.webp",
     accent: "from-violet-50 to-transparent",
@@ -227,7 +227,7 @@ export function HowItWorks() {
                     <span className="text-sm font-body text-on-surface/70">
                       {index === 0 && "Name options in 24 hrs"}
                       {index === 1 && "CAC + logo + website — all handled"}
-                      {index === 2 && "Live & legal in 5 business days"}
+                      {index === 2 && "Live & legal in 7 business days"}
                     </span>
                   </div>
                 </div>

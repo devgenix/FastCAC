@@ -1,6 +1,6 @@
 # FastCAC
 
-> Registered, branded, and online in 5 business days. FastCAC is a premium, all-in-one service for entrepreneurs in Nigeria to launch their business with an official CAC certificate, professional logo, and custom website.
+> Registered, branded, and online in 7 business days. FastCAC is a premium, all-in-one service for entrepreneurs in Nigeria to launch their business with an official CAC certificate, professional logo, and custom website.
 > See [Full Documentation](https://fastcac.com/llms-full.txt) for more details.
 
 ## Core Services

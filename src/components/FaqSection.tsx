@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "Are government fees included in the price?",
-    a: "Yes. The price you see is all-inclusive. Government filing fees (currently ₦10,000–₦15,000), stamp duty, and any other government charges are already factored in. No hidden extras.",
+    a: "Yes. The price you see is all-inclusive. Government filing fees stamp duty, and any other government charges are already factored in. No hidden extras.",
   },
   {
     q: "What exactly does the website look like?",

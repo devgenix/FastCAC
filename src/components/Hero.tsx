@@ -23,7 +23,7 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
   const defaultSubtitle = (
     <>
       Registered, branded, and online in{" "}
-      <span className="font-mono text-on-surface font-bold">5 business days</span>
+      <span className="font-mono text-on-surface font-bold">7 business days</span>
       {" "}— no office visits, no paperwork, no stress.
     </>
   );
@@ -38,7 +38,7 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
             <div className="flex-1 relative w-full h-full lg:min-h-[400px] order-first lg:order-last">
               <div className="relative w-[280px] mx-auto aspect-[2550/3300] lg:w-full lg:h-[600px] lg:aspect-[2550/3300] rounded-3xl overflow-hidden shadow-2xl shadow-black/10 transition-all duration-700 hover:scale-[1.02]">
                 <Image
-                  src="https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg"
+                  src="https://res.cloudinary.com/dzaxzeuh5/image/upload/hero1_ggu55q.jpg"
                   alt="Nigerian entrepreneur receiving their CAC certificate, business logo, and website from FastCAC"
                   width={660}
                   height={854}
