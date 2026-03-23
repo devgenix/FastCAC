@@ -147,7 +147,7 @@ const STEPS = [
     description:
       "Tell us your business idea and we'll suggest 5 unique, CAC-available names with matching domains — or choose from our curated ready-to-register list. Done within 24 hours.",
     icon: Search,
-    image: "/images/step1_naming.webp",
+    image: "https://images.unsplash.com/photo-1738929813802-94d64b2a9ea8?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     accent: "from-emerald-50 to-transparent",
   },
   {
@@ -167,7 +167,7 @@ const STEPS = [
     description:
       "Within days, you'll have your official CAC certificate, a live website, a professional logo, and TIN (Tax Identification Number) — everything you need to start trading.",
     icon: Rocket,
-    image: "/images/step3_launching.webp",
+    image: "https://images.unsplash.com/photo-1575663620136-5ebbfcc2c597?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     accent: "from-violet-50 to-transparent",
   },
 ];

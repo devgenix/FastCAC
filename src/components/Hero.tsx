@@ -30,7 +30,7 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
 
   return (
     <>
-      <section className="relative section-py overflow-hidden">
+      <section className="relative section-py lg:py-[7rem] overflow-hidden">
         <div className="w-full max-w-[1320px] section-px mx-auto relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16 py-12 lg:py-0">
 

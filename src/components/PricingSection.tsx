@@ -50,7 +50,7 @@ const PACKAGE_CONFIG: Record<PackageType, {
     ],
   },
   pro: {
-    title: "Everything in Starter, Plus More",
+    title: "Established Business",
     cta: "Start Pro — ₦200,000",
     stickyLabel: "Start Pro",
     waMessage: WA_MESSAGES.pricingPro,
@@ -225,10 +225,10 @@ const PricingCard = ({
     )}
 
     <div className="mb-6 md:mb-10">
-      <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-1">{title}</h3>
+      <h3 className="text-lg md:text-xl font-bold text-slate-500 mb-2">{title}</h3>
       <div className="flex items-baseline gap-1">
-        <span className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight font-mono">{formatPrice(price)}</span>
-        {isPlus && <span className="text-xl md:text-2xl font-black text-slate-400 font-mono">+</span>}
+        <span className="text-4xl md:text-6xl font-black text-primary tracking-tight font-mono">{formatPrice(price)}</span>
+        {isPlus && <span className="text-2xl md:text-3xl font-black text-slate-400 font-mono">+</span>}
       </div>
     </div>
 
