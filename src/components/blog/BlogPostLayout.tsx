@@ -105,8 +105,8 @@ export function BlogPostLayout({
                   Start Your Business{" "}
                   <span className="underline decoration-primary decoration-4 underline-offset-8">Today</span>
                 </h2>
-                <p className="text-lg text-on-surface/70 max-w-xl mx-auto font-body">
-                  Join 1,200+ Nigerian founders who got their business name, logo, website, and CAC certificate — in 5 days or less.
+                <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-2xl mx-auto font-body">
+                  Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — in 5 days or less for ₦100,000</span>
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

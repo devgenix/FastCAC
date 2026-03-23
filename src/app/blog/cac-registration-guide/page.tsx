@@ -9,10 +9,15 @@ export const metadata: Metadata = {
     canonical: "/blog/cac-registration-guide",
   },
   openGraph: {
-    title: "Everything You Need to Know About CAC Registration | FastCAC",
-    description: "Detailed 2026 guide to CAC registration: CAMA 2020 updates, new fees, and digital certificates explained.",
-    url: "https://fastcac.com/blog/cac-registration-guide",
-    siteName: "FastCAC",
+    images: [
+      {
+        url: "/blog-cac-guide.webp",
+        width: 1200,
+        height: 630,
+        alt: "Everything You Need to Know About CAC Registration | FastCAC",
+      },
+    ],
+    locale: "en_NG",
     type: "article",
     publishedTime: "2026-03-21T00:00:00.000Z",
     authors: ["FastCAC Legal Team"],
@@ -21,6 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Everything You Need to Know About CAC Registration | FastCAC Blog",
     description: "Complete guide to CAC registration in Nigeria.",
+    images: ["/blog-cac-guide.webp"],
   },
 };
 

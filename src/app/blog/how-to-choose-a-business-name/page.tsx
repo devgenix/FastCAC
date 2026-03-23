@@ -9,10 +9,15 @@ export const metadata: Metadata = {
     canonical: "/blog/how-to-choose-a-business-name",
   },
   openGraph: {
-    title: "How to Choose a Great Business Name | FastCAC",
-    description: "Expert branding tips on picking a business name that lasts in 2026. Heritage, minimalism, and cultural resonance.",
-    url: "https://fastcac.com/blog/how-to-choose-a-business-name",
-    siteName: "FastCAC",
+    images: [
+      {
+        url: "/blog-naming-guide.webp",
+        width: 1200,
+        height: 630,
+        alt: "How to Choose a Great Business Name | FastCAC",
+      },
+    ],
+    locale: "en_NG",
     type: "article",
     publishedTime: "2026-03-21T00:00:00.000Z",
     authors: ["FastCAC Branding Team"],
@@ -20,7 +25,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "How to Choose a Great Business Name | FastCAC Blog",
-    description: "Expert tips on picking a business name that lasts. Simple, unique, and memorable strategies.",
+    description: "Master the art of naming your Nigerian startup in 2026.",
+    images: ["/blog-naming-guide.webp"],
   },
 };
 

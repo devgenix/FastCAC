@@ -10,10 +10,22 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   openGraph: {
+    images: [
+      {
+        url: "/images/blog/blog-index-seo.png",
+        width: 1200,
+        height: 630,
+        alt: "FastCAC Blog — Scaling Your Business in Nigeria",
+      },
+    ],
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "FastCAC Blog — Scaling Your Business in Nigeria",
     description: "Expert guides on branding, business registration, and scaling your startup in Nigeria.",
-    url: "https://fastcac.com/blog",
-    type: "website",
+    images: ["/images/blog/blog-index-seo.png"],
   },
 };
 

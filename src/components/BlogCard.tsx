@@ -9,7 +9,7 @@ export function BlogCard({ post, priority = false }: { post: BlogPost, priority?
   return (
     <Link 
       href={`/blog/${post.slug}`}
-      className="group flex flex-col bg-white border border-outline/10 rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1"
+      className="group flex flex-col bg-white border border-outline/50 rounded-xl overflow-hidden shadow-sm transition-all duration-500"
     >
       <div className="relative aspect-[16/9] overflow-hidden">
         <Image
@@ -18,7 +18,7 @@ export function BlogCard({ post, priority = false }: { post: BlogPost, priority?
           width={640}
           height={360}
           priority={priority}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-90"
         />
         <div className="absolute top-4 left-4">
           <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-mono font-bold text-primary uppercase tracking-wider shadow-sm">
@@ -46,9 +46,12 @@ export function BlogCard({ post, priority = false }: { post: BlogPost, priority?
           {post.description}
         </p>
         
-        <div className="flex items-center gap-2 text-xs font-headline font-bold text-on-surface group-hover:text-primary transition-colors">
-          Read Article 
-          <span className="translate-x-0 group-hover:translate-x-1 transition-transform">→</span>
+        <div className="flex items-center gap-2 text-xs font-headline font-bold text-on-surface group-hover:text-primary transition-all duration-300">
+          <span className="relative">
+            Read Article 
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </span>
+          <span className="translate-x-0 group-hover:translate-x-1.5 transition-transform duration-300">→</span>
         </div>
       </div>
     </Link>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "FastCAC",
     images: [
       {
-        url: "https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg",
+        url: "/images/hero1.jpg",
         width: 1200,
         height: 630,
         alt: "FastCAC — Nigerian Business Registration Engine",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
     description: "Get your CAC certificate, business name, logo, and website in 5 days for ₦100k.",
-    images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg"],
+    images: ["/images/hero1.jpg"],
   },
   robots: {
     index: true,
