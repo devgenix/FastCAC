@@ -17,7 +17,7 @@ FastCAC eliminates the stress of business setup. We handle the government paperw
 
 ## What's Included in Every Package
 
-- **Official CAC Certificate:** Government-issued RC number and digital seal, verifiable on the CAC portal.
+- **Official CAC Certificate:** Government-issued CAC Business number and digital seal, verifiable on the CAC portal.
 - **Automatic TIN:** Tax Identification Number generated and included on your certificate.
 - **Professional Logo & Brand Kit:** A custom-designed logo and brand color palette.
 - **Business Website:** Mobile-friendly website with professional email and .ng/.com.ng domain.

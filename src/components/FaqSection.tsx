@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "What documents do I need to provide?",
-    a: "Just your valid government-issued ID (NIN, driver's licence, or international passport) and your BVN for the CAC application. That's it. We handle everything else.",
+    a: "Mostly basic details (Name, DOB, Address, Phone) and business information. For documents, we just need a valid government ID (NIN, Driver's Licence, or International Passport), your signature, and a passport photograph. We'll provide a clear checklist of everything required once we begin.",
   },
   {
     q: "What happens if my business name is rejected by CAC?",

@@ -11,7 +11,7 @@ const CHECKLIST_ITEMS = [
   {
     icon: Verified,
     title: "Official CAC Certificate",
-    desc: "Government-issued RC number and digital seal. Your business is legally recognized within 7 days.",
+    desc: "Government-issued CAC Registration number and digital seal. Your business is legally recognized within 7 days.",
   },
   {
     icon: Globe,

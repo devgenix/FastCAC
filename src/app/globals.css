@@ -174,3 +174,11 @@ h1, h2, h3, h4, .font-headline {
   padding-left: var(--spacing-section-x);
   padding-right: var(--spacing-section-x);
 }
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   authors: [{ name: "FastCAC Team" }],
   openGraph: {
     title: "FastCAC — Start Your Nigerian Business in 7 days",
-    description: "Registered, branded, and online in 7 business days — no office visits, no paperwork, no stress.",
+    description: "Get your businees registered, branded, and online in 7 business days — no office visits, no paperwork, no stress.",
     url: "https://fastcac.com",
     siteName: "FastCAC",
     locale: "en_NG",

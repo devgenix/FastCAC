@@ -8,15 +8,24 @@ interface BusinessNameCardProps {
   domain: string;
   category: string;
   tagline: string;
+  onSearchCac?: (name: string) => void;
 }
 
-export const BusinessNameCard = ({ name, domain, category, tagline }: BusinessNameCardProps) => (
-  <Link
-    href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
-    className="w-full bg-white border border-outline/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden block"
-  >
-    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
-    <div className="space-y-4 relative z-10">
+import { Search } from "./Icons";
+
+export const BusinessNameCard = ({ name, domain, category, tagline, onSearchCac }: BusinessNameCardProps) => (
+  <div className="w-full bg-white border border-outline/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden block">
+    {/* Main Link that covers the card */}
+    <Link
+      href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
+      className="absolute inset-0 z-0"
+      aria-label={`View details for ${name}`}
+    />
+    
+    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
+    
+    {/* Content overlay */}
+    <div className="space-y-4 relative z-10 pointer-events-none">
       <div>
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-2xl font-headline font-bold text-on-surface">{name}</h3>
@@ -27,9 +36,29 @@ export const BusinessNameCard = ({ name, domain, category, tagline }: BusinessNa
       <p className="text-sm text-on-surface/60 font-body leading-snug h-10 line-clamp-2">
         {tagline}
       </p>
-      <div className="w-full bg-on-surface text-white py-3 rounded-xl font-headline text-sm font-semibold flex items-center justify-center gap-2 group-hover:bg-primary transition-colors">
-        <span>👉 Claim This Name</span>
+      
+      {/* Footer buttons (interactive) */}
+      <div className="flex gap-2 pointer-events-auto">
+        <Link 
+          href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
+          className="flex-1 bg-on-surface text-white py-3 rounded-xl font-headline text-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors relative z-20"
+        >
+          <span>👉 Claim This Name</span>
+        </Link>
+        {onSearchCac && (
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onSearchCac(name);
+            }}
+            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20"
+            title={`Search "${name}" on CAC`}
+          >
+            <Search className="w-5 h-5" />
+          </button>
+        )}
       </div>
     </div>
-  </Link>
+  </div>
 );

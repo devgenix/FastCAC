@@ -11,10 +11,18 @@ export const metadata: Metadata = {
   },
 };
 
+import { Suspense } from "react";
+
 export default function NamesPage() {
   return (
     <main className="min-h-screen">
-      <NameMarketplace />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+        </div>
+      }>
+        <NameMarketplace />
+      </Suspense>
       <FinalCTA />
     </main>
   );

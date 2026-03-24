@@ -6,9 +6,10 @@ import { BusinessName } from "@/lib/name-data";
 
 interface NameGridProps {
   names: BusinessName[];
+  onSearchCac?: (name: string) => void;
 }
 
-export function NameGrid({ names }: NameGridProps) {
+export function NameGrid({ names, onSearchCac }: NameGridProps) {
   if (names.length === 0) {
     return (
       <div className="py-20 text-center">
@@ -22,7 +23,7 @@ export function NameGrid({ names }: NameGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
       {names.map((item) => (
-        <BusinessNameCard key={item.name} {...item} />
+        <BusinessNameCard key={item.name} {...item} onSearchCac={onSearchCac} />
       ))}
     </div>
   );

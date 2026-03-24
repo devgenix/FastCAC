@@ -22,7 +22,7 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
 
   const defaultSubtitle = (
     <>
-      Registered, branded, and online in{" "}
+      Get your business registered, branded, and online in{" "}
       <span className="font-mono text-on-surface font-bold">7 business days</span>
       {" "}— no office visits, no paperwork, no stress.
     </>
