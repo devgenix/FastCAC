@@ -43,7 +43,7 @@ export function CacSearchSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="max-w-xl text-center lg:text-left space-y-4">
             <h2 className="text-2xl xs:text-3xl lg:text-4xl font-headline font-black tracking-tight leading-tight px-4 lg:px-0">
-              Is your desired business name <span className="text-primary italic">already taken?</span>
+              Is your business name <span className="text-primary italic">already taken?</span>
             </h2>
             <p className="text-on-surface/60 font-body text-base lg:text-lg px-6 lg:px-0 opacity-80 max-w-lg mx-auto lg:mx-0">
               Browse our marketplace of curated names, let us help you find or create the perfect identity for your new venture, or verify any name with the CAC in real-time.

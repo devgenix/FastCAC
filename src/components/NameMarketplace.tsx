@@ -9,7 +9,7 @@ import { CacResultsList, getStatusIcon } from "./CacResultsList";
 import { BusinessNameCard } from "./BusinessNameCard";
 import { HeaderToggle } from "@/components/HeaderToggle";
 import { CacCompany, CacSearchType } from "@/lib/cac-search";
-import { Search, Zap, X, Globe, ChevronDown, Check, ArrowRight, Info } from "./Icons";
+import { Search, Zap, X, Globe, ChevronDown, Check, ArrowRight, Info, Loader2 } from "./Icons";
 import { BUSINESS_NAMES_DATA, CATEGORIES, BusinessName } from "@/lib/name-data";
 
 export function NameMarketplace() {
@@ -43,6 +43,7 @@ export function NameMarketplace() {
   const [isCacLoading, setIsCacLoading] = useState(false);
   const [hasSearchedCac, setHasSearchedCac] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<CacCompany | null>(null);
+  const [verifyingName, setVerifyingName] = useState<string | null>(null);
 
   // Auto-search logic for CAC mode if 'q' is in URL
   useEffect(() => {
@@ -52,11 +53,13 @@ export function NameMarketplace() {
       const performSearch = async () => {
         setIsCacLoading(true);
         setHasSearchedCac(true);
+        setVerifyingName(q);
         const result = await searchCacAction(q, cacSearchType);
         const results = result.success ? result.data : [];
         setCacResults(results);
         setSelectedCompany(results.length > 0 ? results[0] : null);
         setIsCacLoading(false);
+        setVerifyingName(null);
       };
       performSearch();
     } else if (q && searchMode === 'our-names') {
@@ -79,11 +82,13 @@ export function NameMarketplace() {
     // Trigger search
     setIsCacLoading(true);
     setHasSearchedCac(true);
+    setVerifyingName(name);
     const result = await searchCacAction(name, cacSearchType);
     const results = result.success ? result.data : [];
     setCacResults(results);
     setSelectedCompany(results.length > 0 ? results[0] : null);
     setIsCacLoading(false);
+    setVerifyingName(null);
 
     // Scroll to results
     setTimeout(() => {
@@ -276,7 +281,11 @@ export function NameMarketplace() {
                   ...BUSINESS_NAMES_DATA.filter((n) => n.isPremium),
                 ].map((item, index) => (
                   <div key={`featured-desktop-${index}`} className="w-[320px] shrink-0">
-                    <BusinessNameCard {...item} onSearchCac={triggerCacSearch} />
+                    <BusinessNameCard 
+                      {...item} 
+                      onSearchCac={triggerCacSearch} 
+                      isVerifying={verifyingName === item.name}
+                    />
                   </div>
                 ))}
               </div>
@@ -293,7 +302,11 @@ export function NameMarketplace() {
                       key={`featured-mobile-${index}`}
                       className="snap-center shrink-0 w-[85vw]"
                     >
-                      <BusinessNameCard {...item} onSearchCac={triggerCacSearch} />
+                      <BusinessNameCard 
+                        {...item} 
+                        onSearchCac={triggerCacSearch} 
+                        isVerifying={verifyingName === item.name}
+                      />
                     </div>
                   )
                 )}
@@ -415,13 +428,9 @@ export function NameMarketplace() {
                   placeholder={searchMode === 'our-names' ? "Search by keyword, industry or name..." : "Entity name, RC number, or AV code..."}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={async (e) => {
+                  onKeyDown={(e) => {
                     if (e.key === 'Enter' && searchMode === 'cac' && searchQuery.trim().length >= 3) {
-                      setIsCacLoading(true);
-                      setHasSearchedCac(true);
-                      const result = await searchCacAction(searchQuery, cacSearchType);
-                      setCacResults(result.success ? result.data : []);
-                      setIsCacLoading(false);
+                      triggerCacSearch(searchQuery);
                     }
                   }}
                   className="flex-1 min-w-0 bg-transparent border-none outline-none focus:ring-0 text-base md:text-lg font-body py-2 md:py-3 text-on-surface placeholder:text-on-surface/20"
@@ -430,12 +439,18 @@ export function NameMarketplace() {
                 {/* Close Button if text exists */}
                 {searchQuery && (
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       setSearchQuery("");
                       if (searchMode === 'cac') {
                         setCacResults([]);
                         setHasSearchedCac(false);
+                        // Also clear URL param to prevent auto-search re-trigger
+                        const params = new URLSearchParams(searchParams.toString());
+                        params.delete('q');
+                        router.push(`?${params.toString()}`, { scroll: false });
                       }
                     }}
                     className="p-2 hover:bg-on-surface/5 rounded-full text-on-surface/30 transition-colors"
@@ -448,13 +463,7 @@ export function NameMarketplace() {
                 {searchMode === 'cac' && (
                   <button
                     disabled={searchQuery.trim().length < 3 || isCacLoading}
-                    onClick={async () => {
-                      setIsCacLoading(true);
-                      setHasSearchedCac(true);
-                      const result = await searchCacAction(searchQuery, cacSearchType);
-                      setCacResults(result.success ? result.data : []);
-                      setIsCacLoading(false);
-                    }}
+                    onClick={() => triggerCacSearch(searchQuery)}
                     className={`
                       hidden sm:flex items-center justify-center h-12 px-6 rounded-xl text-white text-sm font-headline font-bold transition-all
                       ${searchQuery.trim().length < 3 || isCacLoading 
@@ -462,8 +471,14 @@ export function NameMarketplace() {
                         : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]'}
                     `}
                   >
-                    {isCacLoading ? '...' : 'Search'}
-                    {!isCacLoading && <ArrowRight className="ml-2 w-4 h-4" />}
+                    {isCacLoading ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <>
+                        Search
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 )}
 
@@ -471,13 +486,7 @@ export function NameMarketplace() {
                 {searchMode === 'cac' && (
                   <button
                     disabled={searchQuery.trim().length < 3 || isCacLoading}
-                    onClick={async () => {
-                      setIsCacLoading(true);
-                      setHasSearchedCac(true);
-                      const result = await searchCacAction(searchQuery, cacSearchType);
-                      setCacResults(result.success ? result.data : []);
-                      setIsCacLoading(false);
-                    }}
+                    onClick={() => triggerCacSearch(searchQuery)}
                     className={`
                       sm:hidden flex items-center justify-center w-11 h-11 rounded-xl text-white transition-all active:scale-95
                       ${searchQuery.trim().length < 3 || isCacLoading 
@@ -485,7 +494,11 @@ export function NameMarketplace() {
                         : 'bg-primary shadow-lg shadow-primary/20'}
                     `}
                   >
-                    <ArrowRight className="w-5 h-5" />
+                    {isCacLoading ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <ArrowRight className="w-5 h-5" />
+                    )}
                   </button>
                 )}
               </div>
@@ -552,7 +565,11 @@ export function NameMarketplace() {
 
           {/* Results Display */}
           {searchMode === 'our-names' ? (
-            <NameGrid names={filteredNames} onSearchCac={triggerCacSearch} />
+            <NameGrid 
+              names={filteredNames} 
+              onSearchCac={triggerCacSearch} 
+              verifyingName={verifyingName}
+            />
           ) : (
             <div className="mt-8">
               {hasSearchedCac ? (

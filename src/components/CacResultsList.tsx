@@ -179,21 +179,23 @@ export function CacResultsList({
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-xs font-headline font-black uppercase tracking-widest text-primary">Tax ID (TIN)</span>
                   </div>
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="text-3xl font-headline font-black tracking-tight text-on-surface select-all">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <p className="text-2xl sm:text-3xl font-headline font-black tracking-tight text-on-surface select-all break-all sm:break-normal">
                       {taxId}
                     </p>
                     <button 
-                      onClick={() => {
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
                         if (taxId) {
                           navigator.clipboard.writeText(taxId);
                           setIsCopied(true);
                           setTimeout(() => setIsCopied(false), 2000);
                         }
                       }}
-                      className="p-2 hover:bg-primary/10 rounded-lg text-primary transition-all text-[10px] font-headline font-bold uppercase min-w-[60px]"
+                      className="p-3 sm:p-2 bg-primary/5 sm:bg-transparent hover:bg-primary/10 rounded-xl sm:rounded-lg text-primary transition-all text-[11px] sm:text-[10px] font-headline font-bold uppercase min-w-[80px] sm:min-w-[60px] text-center"
                     >
-                      {isCopied ? 'Copied' : 'Copy'}
+                      {isCopied ? 'Copied!' : 'Copy TIN'}
                     </button>
                   </div>
                 </div>

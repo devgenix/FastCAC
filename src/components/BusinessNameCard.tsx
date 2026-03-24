@@ -9,11 +9,19 @@ interface BusinessNameCardProps {
   category: string;
   tagline: string;
   onSearchCac?: (name: string) => void;
+  isVerifying?: boolean;
 }
 
-import { Search } from "./Icons";
+import { Search, Loader2 } from "./Icons";
 
-export const BusinessNameCard = ({ name, domain, category, tagline, onSearchCac }: BusinessNameCardProps) => (
+export const BusinessNameCard = ({ 
+  name, 
+  domain, 
+  category, 
+  tagline, 
+  onSearchCac,
+  isVerifying 
+}: BusinessNameCardProps) => (
   <div className="w-full bg-white border border-outline/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden block">
     {/* Main Link that covers the card */}
     <Link
@@ -52,10 +60,15 @@ export const BusinessNameCard = ({ name, domain, category, tagline, onSearchCac 
               e.stopPropagation();
               onSearchCac(name);
             }}
-            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20 cursor-pointer"
+            disabled={isVerifying}
+            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             title={`Search "${name}" on CAC`}
           >
-            <Search className="w-5 h-5" />
+            {isVerifying ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Search className="w-5 h-5" />
+            )}
           </button>
         )}
       </div>
