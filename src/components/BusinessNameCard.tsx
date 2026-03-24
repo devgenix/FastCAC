@@ -52,7 +52,7 @@ export const BusinessNameCard = ({ name, domain, category, tagline, onSearchCac 
               e.stopPropagation();
               onSearchCac(name);
             }}
-            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20"
+            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20 cursor-pointer"
             title={`Search "${name}" on CAC`}
           >
             <Search className="w-5 h-5" />

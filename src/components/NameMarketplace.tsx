@@ -1,29 +1,48 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { BUSINESS_NAMES_DATA, CATEGORIES, BusinessName } from "@/lib/name-data";
-import { Search, Zap, X, Globe } from "./Icons";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+
 import { NameGrid } from "./NameGrid";
+import { searchCacAction } from "@/app/actions";
+import { CacResultsList, getStatusIcon } from "./CacResultsList";
 import { BusinessNameCard } from "./BusinessNameCard";
 import { HeaderToggle } from "@/components/HeaderToggle";
-import { searchCacAction } from "@/app/actions";
 import { CacCompany, CacSearchType } from "@/lib/cac-search";
-import { CacResultsList } from "./CacResultsList";
+import { Search, Zap, X, Globe, ChevronDown, Check, ArrowRight, Info } from "./Icons";
+import { BUSINESS_NAMES_DATA, CATEGORIES, BusinessName } from "@/lib/name-data";
 
 export function NameMarketplace() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  
+  // Scroll to search section on initial land if searching or from certain actions
+  useEffect(() => {
+    // Check if we should scroll (either via hash or if a search is active)
+    if (typeof window !== 'undefined' && (window.location.hash === '#names-search' || searchParams.get('q'))) {
+      const element = document.getElementById('names-search');
+      if (element) {
+        // Delay slightly to allow Suspense/hydration to settle
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [searchParams]);
   
   const [searchMode, setSearchMode] = useState<'our-names' | 'cac'>(
     (searchParams.get('type') === 'cac' ? 'cac' : 'our-names') as 'our-names' | 'cac'
   );
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [cacSearchType, setCacSearchType] = useState<CacSearchType>('ALL');
+  const [cacSearchType, setCacSearchType] = useState<CacSearchType>(
+    (searchParams.get('classification') as CacSearchType) || 'ALL'
+  );
   const [cacResults, setCacResults] = useState<CacCompany[]>([]);
   const [isCacLoading, setIsCacLoading] = useState(false);
   const [hasSearchedCac, setHasSearchedCac] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState<CacCompany | null>(null);
 
   // Auto-search logic for CAC mode if 'q' is in URL
   useEffect(() => {
@@ -34,7 +53,9 @@ export function NameMarketplace() {
         setIsCacLoading(true);
         setHasSearchedCac(true);
         const result = await searchCacAction(q, cacSearchType);
-        setCacResults(result.success ? result.data : []);
+        const results = result.success ? result.data : [];
+        setCacResults(results);
+        setSelectedCompany(results.length > 0 ? results[0] : null);
         setIsCacLoading(false);
       };
       performSearch();
@@ -47,6 +68,7 @@ export function NameMarketplace() {
   const triggerCacSearch = useCallback(async (name: string) => {
     setSearchMode('cac');
     setSearchQuery(name);
+    setIsClassificationOpen(false);
     
     // Update URL
     const params = new URLSearchParams(searchParams.toString());
@@ -58,7 +80,9 @@ export function NameMarketplace() {
     setIsCacLoading(true);
     setHasSearchedCac(true);
     const result = await searchCacAction(name, cacSearchType);
-    setCacResults(result.success ? result.data : []);
+    const results = result.success ? result.data : [];
+    setCacResults(results);
+    setSelectedCompany(results.length > 0 ? results[0] : null);
     setIsCacLoading(false);
 
     // Scroll to results
@@ -69,6 +93,8 @@ export function NameMarketplace() {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [wordIndex, setWordIndex] = useState(0);
+  const [isClassificationOpen, setIsClassificationOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const words = useMemo(() => ["Business", "Startup", "NGO", "Enterprise", "Agency", "Brand"], []);
 
@@ -159,6 +185,17 @@ export function NameMarketplace() {
     isHoveredRef.current = true;
     setIsHovered(true);
   };
+
+  // Click outside to close classification dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsClassificationOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isInteractingRef.current) return;
@@ -282,7 +319,7 @@ export function NameMarketplace() {
           </div>
 
           {/* ✅ Sticky section — works now because no overflow on ancestors */}
-          <div ref={searchResultsRef} className="sticky top-2 z-40 mb-12">
+          <div id="names-search" ref={searchResultsRef} className="sticky top-2 z-40 mb-12 scroll-mt-32">
             {/* Search Bar & Mode Toggle */}
             <div className="flex flex-col md:flex-row gap-4 mb-4">
               {/* Mode Toggle */}
@@ -328,22 +365,49 @@ export function NameMarketplace() {
               </div>
 
               {/* Search input with classification dropdown for CAC */}
-              <div className="flex-1 relative flex items-center bg-white dark:bg-surface-container border border-outline focus-within:border-primary rounded-xl p-1.5 shadow-sm transition-all gap-2 px-4">
-                <Search className="w-5 h-5 text-on-surface/40 shrink-0" />
+              <div className="flex-1 relative flex items-center bg-white dark:bg-surface-container border border-outline focus-within:border-primary rounded-2xl p-1.5 md:p-2 shadow-sm transition-all gap-1.5 md:gap-2 px-3 md:px-4 min-h-[56px] md:min-h-[64px]">
+                {/* No Search Icon on left - match homepage */}
                 
                 {searchMode === 'cac' && (
-                  <select
-                    value={cacSearchType}
-                    onChange={(e) => setCacSearchType(e.target.value as CacSearchType)}
-                    className="bg-transparent border-none outline-none focus:ring-0 text-xs font-headline font-bold text-primary py-0 pl-0 pr-6 appearance-none cursor-pointer border-r border-outline/5"
-                  >
-                    <option value="ALL">ALL</option>
-                    <option value="BUSINESS NAME">BUSINESS NAME</option>
-                    <option value="COMPANY">COMPANY</option>
-                    <option value="INCORPORATED TRUSTEE">IT</option>
-                    <option value="LIMITED LIABILITY">LL</option>
-                    <option value="LIMITED LIABILITY PARTNERSHIP">LLP</option>
-                  </select>
+                  <div className="relative" ref={dropdownRef}>
+                    <button
+                      type="button"
+                      onClick={() => setIsClassificationOpen(!isClassificationOpen)}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-on-surface/5 transition-colors text-xs font-headline font-bold text-primary whitespace-nowrap border-r border-outline/10 mr-1"
+                    >
+                      <span className="hidden sm:inline">{cacSearchType === 'ALL' ? 'ALL CATEGORIES' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LL Partnership' : (cacSearchType === 'LIMITED LIABILITY' ? 'Limited Liability' : (cacSearchType === 'COMPANY' ? 'Company' : (cacSearchType === 'BUSINESS NAME' ? 'Business Name' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT (Incorp. Trustee)' : cacSearchType)))))}</span>
+                      <span className="sm:hidden">{cacSearchType === 'ALL' ? 'ALL' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LLT' : (cacSearchType === 'LIMITED LIABILITY' ? 'LL' : (cacSearchType === 'COMPANY' ? 'COM' : (cacSearchType === 'BUSINESS NAME' ? 'BN' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT' : cacSearchType)))))}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isClassificationOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    {isClassificationOpen && (
+                      <div className="absolute top-full left-0 mt-3 w-64 bg-white dark:bg-surface-container border border-outline/10 rounded-2xl shadow-xl z-50 py-2 animate-in fade-in zoom-in-95 duration-200">
+                        {(['ALL', 'BUSINESS NAME', 'COMPANY', 'INCORPORATED TRUSTEE', 'LIMITED LIABILITY', 'LIMITED LIABILITY PARTNERSHIP'] as const).map((type) => (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() => {
+                              setCacSearchType(type as CacSearchType);
+                              setIsClassificationOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-3 text-xs font-headline font-bold flex items-center justify-between transition-colors hover:bg-on-surface/5 ${
+                              cacSearchType === type ? 'text-primary' : 'text-on-surface/60'
+                            }`}
+                          >
+                            <span>{
+                              type === 'INCORPORATED TRUSTEE' ? 'IT (Incorp. Trustee)' : 
+                              type === 'BUSINESS NAME' ? 'Business Name (BN)' : 
+                              type === 'COMPANY' ? 'Company (COM)' : 
+                              type === 'LIMITED LIABILITY' ? 'Limited Liability (LL)' : 
+                              type === 'LIMITED LIABILITY PARTNERSHIP' ? 'LL Partnership (LLT)' : 
+                              type === 'ALL' ? 'All Categories' : type
+                            }</span>
+                            {cacSearchType === type && <Check className="w-3.5 h-3.5" />}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 <input
@@ -360,9 +424,27 @@ export function NameMarketplace() {
                       setIsCacLoading(false);
                     }
                   }}
-                  className="flex-1 min-w-0 bg-transparent border-none outline-none focus:ring-0 text-base font-body py-2 text-on-surface placeholder:text-on-surface/20"
+                  className="flex-1 min-w-0 bg-transparent border-none outline-none focus:ring-0 text-base md:text-lg font-body py-2 md:py-3 text-on-surface placeholder:text-on-surface/20"
                 />
 
+                {/* Close Button if text exists */}
+                {searchQuery && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSearchQuery("");
+                      if (searchMode === 'cac') {
+                        setCacResults([]);
+                        setHasSearchedCac(false);
+                      }
+                    }}
+                    className="p-2 hover:bg-on-surface/5 rounded-full text-on-surface/30 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+
+                {/* Desktop Search Button Inside Field (CAC MODE) */}
                 {searchMode === 'cac' && (
                   <button
                     disabled={searchQuery.trim().length < 3 || isCacLoading}
@@ -373,35 +455,75 @@ export function NameMarketplace() {
                       setCacResults(result.success ? result.data : []);
                       setIsCacLoading(false);
                     }}
-                    className={`shrink-0 flex items-center justify-center h-10 px-6 rounded-lg text-white transition-all font-headline font-bold text-sm ${
-                      searchQuery.trim().length < 3 || isCacLoading 
+                    className={`
+                      hidden sm:flex items-center justify-center h-12 px-6 rounded-xl text-white text-sm font-headline font-bold transition-all
+                      ${searchQuery.trim().length < 3 || isCacLoading 
                         ? 'bg-on-surface/20 cursor-not-allowed' 
-                        : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20'
-                    }`}
+                        : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]'}
+                    `}
                   >
                     {isCacLoading ? '...' : 'Search'}
+                    {!isCacLoading && <ArrowRight className="ml-2 w-4 h-4" />}
                   </button>
                 )}
 
-                {searchQuery && (
+                {/* Mobile Right Arrow Button Inside Field (CAC MODE) */}
+                {searchMode === 'cac' && (
                   <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setSearchQuery("");
-                      if (searchMode === 'cac') {
-                        setCacResults([]);
-                        setHasSearchedCac(false);
-                      }
+                    disabled={searchQuery.trim().length < 3 || isCacLoading}
+                    onClick={async () => {
+                      setIsCacLoading(true);
+                      setHasSearchedCac(true);
+                      const result = await searchCacAction(searchQuery, cacSearchType);
+                      setCacResults(result.success ? result.data : []);
+                      setIsCacLoading(false);
                     }}
-                    className="shrink-0 flex items-center justify-center w-8 h-8 rounded-xl hover:bg-on-surface/5 text-on-surface/40 hover:text-on-surface/70 transition-all animate-in fade-in zoom-in duration-200"
-                    aria-label="Clear search"
+                    className={`
+                      sm:hidden flex items-center justify-center w-11 h-11 rounded-xl text-white transition-all active:scale-95
+                      ${searchQuery.trim().length < 3 || isCacLoading 
+                        ? 'bg-on-surface/10 text-on-surface/30' 
+                        : 'bg-primary shadow-lg shadow-primary/20'}
+                    `}
                   >
-                    <X className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </button>
                 )}
               </div>
-            </div>
+
+            {/* Mobile Horizontal Results Sticky Chips (Inside sticky container) */}
+            {searchMode === 'cac' && hasSearchedCac && cacResults.length > 0 && (
+              <div className="lg:hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="bg-surface/90 backdrop-blur-md border border-outline/10 rounded-2xl p-3 shadow-sm overflow-hidden">
+                  <div className="flex items-center justify-between mb-2 px-1">
+                    <span className="text-[10px] font-headline font-bold text-on-surface/40 uppercase tracking-wider">
+                      Search Results ({cacResults.length})
+                    </span>
+                    {cacResults.length > 1 && (
+                      <span className="text-[10px] font-body text-on-surface/30 italic">
+                        Scroll to see all
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                    {cacResults.map((company, index) => (
+                      <button 
+                        key={`${company.rcNumber}-${index}-mobile-sticky`}
+                        onClick={() => setSelectedCompany(company)}
+                        className={`shrink-0 px-4 py-2 rounded-xl text-xs font-headline font-bold transition-all border whitespace-nowrap flex items-center gap-2 ${
+                          selectedCompany?.approvedName === company.approvedName 
+                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-[1.02]' 
+                            : 'bg-surface-container border-outline/5 text-on-surface/60'
+                        }`}
+                      >
+                        {getStatusIcon(company.status, true)}
+                        {company.approvedName}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
             {/* Category Tabs (Only if in our-names mode) */}
             {searchMode === 'our-names' && (
@@ -434,7 +556,12 @@ export function NameMarketplace() {
           ) : (
             <div className="mt-8">
               {hasSearchedCac ? (
-                <CacResultsList results={cacResults} isLoading={isCacLoading} />
+                <CacResultsList 
+                  results={cacResults} 
+                  isLoading={isCacLoading} 
+                  selectedCompany={selectedCompany}
+                  setSelectedCompany={setSelectedCompany}
+                />
               ) : (
                 <div className="flex flex-col items-center justify-center py-20 gap-6 text-center animate-in fade-in duration-700">
                   <div className="w-20 h-20 bg-primary/5 rounded-3xl flex items-center justify-center border border-primary/10 shadow-inner">

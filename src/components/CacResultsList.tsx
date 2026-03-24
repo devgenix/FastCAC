@@ -6,27 +6,25 @@ import { getTaxIdAction } from '@/app/actions';
 interface CacResultsListProps {
   results: CacCompany[];
   isLoading: boolean;
+  selectedCompany: CacCompany | null;
+  setSelectedCompany: (company: CacCompany | null) => void;
 }
 
-export function CacResultsList({ results, isLoading }: CacResultsListProps) {
-  const [selectedCompany, setSelectedCompany] = useState<CacCompany | null>(
-    results.length > 0 ? results[0] : null
-  );
+export function CacResultsList({ 
+  results, 
+  isLoading, 
+  selectedCompany, 
+  setSelectedCompany 
+}: CacResultsListProps) {
   
   // Cache for TINs: { [companyId]: taxId }
   const [tinCache, setTinCache] = useState<Record<number, string>>({});
   const [isTaxLoading, setIsTaxLoading] = useState(false);
   const [taxError, setTaxError] = useState<string | null>(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   // Derive taxId for the currently selected company from the cache
   const taxId = selectedCompany?.companyId ? tinCache[selectedCompany.companyId] : null;
-
-  // Update selected company if results change and nothing is selected
-  React.useEffect(() => {
-    if (results.length > 0 && !selectedCompany) {
-      setSelectedCompany(results[0]);
-    }
-  }, [results, selectedCompany]);
 
   const handleGetTaxId = async () => {
     if (!selectedCompany || !selectedCompany.companyId || !selectedCompany.rcNumber) return;
@@ -67,32 +65,6 @@ export function CacResultsList({ results, isLoading }: CacResultsListProps) {
     }
   };
 
-  const getStatusIcon = (status: string) => {
-    switch (status.toUpperCase()) {
-      case 'ACTIVE':
-        return <CheckCircle className="w-4 h-4 text-primary" />;
-      case 'INACTIVE':
-        return <XCircle className="w-4 h-4 text-red-500" />;
-      case 'UNDER_REGISTRATION':
-        return <Clock className="w-4 h-4 text-yellow-500" />;
-      default:
-        return <Info className="w-4 h-4 text-on-surface/40" />;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status.toUpperCase()) {
-      case 'ACTIVE':
-        return 'bg-primary/10 text-primary border-primary/20';
-      case 'INACTIVE':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
-      case 'UNDER_REGISTRATION':
-        return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      default:
-        return 'bg-on-surface/5 text-on-surface/50 border-outline/10';
-    }
-  };
-
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4 animate-in fade-in duration-500">
@@ -119,11 +91,11 @@ export function CacResultsList({ results, isLoading }: CacResultsListProps) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      {/* Results List */}
-      <div className="flex-1 lg:max-w-md">
-        <div className="bg-white dark:bg-surface-container border border-outline/10 rounded-2xl overflow-hidden shadow-sm">
-          <div className="divide-y divide-outline/5 max-h-[600px] overflow-y-auto no-scrollbar">
+    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Desktop Results List - Fixed Sidebar style */}
+      <div className="hidden lg:block flex-1 max-w-md sticky top-24 h-fit">
+        <div className="bg-white dark:bg-surface-container border border-outline/10 rounded-2xl overflow-hidden shadow-sm flex flex-col max-h-[calc(100vh-140px)]">
+          <div className="divide-y divide-outline/5 overflow-y-auto no-scrollbar flex-1">
             {results.map((company, index) => (
               <button
                 key={`${company.rcNumber}-${index}`}
@@ -148,14 +120,14 @@ export function CacResultsList({ results, isLoading }: CacResultsListProps) {
               </button>
             ))}
           </div>
-          <div className="p-4 bg-on-surface/5 border-t border-outline/5 text-[10px] font-body text-on-surface/40 flex justify-between">
+          <div className="p-4 bg-on-surface/5 border-t border-outline/5 text-[10px] font-body text-on-surface/40 flex justify-between shrink-0">
             <span>Showing {results.length} results</span>
             <span>Data provided by CAC Nigeria</span>
           </div>
         </div>
       </div>
 
-      {/* Details View */}
+      {/* Details View - Also Sticky to stay in view */}
       <div className="flex-[1.5] lg:sticky lg:top-24 h-fit">
         {selectedCompany ? (
           <div className="bg-white dark:bg-surface-container border border-outline/10 rounded-2xl p-8 shadow-sm space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
@@ -205,18 +177,23 @@ export function CacResultsList({ results, isLoading }: CacResultsListProps) {
               {taxId ? (
                 <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 animate-in zoom-in-95 duration-500">
                   <div className="flex items-center gap-3 mb-2">
-                    <Zap className="w-5 h-5 text-primary" />
-                    <span className="text-xs font-headline font-black uppercase tracking-widest text-primary">Official Tax ID (TIN)</span>
+                    <span className="text-xs font-headline font-black uppercase tracking-widest text-primary">Tax ID (TIN)</span>
                   </div>
                   <div className="flex items-center justify-between gap-4">
                     <p className="text-3xl font-headline font-black tracking-tight text-on-surface select-all">
                       {taxId}
                     </p>
                     <button 
-                      onClick={() => navigator.clipboard.writeText(taxId)}
-                      className="p-2 hover:bg-primary/10 rounded-lg text-primary transition-colors text-[10px] font-headline font-bold uppercase"
+                      onClick={() => {
+                        if (taxId) {
+                          navigator.clipboard.writeText(taxId);
+                          setIsCopied(true);
+                          setTimeout(() => setIsCopied(false), 2000);
+                        }
+                      }}
+                      className="p-2 hover:bg-primary/10 rounded-lg text-primary transition-all text-[10px] font-headline font-bold uppercase min-w-[60px]"
                     >
-                      Copy
+                      {isCopied ? 'Copied' : 'Copy'}
                     </button>
                   </div>
                 </div>
@@ -262,3 +239,30 @@ export function CacResultsList({ results, isLoading }: CacResultsListProps) {
     </div>
   );
 }
+
+export const getStatusIcon = (status: string, isCompact?: boolean) => {
+  const size = isCompact ? "w-3 h-3" : "w-4 h-4";
+  switch (status.toUpperCase()) {
+    case 'ACTIVE':
+      return <CheckCircle className={`${size} text-primary`} />;
+    case 'INACTIVE':
+      return <XCircle className={`${size} text-red-500`} />;
+    case 'UNDER_REGISTRATION':
+      return <Clock className={`${size} text-yellow-500`} />;
+    default:
+      return <Info className={`${size} text-on-surface/40`} />;
+  }
+};
+
+export const getStatusColor = (status: string) => {
+  switch (status.toUpperCase()) {
+    case 'ACTIVE':
+      return 'bg-primary/10 text-primary border-primary/20';
+    case 'INACTIVE':
+      return 'bg-red-500/10 text-red-500 border-red-500/20';
+    case 'UNDER_REGISTRATION':
+      return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
+    default:
+      return 'bg-on-surface/5 text-on-surface/50 border-outline/10';
+  }
+};
