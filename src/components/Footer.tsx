@@ -21,7 +21,7 @@ export function FinalCTA() {
               <span className="underline decoration-secondary decoration-4 underline-offset-8">Today</span>
             </h2>
             <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-2xl mx-auto font-body">
-              Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — in 7 days or less for ₦100,000</span>
+              Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — in 5 days or less for ₦100,000</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -59,7 +59,7 @@ export function Footer() {
               <span className="opacity-60">CAC</span>
             </div>
             <p className="text-on-surface/65 text-sm leading-relaxed font-body">
-              Nigeria's fastest way to get your business registered, branded, and online — in 7 days.
+              Nigeria's fastest way to get your business registered, branded, and online — in 5 days.
             </p>
           </div>
           <div>

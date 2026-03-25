@@ -11,7 +11,7 @@ const CHECKLIST_ITEMS = [
   {
     icon: Verified,
     title: "Official CAC Certificate",
-    desc: "Government-issued CAC Business number and digital seal. Your business is legally recognized within 7 days.",
+    desc: "Government-issued CAC Business number and digital seal. Your business is legally recognized within 5 days.",
   },
   {
     icon: Globe,
@@ -80,7 +80,7 @@ export function ChecklistSection() {
                 Official CAC<br />Certificate
               </h3>
               <p className="text-white/60 font-body text-sm lg:text-base leading-relaxed max-w-sm">
-                Government-issue, legally yours within 7 business days.
+                Government-issue, legally yours within 5 business days.
               </p>
             </div>
           </div>
@@ -227,7 +227,7 @@ export function HowItWorks() {
                     <span className="text-sm font-body text-on-surface/70">
                       {index === 0 && "Name options in 24 hrs"}
                       {index === 1 && "CAC + logo + website — all handled"}
-                      {index === 2 && "Live & legal in 7 business days"}
+                      {index === 2 && "Live & legal in 5 business days"}
                     </span>
                   </div>
                 </div>

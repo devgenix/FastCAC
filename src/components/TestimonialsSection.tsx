@@ -10,7 +10,7 @@ const testimonials = [
     avatar: "AO",
     color: "from-pink-400 to-rose-500",
     quote:
-      "I had been putting off registering my business for 2 years because I didn't know where to start. FastCAC did everything in 7 days. I now have my CAC cert, logo, website, and professional email. It felt like magic.",
+      "I had been putting off registering my business for 2 years because I didn't know where to start. FastCAC did everything in 5 days. I now have my CAC cert, logo, website, and professional email. It felt like magic.",
   },
   {
     name: "Emeka Nwosu",
@@ -37,7 +37,7 @@ const testimonials = [
     avatar: "CE",
     color: "from-violet-400 to-purple-500",
     quote:
-      "I needed my business set up fast before a big contract. FastCAC delivered in exactly 7 days. Everything was perfect — the logo, the website, the business name. 10/10, no complaints whatsoever.",
+      "I needed my business set up fast before a big contract. FastCAC delivered in exactly 5 days. Everything was perfect — the logo, the website, the business name. 10/10, no complaints whatsoever.",
   },
   {
     name: "Oluwaseun Afolabi",

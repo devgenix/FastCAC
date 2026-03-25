@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
     template: "%s | FastCAC"
   },
-  description: "Get your CAC certificate, business name registration, professional logo, and website in 7 days for ₦100k. The most reliable way to register a business in Nigeria.",
+  description: "Get your CAC certificate, business name registration, professional logo, and website in 5 days for ₦100k. The most reliable way to register a business in Nigeria.",
   keywords: [
     "CAC registration", 
     "Business names registration", 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
-    description: "Legalize your business in 7 days. CAC certificate, TIN, Logo, and Website included.",
+    description: "Legalize your business in 5 days. CAC certificate, TIN, Logo, and Website included.",
     url: "https://fastcac.com",
     siteName: "FastCAC",
     locale: "en_NG",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
-    description: "Get your CAC certificate and business setup in 7 days for ₦100k.",
+    description: "Get your CAC certificate and business setup in 5 days for ₦100k.",
     images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/WhatsApp_Image_2026-03-25_at_01.54.43_jkbpgu.jpg"],
   },
   robots: {
@@ -87,7 +87,7 @@ export default function RootLayout({
       "https://facebook.com/fastcac",
       "https://instagram.com/fastcac"
     ],
-    "description": "Fastest CAC Registration service in Nigeria. Get your business name, logo, and website in 7 days.",
+    "description": "Fastest CAC Registration service in Nigeria. Get your business name, logo, and website in 5 days.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "NG"

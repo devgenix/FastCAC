@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: NamePageProps): Promise<Metad
 
   return {
     title: `Claim ${name} — Business Name & CAC Registration`,
-    description: `Register your business as ${name} with CAC, get a professional logo and a website in 7 days for ₦100k.`,
+    description: `Register your business as ${name} with CAC, get a professional logo and a website in 5 days for ₦100k.`,
     alternates: {
       canonical: `/names/${rawName}`,
     },
@@ -81,7 +81,7 @@ export default async function NameDetailPage({ params }: NamePageProps) {
   const heroSubtitle = (
     <>
       This name is currently <span className="text-primary font-bold">AVAILABLE</span> for registration. 
-      Secure it today and get your full business setup in 7 days.
+      Secure it today and get your full business setup in 5 days.
     </>
   );
 
