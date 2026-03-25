@@ -11,7 +11,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://fastcac.com"),
   title: {
-    default: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
+    default: "Fastest CAC Registration in Nigeria + Website & Logo for ₦100k",
     template: "%s | FastCAC"
   },
   description: "Get your CAC certificate, business name registration, professional logo, and website in 5 days for ₦100k. The most reliable way to register a business in Nigeria.",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
+    title: "Fastest CAC Registration in Nigeria + Website & Logo for ₦100k",
     description: "Legalize your business in 5 days. CAC certificate, TIN, Logo, and Website included.",
     url: "https://fastcac.com",
     siteName: "FastCAC",
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fastest CAC Registration in Nigeria — Business Name & Logo for ₦100k",
-    description: "Get your CAC certificate and business setup in 5 days for ₦100k.",
+    title: "Fastest CAC Registration in Nigeria + Website & Logo for ₦100k",
+    description: "Get your CAC certificate, business logo & website in 5 days for ₦100k.",
     images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/WhatsApp_Image_2026-03-25_at_01.54.43_jkbpgu.jpg"],
   },
   robots: {
