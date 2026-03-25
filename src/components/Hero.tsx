@@ -3,16 +3,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TrustSection } from "@/components/TrustSection";
 import { ArrowRight } from "@/components/Icons";
-import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
+import { waLink, WA_MESSAGES, getNameMessage } from "@/lib/whatsapp";
 
 interface HeroProps {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   ctaText?: string;
   waMessage?: string;
+  selectedName?: string;
 }
 
-export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
+export function Hero({ title, subtitle, ctaText, waMessage, selectedName }: HeroProps) {
   const defaultTitle = (
     <>
       Business Name, Website &amp; CAC —
@@ -57,13 +58,23 @@ export function Hero({ title, subtitle, ctaText, waMessage }: HeroProps) {
                 {subtitle || defaultSubtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href={waLink(waMessage || WA_MESSAGES.hero)} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Link 
+                  href={selectedName ? waLink(getNameMessage(selectedName, "starter")) : waLink(waMessage || WA_MESSAGES.hero)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full sm:w-auto"
+                >
                   <Button className="w-full bg-primary text-white hover:opacity-90 px-8 py-6 h-auto rounded-full font-medium text-lg shadow-xl shadow-black/5 transition-all active:scale-95 group">
                     {ctaText || "Get My Business Started — ₦100k"}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link href={waLink(WA_MESSAGES.consultation)} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Link 
+                  href={selectedName ? waLink(getNameMessage(selectedName, "consultation")) : waLink(WA_MESSAGES.consultation)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full sm:w-auto"
+                >
                   <Button variant="outline" className="w-full border-outline/10 px-8 py-6 h-auto rounded-full font-medium text-base hover:bg-surface-container transition-all">
                     Got questions? Chat on WhatsApp →
                   </Button>

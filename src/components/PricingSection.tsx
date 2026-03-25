@@ -143,7 +143,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
         <div className="text-center mt-6 text-sm text-slate-600">
           Not sure which package?{" "}
           <Link
-            href={waLink(WA_MESSAGES.consultation)}
+            href={selectedName ? waLink(getNameMessage(selectedName, "consultation")) : waLink(WA_MESSAGES.consultation)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary font-semibold hover:underline"

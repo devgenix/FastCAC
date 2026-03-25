@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { WhatsApp, ArrowRight } from "@/components/Icons";
 import { cn } from "@/lib/utils";
-import { waLink, WA_MESSAGES } from "@/lib/whatsapp";
+import { waLink, WA_MESSAGES, getNameMessage } from "@/lib/whatsapp";
 import { useHeader } from "./HeaderContext";
 
 
@@ -19,6 +19,13 @@ export function Navbar() {
   const pathRef = useRef<SVGPathElement>(null);
   const pathname = usePathname();
   const isBlogPost = pathname && pathname.startsWith("/blog/") && pathname !== "/blog";
+  const isNamePage = pathname && pathname.startsWith("/names/") && pathname !== "/names";
+  const selectedName = isNamePage 
+    ? pathname.split("/")[2]
+        .split("-")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ") 
+    : null;
 
   // Measure the path's real perimeter whenever the pill becomes visible
   useEffect(() => {
@@ -141,7 +148,7 @@ export function Navbar() {
           </Link>
           {isScrolled && (
             <Link
-              href={waLink(WA_MESSAGES.navbar)}
+              href={selectedName ? waLink(getNameMessage(selectedName, "starter")) : waLink(WA_MESSAGES.navbar)}
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer"
@@ -222,7 +229,7 @@ export function Navbar() {
             </Link>
           </div>
           <Link
-            href={waLink(WA_MESSAGES.mobileMenu)}
+            href={selectedName ? waLink(getNameMessage(selectedName, "starter")) : waLink(WA_MESSAGES.mobileMenu)}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full cursor-pointer"

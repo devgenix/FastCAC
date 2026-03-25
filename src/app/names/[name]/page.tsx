@@ -53,6 +53,7 @@ export default async function NameDetailPage({ params }: NamePageProps) {
         title={heroTitle}
         subtitle={heroSubtitle}
         ctaText={`Claim ${name} Now`}
+        selectedName={name}
       />
       
       <NameDetailsSection name={name} />
