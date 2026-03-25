@@ -112,7 +112,7 @@ export function CacSearchSection() {
                     : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer'}
                 `}
               >
-                Search <ArrowRight className="ml-2 w-4 h-4" />
+                Search <Search className="ml-2 w-4 h-4" />
               </button>
 
               {/* Mobile Right Arrow Button Inside Field */}
@@ -126,7 +126,7 @@ export function CacSearchSection() {
                     : 'bg-primary shadow-lg shadow-primary/20 cursor-pointer'}
                 `}
               >
-                <ArrowRight className="w-5 h-5" />
+                <Search className="w-5 h-5" />
               </button>
             </div>
             
@@ -141,7 +141,7 @@ export function CacSearchSection() {
                 onClick={() => router.push('/names#names-search')}
                 className="w-full flex items-center justify-center py-4 rounded-xl border border-primary/20 bg-primary/5 text-primary text-sm font-headline font-bold transition-all hover:bg-primary/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                Find or Create a Custom Name <Search className="ml-2 w-4 h-4" />
+                Find or Create a Custom Name <ArrowRight className="ml-2 w-4 h-4" />
               </button>
             </div>
           </form>
