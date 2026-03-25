@@ -11,12 +11,12 @@ const CHECKLIST_ITEMS = [
   {
     icon: Verified,
     title: "Official CAC Certificate",
-    desc: "Government-issued CAC Registration number and digital seal. Your business is legally recognized within 7 days.",
+    desc: "Government-issued CAC Business number and digital seal. Your business is legally recognized within 7 days.",
   },
   {
     icon: Globe,
-    title: "Business Website & Professional Email",
-    desc: "A professional business website, matching .com.ng or .ng domain, and a professional email — all set up and ready to use.",
+    title: "Professional Business Website",
+    desc: "A professional business website, matching .com.ng or .ng domain, all set up and ready to use.",
   },
   {
     icon: Zap,
@@ -80,7 +80,7 @@ export function ChecklistSection() {
                 Official CAC<br />Certificate
               </h3>
               <p className="text-white/60 font-body text-sm lg:text-base leading-relaxed max-w-sm">
-                Government-issued, RC number registered. Legally yours within 7 business days.
+                Government-issue, legally yours within 7 business days.
               </p>
             </div>
           </div>

@@ -81,4 +81,4 @@ export const BLOG_POSTS: BlogPost[] = [
     description: "Current CAC processing durations in 2026 for Business Names, Limited Companies, and NGOs. Tips to avoid delays and get registered faster.",
     thumbnail: "/blog-cac-timeline.png",
   },
-];
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
