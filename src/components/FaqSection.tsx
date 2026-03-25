@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: "What is the difference between the Starter and Full Setup packages?",
-    a: "The Starter (₦100k) gives you a Business Name registration — ideal for sole traders and small businesses. The Full Setup (₦500k) includes a full Limited Liability Company (Ltd) incorporation — ideal for those seeking investment, tenders, or formal corporate contracts. Both include branding and a website.",
+    a: "The Starter (₦100k) gives you a Business Name registration — ideal for sole traders and small businesses. The Full Setup (₦400k+) includes a full Limited Liability Company (Ltd) incorporation — ideal for those seeking investment, tenders, or formal corporate contracts. Both include branding and a website.",
   },
   {
     q: "Can I get a refund if I change my mind?",

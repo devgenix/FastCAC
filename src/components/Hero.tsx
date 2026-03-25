@@ -16,7 +16,7 @@ interface HeroProps {
 export function Hero({ title, subtitle, ctaText, waMessage, selectedName }: HeroProps) {
   const defaultTitle = (
     <>
-      Business Name, Website &amp; CAC —
+      Business Name, Logo, Website &amp; CAC —
       <span className="italic font-mono"> For &#x20A6;100k</span>
     </>
   );

@@ -609,13 +609,6 @@ export function NameMarketplace() {
                       Enter a company name above to check its status in the official Corporate Affairs Commission database.
                     </p>
                   </div>
-                  <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] font-headline font-bold text-on-surface/30 uppercase tracking-widest pt-4">
-                    <span className="flex items-center gap-1.5"><Zap className="w-3 h-3"/> Fast Access</span>
-                    <span className="w-1 h-1 bg-on-surface/20 rounded-full"/>
-                    <span className="flex items-center gap-1.5"><Globe className="w-3 h-3"/> Real-time Connection</span>
-                    <span className="w-1 h-1 bg-on-surface/20 rounded-full"/>
-                    <span className="flex items-center gap-1.5"><Search className="w-3 h-3"/> Accurate Data</span>
-                  </div>
                 </div>
               )}
             </div>
