@@ -69,7 +69,7 @@ export default function BlogPostPage() {
     name: "FastCAC Legal Team",
     role: "Compliance Experts",
     bio: "Our legal team specializes in Nigerian corporate law and has helped thousands of businesses register with the CAC efficiently.",
-    avatar: "", // Initials will be used
+    avatar: "/logo.png"
   };
 
   return (

@@ -69,7 +69,7 @@ export default function BlogPostPage() {
     name: "FastCAC Branding Team",
     role: "Expert Advisory",
     bio: "We help thousands of entrepreneurs across Nigeria launch their dreams. Our team specializes in regulatory compliance and brand identity.",
-    avatar: "", // Initials will be used
+    avatar: "/logo.png"
   };
 
   return (
