@@ -1,7 +1,23 @@
 import { MetadataRoute } from "next";
+import { BLOG_POSTS } from "@/lib/blog";
+import { BUSINESS_NAMES_DATA } from "@/lib/name-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://fastcac.com"; // Replace with actual production domain if different
+  const baseUrl = "https://fastcac.com";
+
+  const blogEntries: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const nameEntries: MetadataRoute.Sitemap = BUSINESS_NAMES_DATA.map((item) => ({
+    url: `${baseUrl}/names/${item.name.toLowerCase()}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
 
   return [
     {
@@ -22,24 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/blog/how-to-choose-a-business-name`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/cac-registration-guide`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/post-registration-compliance`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    ...blogEntries,
+    ...nameEntries,
     {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
