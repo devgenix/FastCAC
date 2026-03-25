@@ -43,12 +43,24 @@ export function Navbar() {
         const height =
           document.documentElement.scrollHeight -
           document.documentElement.clientHeight;
-        setScrollProgress(winScroll / height);
+        setScrollProgress(winScroll / height || 0);
       }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isBlogPost]);
+
+  // Handle body scroll lock when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   // How many px of the stroke to draw
   const drawLen = totalLen > 0 ? scrollProgress * totalLen : 0;
@@ -69,48 +81,23 @@ export function Navbar() {
         {/* Progress Border SVG — only on blog posts when scrolled */}
         {isScrolled && isBlogPost && (
           <div className="absolute -inset-[3px] pointer-events-none overflow-visible rounded-lg">
-            <svg
-              className="absolute inset-0 w-full h-full overflow-visible"
-              /*
-               * viewBox matches the pill's real pixel dimensions so that
-               * SVG coordinates map 1-to-1 with rendered pixels.
-               * The path's rx value (9) mirrors the pill's border-radius.
-               *
-               * Width  = pill offsetWidth  (e.g. 760 for max-w-[800px] at 95%)
-               * Height = pill offsetHeight (e.g. 46 — adjust to match yours)
-               *
-               * If the pill size changes, update these two numbers and the
-               * path coordinates below to match.
-               */
-              viewBox="0 0 760 46"
-              fill="none"
-              // No preserveAspectRatio="none" — default (xMidYMid meet) keeps
-              // the coordinate space undistorted so getTotalLength() is accurate.
-            >
-              <path
-                ref={pathRef}
-                /*
-                 * Same shape as the pill container (rounded-lg ≈ rx 8–9).
-                 * Starts at the top-centre and traces anti-clockwise so the
-                 * stroke begins at 12 o'clock and fills leftward then around.
-                 *
-                 * M cx,0          — top centre
-                 * L rx,0          — top-left straight edge
-                 * Q 0,0 0,rx      — top-left corner
-                 * Q 0,h rx,h      — bottom-left corner (h = height, rx = radius)
-                 * L (w-rx),h      — bottom-right straight edge
-                 * Q w,h w,(h-rx)  — bottom-right corner
-                 * Q w,0 (w-rx),0  — top-right corner
-                 * L cx,0          — back to start
-                 */
-                d="M 380,0 L 9,0 Q 0,0 0,9 Q 0,46 9,46 L 751,46 Q 760,46 760,37 Q 760,0 751,0 L 380,0"
+            <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                rx="24"
+                ry="24"
+                fill="none"
                 stroke="var(--color-primary)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
-                // Drive the stroke with real perimeter units — no pathLength tricks
-                strokeDasharray={
-                  totalLen > 0 ? `${drawLen} ${totalLen}` : "0 9999"
-                }
+                vectorEffect="non-scaling-stroke"
+                pathLength="100"
+                strokeDasharray="100"
+                strokeDashoffset={100 - (scrollProgress * 100)}
+                style={{ transition: "stroke-dashoffset 0.1s ease-out" }}
               />
             </svg>
           </div>
@@ -233,6 +220,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="w-full cursor-pointer"
+            onClick={() => setIsMenuOpen(false)}
           >
             <Button className="bg-primary w-full rounded-full py-6 h-auto text-lg">
               Get Started →
