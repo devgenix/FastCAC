@@ -35,18 +35,27 @@ export function Navbar() {
   }, [isScrolled, isBlogPost]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    let ticking = false;
 
-      if (isBlogPost) {
-        const winScroll = window.scrollY;
-        const height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-        setScrollProgress(winScroll / height || 0);
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+
+          if (isBlogPost) {
+            const winScroll = window.scrollY;
+            const height =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            setScrollProgress(winScroll / height || 0);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isBlogPost]);
 
@@ -97,7 +106,6 @@ export function Navbar() {
                 pathLength="100"
                 strokeDasharray="100"
                 strokeDashoffset={100 - (scrollProgress * 100)}
-                style={{ transition: "stroke-dashoffset 0.1s ease-out" }}
               />
             </svg>
           </div>

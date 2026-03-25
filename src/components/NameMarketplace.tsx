@@ -396,7 +396,7 @@ export function NameMarketplace() {
                       : 'text-on-surface/40 hover:text-on-surface/60'
                   }`}
                 >
-                  CAC Public Search
+                  Search CAC
                 </button>
               </div>
 
