@@ -14,17 +14,26 @@ export const metadata: Metadata = {
   keywords: ["CAC registration", "Nigeria business", "business name", "logo design", "business website", "startup Nigeria"],
   authors: [{ name: "FastCAC Team" }],
   openGraph: {
-    title: "FastCAC — Start Your Nigerian Business in 7 days",
-    description: "Get your businees registered, branded, and online in 7 business days — no office visits, no paperwork, no stress.",
+    title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
+    description: "Get your CAC certificate, business name, logo, and website in 7 days for ₦100k.",
     url: "https://fastcac.com",
     siteName: "FastCAC",
     locale: "en_NG",
     type: "website",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg",
+        width: 1200,
+        height: 630,
+        alt: "FastCAC - Fastest CAC Registration in Nigeria",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
     description: "Get your CAC certificate, business name, logo, and website in 7 days for ₦100k.",
+    images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/v1774103154/hero1_ggu55q.jpg"],
   },
   robots: {
     index: true,
