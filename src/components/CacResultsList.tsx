@@ -83,7 +83,7 @@ export function CacResultsList({
         <div className="max-w-md">
           <h3 className="text-xl font-headline font-bold mb-2">No results found</h3>
           <p className="text-on-surface/50 font-body">
-            We couldn't find any registered businesses matching your search. This name might be available for registration!
+            We couldn't find any registered businesses matching your search. This name is available for registration!
           </p>
         </div>
       </div>

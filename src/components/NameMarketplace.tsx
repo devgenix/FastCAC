@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback, useRef } from "react";
 
 import { NameGrid } from "./NameGrid";
 import { searchCacAction } from "@/app/actions";
@@ -44,16 +44,30 @@ export function NameMarketplace() {
   const [hasSearchedCac, setHasSearchedCac] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<CacCompany | null>(null);
   const [verifyingName, setVerifyingName] = useState<string | null>(null);
+  
+  // Track to avoid race conditions and redundant searches
+  const lastProcessedQueryRef = useRef<string | null>(null);
 
   // Auto-search logic for CAC mode if 'q' is in URL
   useEffect(() => {
     const q = searchParams.get('q');
-    if (q && searchMode === 'cac' && !hasSearchedCac) {
+    
+    // If q is missing, but we still think we have searched, clear it
+    if (!q && hasSearchedCac) {
+      setCacResults([]);
+      setHasSearchedCac(false);
+      setSearchQuery("");
+      lastProcessedQueryRef.current = null;
+      return;
+    }
+
+    if (q && searchMode === 'cac' && q !== lastProcessedQueryRef.current) {
       setSearchQuery(q);
       const performSearch = async () => {
         setIsCacLoading(true);
         setHasSearchedCac(true);
         setVerifyingName(q);
+        lastProcessedQueryRef.current = q;
         const result = await searchCacAction(q, cacSearchType);
         const results = result.success ? result.data : [];
         setCacResults(results);
@@ -83,6 +97,7 @@ export function NameMarketplace() {
     setIsCacLoading(true);
     setHasSearchedCac(true);
     setVerifyingName(name);
+    lastProcessedQueryRef.current = name;
     const result = await searchCacAction(name, cacSearchType);
     const results = result.success ? result.data : [];
     setCacResults(results);
@@ -343,6 +358,7 @@ export function NameMarketplace() {
                     setSearchQuery("");
                     setCacResults([]);
                     setHasSearchedCac(false);
+                    lastProcessedQueryRef.current = null;
                     const params = new URLSearchParams(searchParams.toString());
                     params.delete('type');
                     params.delete('q');
@@ -362,6 +378,7 @@ export function NameMarketplace() {
                     setSearchQuery("");
                     setCacResults([]);
                     setHasSearchedCac(false);
+                    lastProcessedQueryRef.current = null;
                     const params = new URLSearchParams(searchParams.toString());
                     params.set('type', 'cac');
                     params.delete('q');
@@ -444,14 +461,14 @@ export function NameMarketplace() {
                       e.preventDefault();
                       e.stopPropagation();
                       setSearchQuery("");
-                      if (searchMode === 'cac') {
-                        setCacResults([]);
-                        setHasSearchedCac(false);
-                        // Also clear URL param to prevent auto-search re-trigger
-                        const params = new URLSearchParams(searchParams.toString());
-                        params.delete('q');
-                        router.push(`?${params.toString()}`, { scroll: false });
-                      }
+                      setCacResults([]);
+                      setHasSearchedCac(false);
+                      lastProcessedQueryRef.current = null;
+                      
+                      // Clear URL param consistently in all modes
+                      const params = new URLSearchParams(searchParams.toString());
+                      params.delete('q');
+                      router.push(`?${params.toString()}`, { scroll: false });
                     }}
                     className="p-2 hover:bg-on-surface/5 rounded-full text-on-surface/30 transition-colors"
                   >
@@ -513,7 +530,7 @@ export function NameMarketplace() {
                     </span>
                     {cacResults.length > 1 && (
                       <span className="text-[10px] font-body text-on-surface/30 italic">
-                        Scroll to see all
+                        Scroll right to see all
                       </span>
                     )}
                   </div>

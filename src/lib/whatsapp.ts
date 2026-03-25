@@ -21,6 +21,7 @@ export const WA_MESSAGES = {
   stickyPro: "Hi! I'm ready to go with the Business Pro Package (₦200,000). Please help me register my business.",
   stickyFull: "Hi! I'm ready to go with the Full Setup Package (₦500,000). Please help me set up my company.",
   finalCTA: "Hi! I'm ready to own my business. I'd like to get started with FastCAC today.",
+  businessName: "Hi! I'd like to get a business name for my company. How do I proceed?",
   consultation: "Hi! I'd like to book a strategy consultation with FastCAC to discuss the right package for my business.",
   whatsapp: "Hi! I found FastCAC online and I have a question about business registration.",
 };

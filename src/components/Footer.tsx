@@ -30,13 +30,16 @@ export function FinalCTA() {
                   Start My Business Now
                 </Button>
               </Link>
-              {!isNamesPage && (
-                <Link href="/names" className="w-full sm:w-auto">
-                  <Button variant="outline" className="w-full h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
-                    Get Business Names
-                  </Button>
-                </Link>
-              )}
+              <Link 
+                href={isNamesPage ? waLink(WA_MESSAGES.businessName) : "/names"} 
+                target={isNamesPage ? "_blank" : undefined}
+                rel={isNamesPage ? "noopener noreferrer" : undefined}
+                className="w-full sm:w-auto"
+              >
+                <Button variant="outline" className="w-full h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
+                  {isNamesPage ? "I want a business name" : "Get Business Names"}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
