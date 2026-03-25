@@ -53,15 +53,20 @@ export function NameMarketplace() {
     const q = searchParams.get('q');
     
     // If q is missing, but we still think we have searched, clear it
-    if (!q && hasSearchedCac) {
-      setCacResults([]);
-      setHasSearchedCac(false);
-      setSearchQuery("");
-      lastProcessedQueryRef.current = null;
+    if (!q) {
+      if (hasSearchedCac) {
+        setCacResults([]);
+        setHasSearchedCac(false);
+      }
+      // Only clear searchQuery if we just came from having a query in the URL
+      if (lastProcessedQueryRef.current !== null) {
+        setSearchQuery("");
+        lastProcessedQueryRef.current = null;
+      }
       return;
     }
 
-    if (q && searchMode === 'cac' && q !== lastProcessedQueryRef.current) {
+    if (searchMode === 'cac' && q !== lastProcessedQueryRef.current) {
       setSearchQuery(q);
       const performSearch = async () => {
         setIsCacLoading(true);
@@ -76,10 +81,12 @@ export function NameMarketplace() {
         setVerifyingName(null);
       };
       performSearch();
-    } else if (q && searchMode === 'our-names') {
+    } else if (searchMode === 'our-names' && q !== lastProcessedQueryRef.current) {
       setSearchQuery(q);
+      lastProcessedQueryRef.current = q;
     }
   }, [searchParams, searchMode, cacSearchType, hasSearchedCac]);
+
   const searchResultsRef = React.useRef<HTMLDivElement>(null);
 
   const triggerCacSearch = useCallback(async (name: string) => {
@@ -228,13 +235,11 @@ export function NameMarketplace() {
   };
 
   return (
-    // ✅ No overflow-x-hidden here — would break sticky
     <div className="min-h-screen">
       <HeaderToggle sticky={false} />
 
       {/* Hero Section */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 border-b border-outline/5">
-        {/* ✅ overflow-hidden scoped only to hero for any decorative overflow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" />
         <div className="max-w-[1320px] section-px mx-auto relative z-10 text-center">
           <div className="space-y-12">
@@ -261,7 +266,6 @@ export function NameMarketplace() {
       </div>
 
       {/* Main Marketplace Content */}
-      {/* ✅ overflow-x-clip here — blocks horizontal scroll without breaking sticky */}
       <section className="py-12 lg:py-20 relative overflow-x-clip">
         <div className="max-w-[1320px] mx-auto section-px">
 
@@ -279,7 +283,7 @@ export function NameMarketplace() {
               </div>
             </div>
 
-            {/* Desktop Horizontal Scroll — overflow-hidden scoped here only */}
+            {/* Desktop Horizontal Scroll */}
             <div className="hidden lg:block relative overflow-hidden group/scroll">
               <div
                 ref={desktopScrollRef}
@@ -308,7 +312,7 @@ export function NameMarketplace() {
               <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
             </div>
 
-            {/* Mobile Snap Carousel — overflow scoped here only */}
+            {/* Mobile Snap Carousel */}
             <div className="relative lg:hidden overflow-hidden -mx-6 px-6">
               <div className="overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 py-4">
                 {BUSINESS_NAMES_DATA.filter((n) => n.isPremium).map(
@@ -346,25 +350,26 @@ export function NameMarketplace() {
             </div>
           </div>
 
-          {/* ✅ Sticky section — works now because no overflow on ancestors */}
+          {/* Sticky section */}
           <div id="names-search" ref={searchResultsRef} className="sticky top-2 z-40 mb-12 scroll-mt-32">
-            {/* Search Bar & Mode Toggle */}
+            {/* Row 1: Search Bar & Mode Toggle */}
             <div className="flex flex-col md:flex-row gap-4 mb-4">
               {/* Mode Toggle */}
               <div className="flex p-1.5 bg-white dark:bg-surface-container border border-outline/10 rounded-xl shadow-sm md:w-auto w-full">
                 <button
                   onClick={() => {
+                    const currentQ = searchParams.get('q');
                     setSearchMode('our-names');
                     setSearchQuery("");
                     setCacResults([]);
                     setHasSearchedCac(false);
-                    lastProcessedQueryRef.current = null;
+                    lastProcessedQueryRef.current = currentQ;
                     const params = new URLSearchParams(searchParams.toString());
                     params.delete('type');
                     params.delete('q');
                     router.push(`?${params.toString()}`, { scroll: false });
                   }}
-                  className={`flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-headline font-bold transition-all whitespace-nowrap ${
+                  className={`flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-headline font-bold transition-all whitespace-nowrap cursor-pointer ${
                     searchMode === 'our-names'
                       ? 'bg-primary text-white shadow-md'
                       : 'text-on-surface/40 hover:text-on-surface/60'
@@ -374,17 +379,18 @@ export function NameMarketplace() {
                 </button>
                 <button
                   onClick={() => {
+                    const currentQ = searchParams.get('q');
                     setSearchMode('cac');
                     setSearchQuery("");
                     setCacResults([]);
                     setHasSearchedCac(false);
-                    lastProcessedQueryRef.current = null;
+                    lastProcessedQueryRef.current = currentQ;
                     const params = new URLSearchParams(searchParams.toString());
                     params.set('type', 'cac');
                     params.delete('q');
                     router.push(`?${params.toString()}`, { scroll: false });
                   }}
-                  className={`flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-headline font-bold transition-all whitespace-nowrap ${
+                  className={`flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-headline font-bold transition-all whitespace-nowrap cursor-pointer ${
                     searchMode === 'cac'
                       ? 'bg-primary text-white shadow-md'
                       : 'text-on-surface/40 hover:text-on-surface/60'
@@ -396,14 +402,12 @@ export function NameMarketplace() {
 
               {/* Search input with classification dropdown for CAC */}
               <div className="flex-1 relative flex items-center bg-white dark:bg-surface-container border border-outline focus-within:border-primary rounded-2xl p-1.5 md:p-2 shadow-sm transition-all gap-1.5 md:gap-2 px-3 md:px-4 min-h-[56px] md:min-h-[64px]">
-                {/* No Search Icon on left - match homepage */}
-                
                 {searchMode === 'cac' && (
                   <div className="relative" ref={dropdownRef}>
                     <button
                       type="button"
                       onClick={() => setIsClassificationOpen(!isClassificationOpen)}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-on-surface/5 transition-colors text-xs font-headline font-bold text-primary whitespace-nowrap border-r border-outline/10 mr-1"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-on-surface/5 transition-colors text-xs font-headline font-bold text-primary whitespace-nowrap border-r border-outline/10 mr-1 cursor-pointer"
                     >
                       <span className="hidden sm:inline">{cacSearchType === 'ALL' ? 'ALL CATEGORIES' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LL Partnership' : (cacSearchType === 'LIMITED LIABILITY' ? 'Limited Liability' : (cacSearchType === 'COMPANY' ? 'Company' : (cacSearchType === 'BUSINESS NAME' ? 'Business Name' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT (Incorp. Trustee)' : cacSearchType)))))}</span>
                       <span className="sm:hidden">{cacSearchType === 'ALL' ? 'ALL' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LLT' : (cacSearchType === 'LIMITED LIABILITY' ? 'LL' : (cacSearchType === 'COMPANY' ? 'COM' : (cacSearchType === 'BUSINESS NAME' ? 'BN' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT' : cacSearchType)))))}</span>
@@ -420,7 +424,7 @@ export function NameMarketplace() {
                               setCacSearchType(type as CacSearchType);
                               setIsClassificationOpen(false);
                             }}
-                            className={`w-full text-left px-4 py-3 text-xs font-headline font-bold flex items-center justify-between transition-colors hover:bg-on-surface/5 ${
+                            className={`w-full text-left px-4 py-3 text-xs font-headline font-bold flex items-center justify-between transition-colors hover:bg-on-surface/5 cursor-pointer ${
                               cacSearchType === type ? 'text-primary' : 'text-on-surface/60'
                             }`}
                           >
@@ -453,30 +457,29 @@ export function NameMarketplace() {
                   className="flex-1 min-w-0 bg-transparent border-none outline-none focus:ring-0 text-base md:text-lg font-body py-2 md:py-3 text-on-surface placeholder:text-on-surface/20"
                 />
 
-                {/* Close Button if text exists */}
+                {/* Close Button */}
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
+                      const currentQ = searchParams.get('q');
                       setSearchQuery("");
                       setCacResults([]);
                       setHasSearchedCac(false);
-                      lastProcessedQueryRef.current = null;
-                      
-                      // Clear URL param consistently in all modes
+                      lastProcessedQueryRef.current = currentQ; 
                       const params = new URLSearchParams(searchParams.toString());
                       params.delete('q');
                       router.push(`?${params.toString()}`, { scroll: false });
                     }}
-                    className="p-2 hover:bg-on-surface/5 rounded-full text-on-surface/30 transition-colors"
+                    className="p-2 hover:bg-on-surface/5 rounded-full text-on-surface/30 transition-colors cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 )}
 
-                {/* Desktop Search Button Inside Field (CAC MODE) */}
+                {/* Desktop Search Button */}
                 {searchMode === 'cac' && (
                   <button
                     disabled={searchQuery.trim().length < 3 || isCacLoading}
@@ -485,21 +488,20 @@ export function NameMarketplace() {
                       hidden sm:flex items-center justify-center h-12 px-6 rounded-xl text-white text-sm font-headline font-bold transition-all
                       ${searchQuery.trim().length < 3 || isCacLoading 
                         ? 'bg-on-surface/20 cursor-not-allowed' 
-                        : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]'}
+                        : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer'}
                     `}
                   >
                     {isCacLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        Search
-                        <ArrowRight className="ml-2 w-4 h-4" />
+                        Search <ArrowRight className="ml-2 w-4 h-4" />
                       </>
                     )}
                   </button>
                 )}
 
-                {/* Mobile Right Arrow Button Inside Field (CAC MODE) */}
+                {/* Mobile Search Button */}
                 {searchMode === 'cac' && (
                   <button
                     disabled={searchQuery.trim().length < 3 || isCacLoading}
@@ -507,8 +509,8 @@ export function NameMarketplace() {
                     className={`
                       sm:hidden flex items-center justify-center w-11 h-11 rounded-xl text-white transition-all active:scale-95
                       ${searchQuery.trim().length < 3 || isCacLoading 
-                        ? 'bg-on-surface/10 text-on-surface/30' 
-                        : 'bg-primary shadow-lg shadow-primary/20'}
+                        ? 'bg-on-surface/10 text-on-surface/30 cursor-not-allowed' 
+                        : 'bg-primary shadow-lg shadow-primary/20 cursor-pointer'}
                     `}
                   >
                     {isCacLoading ? (
@@ -519,10 +521,11 @@ export function NameMarketplace() {
                   </button>
                 )}
               </div>
+            </div>
 
-            {/* Mobile Horizontal Results Sticky Chips (Inside sticky container) */}
+            {/* Row 2: Mobile Sticky Chips (CAC) */}
             {searchMode === 'cac' && hasSearchedCac && cacResults.length > 0 && (
-              <div className="lg:hidden animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="lg:hidden animate-in fade-in slide-in-from-top-2 duration-300 mb-4">
                 <div className="bg-surface/90 backdrop-blur-md border border-outline/10 rounded-2xl p-3 shadow-sm overflow-hidden">
                   <div className="flex items-center justify-between mb-2 px-1">
                     <span className="text-[10px] font-headline font-bold text-on-surface/40 uppercase tracking-wider">
@@ -539,7 +542,7 @@ export function NameMarketplace() {
                       <button 
                         key={`${company.rcNumber}-${index}-mobile-sticky`}
                         onClick={() => setSelectedCompany(company)}
-                        className={`shrink-0 px-4 py-2 rounded-xl text-xs font-headline font-bold transition-all border whitespace-nowrap flex items-center gap-2 ${
+                        className={`shrink-0 px-4 py-2 rounded-xl text-xs font-headline font-bold transition-all border whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                           selectedCompany?.approvedName === company.approvedName 
                             ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-[1.02]' 
                             : 'bg-surface-container border-outline/5 text-on-surface/60'
@@ -553,9 +556,8 @@ export function NameMarketplace() {
                 </div>
               </div>
             )}
-          </div>
 
-            {/* Category Tabs (Only if in our-names mode) */}
+            {/* Row 2: Category Tabs (Our Names) */}
             {searchMode === 'our-names' && (
               <div className="bg-surface/80 backdrop-blur-md py-4 animate-in fade-in slide-in-from-top-2 duration-300">
                 <div className="overflow-x-auto no-scrollbar">
@@ -565,7 +567,7 @@ export function NameMarketplace() {
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
                         className={`
-                          flex-1 px-4 py-3 rounded-xl text-sm font-headline font-bold transition-all whitespace-nowrap
+                          flex-1 px-4 py-3 rounded-xl text-sm font-headline font-bold transition-all cursor-pointer whitespace-nowrap
                           ${selectedCategory === cat
                             ? "bg-white dark:bg-surface text-primary shadow-lg scale-[1.02]"
                             : "text-on-surface/40 hover:text-on-surface/70 hover:bg-white/50 dark:hover:bg-white/5"}
