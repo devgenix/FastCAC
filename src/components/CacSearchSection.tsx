@@ -57,7 +57,7 @@ export function CacSearchSection() {
                 <button
                   type="button"
                   onClick={() => setIsClassificationOpen(!isClassificationOpen)}
-                  className="flex items-center gap-1.5 px-2 sm:px-3 py-2 rounded-xl hover:bg-on-surface/5 transition-colors text-[10px] sm:text-xs font-headline font-bold text-primary whitespace-nowrap border-r border-outline/10 mr-1"
+                  className="flex items-center gap-1.5 px-2 sm:px-3 py-2 rounded-xl hover:bg-on-surface/5 transition-colors text-[10px] sm:text-xs font-headline font-bold text-primary whitespace-nowrap border-r border-outline/10 mr-1 cursor-pointer"
                 >
                   <span className="hidden sm:inline">{cacSearchType === 'ALL' ? 'ALL CATEGORIES' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LL Partnership' : (cacSearchType === 'LIMITED LIABILITY' ? 'Limited Liability' : (cacSearchType === 'COMPANY' ? 'Company' : (cacSearchType === 'BUSINESS NAME' ? 'Business Name' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT (Incorp. Trustee)' : cacSearchType)))))}</span>
                   <span className="sm:hidden">{cacSearchType === 'ALL' ? 'ALL' : (cacSearchType === 'LIMITED LIABILITY PARTNERSHIP' ? 'LLT' : (cacSearchType === 'LIMITED LIABILITY' ? 'LL' : (cacSearchType === 'COMPANY' ? 'COM' : (cacSearchType === 'BUSINESS NAME' ? 'BN' : (cacSearchType === 'INCORPORATED TRUSTEE' ? 'IT' : cacSearchType)))))}</span>
@@ -74,7 +74,7 @@ export function CacSearchSection() {
                           setCacSearchType(type as CacSearchType);
                           setIsClassificationOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-3 text-xs font-headline font-bold flex items-center justify-between transition-colors hover:bg-on-surface/5 ${
+                        className={`w-full text-left px-4 py-3 text-xs font-headline font-bold flex items-center justify-between transition-colors hover:bg-on-surface/5 cursor-pointer ${
                           cacSearchType === type ? 'text-primary' : 'text-on-surface/60'
                         }`}
                       >
@@ -109,7 +109,7 @@ export function CacSearchSection() {
                   hidden sm:flex items-center justify-center h-12 px-6 rounded-xl text-white text-sm font-headline font-bold transition-all
                   ${query.trim().length < 3 
                     ? 'bg-on-surface/20 cursor-not-allowed' 
-                    : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]'}
+                    : 'bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer'}
                 `}
               >
                 Search <ArrowRight className="ml-2 w-4 h-4" />
@@ -122,8 +122,8 @@ export function CacSearchSection() {
                 className={`
                   sm:hidden flex items-center justify-center w-11 h-11 rounded-xl text-white transition-all active:scale-95
                   ${query.trim().length < 3 
-                    ? 'bg-on-surface/10 text-on-surface/30' 
-                    : 'bg-primary shadow-lg shadow-primary/20'}
+                    ? 'bg-on-surface/10 text-on-surface/30 cursor-not-allowed' 
+                    : 'bg-primary shadow-lg shadow-primary/20 cursor-pointer'}
                 `}
               >
                 <ArrowRight className="w-5 h-5" />

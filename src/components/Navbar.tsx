@@ -112,7 +112,7 @@ export function Navbar() {
         <Link
           href="/"
           className={cn(
-            "font-headline transition-all duration-300",
+            "font-headline transition-all duration-300 cursor-pointer",
             isScrolled ? "text-xl tracking-tight" : "text-2xl tracking-tighter"
           )}
         >
@@ -123,19 +123,19 @@ export function Navbar() {
         <div className="hidden md:flex gap-8 items-center">
           <Link
             href="#pricing"
-            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm cursor-pointer"
           >
             Pricing
           </Link>
           <Link
             href="/names"
-            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm cursor-pointer"
           >
             Business Names
           </Link>
           <Link
             href="/blog"
-            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm"
+            className="text-on-surface/70 hover:text-primary transition-colors font-medium text-sm cursor-pointer"
           >
             Blog
           </Link>
@@ -144,6 +144,7 @@ export function Navbar() {
               href={waLink(WA_MESSAGES.navbar)}
               target="_blank"
               rel="noopener noreferrer"
+              className="cursor-pointer"
             >
               <Button className="transition-all duration-300 rounded-full font-medium h-9 text-xs px-4 group bg-primary text-white">
                 Get Started
@@ -154,7 +155,7 @@ export function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-on-surface p-2"
+          className="md:hidden text-on-surface p-2 cursor-pointer"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
@@ -188,14 +189,14 @@ export function Navbar() {
           <div className="flex justify-between items-center">
             <Link
               href="/"
-              className="text-2xl font-headline tracking-tighter"
+              className="text-2xl font-headline tracking-tighter cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Fast<span className="opacity-70">CAC</span>
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="text-3xl"
+              className="text-3xl cursor-pointer"
               aria-label="Close menu"
             >
               &times;
@@ -204,15 +205,17 @@ export function Navbar() {
           <div className="flex flex-col gap-8 text-2xl font-headline italic tracking-tight">
             <Link
               href="#pricing"
+              className="cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
             </Link>
-            <Link href="/names" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/names" className="cursor-pointer" onClick={() => setIsMenuOpen(false)}>
               Business Names
             </Link>
             <Link
               href="/blog"
+              className="cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
@@ -222,7 +225,7 @@ export function Navbar() {
             href={waLink(WA_MESSAGES.mobileMenu)}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full"
+            className="w-full cursor-pointer"
           >
             <Button className="bg-primary w-full rounded-full py-6 h-auto text-lg">
               Get Started →

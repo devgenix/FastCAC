@@ -152,6 +152,10 @@ body {
   overflow-x: clip;
 }
 
+button, a {
+  cursor: pointer;
+}
+
 h1, h2, h3, h4, .font-headline {
   font-family: var(--font-headline);
 }

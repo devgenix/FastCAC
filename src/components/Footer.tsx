@@ -65,32 +65,32 @@ export function Footer() {
           <div>
             <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Ecosystem</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
-              <li><a className="hover:text-secondary transition-colors" href="#how-it-works">How it Works</a></li>
-              <li><a className="hover:text-secondary transition-colors" href="#pricing">Packages</a></li>
-              <li><a className="hover:text-secondary transition-colors" href="#whats-included">What's Included</a></li>
-              <li><Link className="hover:text-secondary transition-colors" href="/blog">Blog</Link></li>
+              <li><a className="hover:text-secondary transition-colors cursor-pointer" href="#how-it-works">How it Works</a></li>
+              <li><a className="hover:text-secondary transition-colors cursor-pointer" href="#pricing">Packages</a></li>
+              <li><a className="hover:text-secondary transition-colors cursor-pointer" href="#whats-included">What's Included</a></li>
+              <li><Link className="hover:text-secondary transition-colors cursor-pointer" href="/blog">Blog</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Legal</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
-              <li><Link className="hover:text-secondary transition-colors" href="/privacy">Privacy Policy</Link></li>
-              <li><Link className="hover:text-secondary transition-colors" href="/terms">Terms of Use</Link></li>
-              <li><Link className="hover:text-secondary transition-colors" href="/names">Business Names</Link></li>
+              <li><Link className="hover:text-secondary transition-colors cursor-pointer" href="/privacy">Privacy Policy</Link></li>
+              <li><Link className="hover:text-secondary transition-colors cursor-pointer" href="/terms">Terms of Use</Link></li>
+              <li><Link className="hover:text-secondary transition-colors cursor-pointer" href="/names">Business Names</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="font-mono text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Contact</h3>
             <ul className="space-y-3 text-sm text-on-surface/60 font-body">
               <li>
-                <a href="mailto:hello@fastcac.com" className="hover:text-secondary transition-colors">hello@fastcac.com</a>
+                <a href="mailto:hello@fastcac.com" className="hover:text-secondary transition-colors cursor-pointer">hello@fastcac.com</a>
               </li>
               <li>
                 <Link
                   href={waLink(WA_MESSAGES.whatsapp)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-secondary transition-colors"
+                  className="hover:text-secondary transition-colors cursor-pointer"
                 >
                   +234 816 312 8234
                 </Link>

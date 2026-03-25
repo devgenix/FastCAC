@@ -92,7 +92,7 @@ export function ChecklistSection() {
               return (
                 <div
                   key={i}
-                  className="group flex items-start gap-4 lg:gap-5 p-5 lg:p-6 rounded-2xl bg-surface-container border border-outline/5 hover:border-secondary/20 hover:bg-secondary/5 transition-all duration-300 cursor-default"
+                  className="group flex items-start gap-4 lg:gap-5 p-5 lg:p-6 rounded-2xl bg-surface-container border border-outline/5 hover:border-secondary/20 hover:bg-secondary/5 transition-all duration-300 cursor-pointer"
                 >
                   {/* Icon badge */}
                   <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-white border border-outline/10 flex items-center justify-center group-hover:border-secondary/30 group-hover:bg-secondary/10 transition-all duration-300">
@@ -198,7 +198,7 @@ export function HowItWorks() {
             return (
               <div
                 key={index}
-                className={`group rounded-2xl lg:rounded-3xl overflow-hidden border border-outline/5 hover:border-secondary/15 bg-surface-container transition-all duration-300 flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} lg:min-h-[320px]`}
+                className={`group rounded-2xl lg:rounded-3xl overflow-hidden border border-outline/5 hover:border-secondary/15 bg-surface-container transition-all duration-300 flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} lg:min-h-[320px] cursor-pointer`}
               >
                 {/* Text content */}
                 <div className="flex-1 p-6 lg:p-10 flex flex-col justify-center gap-4">
