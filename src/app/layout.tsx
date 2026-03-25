@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/hero1_ggu55q.jpg",
+        url: "https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/WhatsApp_Image_2026-03-24_at_14.32.37_ro09vo.jpg",
         width: 1200,
-        height: 630,
+        height: 1080,
         alt: "FastCAC - Fastest CAC Registration in Nigeria",
         type: "image/jpeg",
       },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fastest CAC Registration in Nigeria, Logo, Website & More for ₦100k",
     description: "Get your CAC certificate, business name, logo, and website in 7 days for ₦100k.",
-    images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/hero1_ggu55q.jpg"],
+    images: ["https://res.cloudinary.com/dzaxzeuh5/image/upload/w_1200,h_630,c_fill,f_jpg,q_80/v1774103154/WhatsApp_Image_2026-03-24_at_14.32.37_ro09vo.jpg"],
   },
   robots: {
     index: true,
