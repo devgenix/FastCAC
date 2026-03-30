@@ -13,20 +13,7 @@ export interface BusinessName {
   logo?: string;
 }
 
-// Keep the standard list of categories or fetch them dynamically. 
-// For now, we retain the static list as the standard filters.
-export const CATEGORIES: string[] = [
-  "All",
-  "Fintech",
-  "SaaS",
-  "E-commerce",
-  "AgriTech",
-  "HealthTech",
-  "EdTech",
-  "Retail",
-  "Logistics",
-  "Energy",
-];
+
 
 /**
  * Fetches all matching business names from Airtable.

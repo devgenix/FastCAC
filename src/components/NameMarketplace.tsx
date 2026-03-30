@@ -10,7 +10,7 @@ import { BusinessNameCard } from "./BusinessNameCard";
 import { HeaderToggle } from "@/components/HeaderToggle";
 import { CacCompany, CacSearchType } from "@/lib/cac-search";
 import { Search, Zap, X, Globe, ChevronDown, Check, ArrowRight, Info, Loader2 } from "./Icons";
-import { CATEGORIES, BusinessName } from "@/lib/name-data";
+import { BusinessName } from "@/lib/name-data";
 
 export function NameMarketplace({ initialNames }: { initialNames: BusinessName[] }) {
   const searchParams = useSearchParams();
@@ -162,6 +162,16 @@ export function NameMarketplace({ initialNames }: { initialNames: BusinessName[]
     animationFrameId = requestAnimationFrame(autoScroll);
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
+
+  const dynamicCategories = useMemo(() => {
+    const cats = new Set<string>();
+    initialNames.forEach(name => {
+      if (name.category) {
+        cats.add(name.category);
+      }
+    });
+    return ["All", ...Array.from(cats).sort()];
+  }, [initialNames]);
 
   const filteredNames = useMemo(() => {
     return initialNames.filter((item) => {
@@ -562,7 +572,7 @@ export function NameMarketplace({ initialNames }: { initialNames: BusinessName[]
               <div className="bg-surface/80 backdrop-blur-md py-4 animate-in fade-in slide-in-from-top-2 duration-300">
                 <div className="overflow-x-auto no-scrollbar">
                   <div className="flex gap-2 p-1 bg-surface-container-high/50 rounded-2xl w-full border border-outline/5 backdrop-blur-sm">
-                    {CATEGORIES.map((cat) => (
+                    {dynamicCategories.map((cat) => (
                       <button
                         key={cat}
                         onClick={() => setSelectedCategory(cat)}
