@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { Search, Loader2 } from "./Icons";
 
 interface BusinessNameCardProps {
   name: string;
@@ -13,8 +14,6 @@ interface BusinessNameCardProps {
   logo?: string;
 }
 
-import { Search, Loader2 } from "./Icons";
-
 export const BusinessNameCard = ({ 
   name, 
   domain, 
@@ -24,7 +23,7 @@ export const BusinessNameCard = ({
   isVerifying,
   logo
 }: BusinessNameCardProps) => (
-  <div className="w-full bg-white border border-outline/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden block">
+  <div className="w-full h-full bg-white border border-outline/10 rounded-2xl shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden flex flex-col">
     {/* Main Link that covers the card */}
     <Link
       href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
@@ -34,31 +33,40 @@ export const BusinessNameCard = ({
     
     <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
     
-    {/* Content overlay */}
-    <div className="space-y-4 relative z-10 pointer-events-none">
-      <div>
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-3">
-            {logo && (
-              <img src={logo} alt={`${name} logo`} className="w-8 h-8 rounded-md object-cover border border-outline/10 shrink-0 bg-surface/50" />
-            )}
-            <h3 className="text-2xl font-headline font-bold text-on-surface">{name}</h3>
-          </div>
-          <span className="text-[10px] font-mono tracking-widest text-primary/60 uppercase mt-1.5 shrink-0">{category}</span>
+    {/* Image Header */}
+    <div className="h-40 w-full bg-surface-container relative shrink-0 overflow-hidden border-b border-outline/5 pointer-events-none">
+      {logo ? (
+        <img src={logo} alt={`${name} logo`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      ) : (
+        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary/5 to-white">
+          <span className="text-5xl font-headline font-black text-primary/10 select-none">
+            {name.substring(0, 2).toUpperCase()}
+          </span>
         </div>
+      )}
+      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-sm border border-outline/5">
+        <span className="text-[10px] font-mono tracking-widest text-primary uppercase font-bold">{category}</span>
+      </div>
+    </div>
+    
+    {/* Content */}
+    <div className="p-6 space-y-4 relative z-10 pointer-events-none flex-1 flex flex-col">
+      <div>
+        <h3 className="text-2xl font-headline font-bold text-on-surface line-clamp-1">{name}</h3>
         <p className="text-primary font-mono text-sm mt-1">{domain}</p>
       </div>
-      <p className="text-sm text-on-surface/60 font-body leading-snug h-10 line-clamp-2">
+      
+      <p className="text-sm text-on-surface/60 font-body leading-snug flex-1 line-clamp-2 md:line-clamp-none">
         {tagline}
       </p>
       
       {/* Footer buttons (interactive) */}
-      <div className="flex gap-2 pointer-events-auto">
+      <div className="flex gap-2 pointer-events-auto pt-2 mt-auto">
         <Link 
           href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
           className="flex-1 bg-on-surface text-white py-3 rounded-xl font-headline text-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors relative z-20"
         >
-          <span>👉 Claim This Name</span>
+          <span>👉 Get Name</span>
         </Link>
         {onSearchCac && (
           <button 
@@ -68,7 +76,7 @@ export const BusinessNameCard = ({
               onSearchCac(name);
             }}
             disabled={isVerifying}
-            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-12 h-12 flex items-center justify-center bg-primary/10 text-primary border border-primary/20 rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm relative z-20 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
             title={`Search "${name}" on CAC`}
           >
             {isVerifying ? (
