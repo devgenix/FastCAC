@@ -10,6 +10,7 @@ export interface BusinessName {
   description?: string;
   lastModified?: string;
   slug?: string;
+  logo?: string;
 }
 
 // Keep the standard list of categories or fetch them dynamically. 
@@ -51,6 +52,9 @@ export async function getBusinessNames(): Promise<BusinessName[]> {
         description: fields["Description"] || "",
         lastModified: fields["Last Modified"] || record.createdTime,
         slug: fields["Slug"] || "",
+        logo: fields["Logo"] && Array.isArray(fields["Logo"]) && fields["Logo"].length > 0 
+          ? fields["Logo"][0].url 
+          : undefined,
       };
     }).filter((item: BusinessName) => item.name); // basic validation
   } catch (error) {

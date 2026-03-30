@@ -10,6 +10,7 @@ interface BusinessNameCardProps {
   tagline: string;
   onSearchCac?: (name: string) => void;
   isVerifying?: boolean;
+  logo?: string;
 }
 
 import { Search, Loader2 } from "./Icons";
@@ -20,7 +21,8 @@ export const BusinessNameCard = ({
   category, 
   tagline, 
   onSearchCac,
-  isVerifying 
+  isVerifying,
+  logo
 }: BusinessNameCardProps) => (
   <div className="w-full bg-white border border-outline/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden block">
     {/* Main Link that covers the card */}
@@ -36,10 +38,15 @@ export const BusinessNameCard = ({
     <div className="space-y-4 relative z-10 pointer-events-none">
       <div>
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-2xl font-headline font-bold text-on-surface">{name}</h3>
+          <div className="flex items-center gap-3">
+            {logo && (
+              <img src={logo} alt={`${name} logo`} className="w-8 h-8 rounded-md object-cover border border-outline/10 shrink-0 bg-surface/50" />
+            )}
+            <h3 className="text-2xl font-headline font-bold text-on-surface">{name}</h3>
+          </div>
           <span className="text-[10px] font-mono tracking-widest text-primary/60 uppercase mt-1.5 shrink-0">{category}</span>
         </div>
-        <p className="text-primary font-mono text-sm">{domain}</p>
+        <p className="text-primary font-mono text-sm mt-1">{domain}</p>
       </div>
       <p className="text-sm text-on-surface/60 font-body leading-snug h-10 line-clamp-2">
         {tagline}
