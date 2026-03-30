@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { BlogPostLayout } from "@/components/blog/BlogPostLayout";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Everything You Need to Know About CAC Registration | FastCAC Blog",
@@ -74,6 +75,13 @@ export default function BlogPostPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+          { name: "Everything You Need to Know About CAC Registration", item: "/blog/cac-registration-guide" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -91,7 +99,7 @@ export default function BlogPostPage() {
           <section id="introduction" className="scroll-mt-32">
             <p className="text-xl leading-relaxed first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:mr-3 first-letter:float-left first-letter:italic">
               As of March 2026, registering with the Corporate Affairs Commission (CAC) is no longer 
-              just a "good idea"—it's a critical legal requirement for anyone doing business in Nigeria. 
+              just a &quot;good idea&quot;—it&apos;s a critical legal requirement for anyone doing business in Nigeria. 
               With the recent enforcement of registration for all PoS operators and the full implementation 
               of the Companies and Allied Matters Act (CAMA) 2020, the landscape has changed.
             </p>
@@ -149,10 +157,10 @@ export default function BlogPostPage() {
               Operating without a CAC certificate can lead to account freezes and legal penalties.
             </p>
             <div className="p-8 rounded-3xl bg-primary/10 border border-primary/20">
-              <h4 className="font-bold text-primary mb-2 italic">Don't Forget Annual Returns!</h4>
+              <h4 className="font-bold text-primary mb-2 italic">Don&apos;t Forget Annual Returns!</h4>
               <p className="text-on-surface/70 leading-relaxed">
                 Registration is just the start. Every registered business must file Annual Returns (starting at ₦5,000/year for business names) 
-                to maintain an "Active" status on the CAC public search portal.
+                to maintain an &quot;Active&quot; status on the CAC public search portal.
               </p>
             </div>
           </section>
@@ -160,7 +168,7 @@ export default function BlogPostPage() {
           <section id="conclusion" className="scroll-mt-32">
             <h2 className="text-3xl font-headline font-black italic text-on-surface tracking-tighter mb-6">Conclusion</h2>
             <p className="leading-relaxed text-on-surface/70">
-              Don't leave your business in the shadows. Get registered today and start building on a solid legal foundation.
+              Don&apos;t leave your business in the shadows. Get registered today and start building on a solid legal foundation.
             </p>
           </section>
         </div>

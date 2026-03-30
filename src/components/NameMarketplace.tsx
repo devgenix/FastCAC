@@ -10,9 +10,9 @@ import { BusinessNameCard } from "./BusinessNameCard";
 import { HeaderToggle } from "@/components/HeaderToggle";
 import { CacCompany, CacSearchType } from "@/lib/cac-search";
 import { Search, Zap, X, Globe, ChevronDown, Check, ArrowRight, Info, Loader2 } from "./Icons";
-import { BUSINESS_NAMES_DATA, CATEGORIES, BusinessName } from "@/lib/name-data";
+import { CATEGORIES, BusinessName } from "@/lib/name-data";
 
-export function NameMarketplace() {
+export function NameMarketplace({ initialNames }: { initialNames: BusinessName[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -164,7 +164,7 @@ export function NameMarketplace() {
   }, []);
 
   const filteredNames = useMemo(() => {
-    return BUSINESS_NAMES_DATA.filter((item) => {
+    return initialNames.filter((item) => {
       const matchesSearch =
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.domain.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -295,9 +295,9 @@ export function NameMarketplace() {
                 onMouseMove={handleMouseMove}
               >
                 {[
-                  ...BUSINESS_NAMES_DATA.filter((n) => n.isPremium),
-                  ...BUSINESS_NAMES_DATA.filter((n) => n.isPremium),
-                  ...BUSINESS_NAMES_DATA.filter((n) => n.isPremium),
+                  ...initialNames.filter((n) => n.isPremium),
+                  ...initialNames.filter((n) => n.isPremium),
+                  ...initialNames.filter((n) => n.isPremium),
                 ].map((item, index) => (
                   <div key={`featured-desktop-${index}`} className="w-[320px] shrink-0">
                     <BusinessNameCard 
@@ -315,7 +315,7 @@ export function NameMarketplace() {
             {/* Mobile Snap Carousel */}
             <div className="relative lg:hidden overflow-hidden -mx-6 px-6">
               <div className="overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 py-4">
-                {BUSINESS_NAMES_DATA.filter((n) => n.isPremium).map(
+                {initialNames.filter((n) => n.isPremium).map(
                   (item, index) => (
                     <div
                       key={`featured-mobile-${index}`}

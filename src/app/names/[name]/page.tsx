@@ -3,7 +3,8 @@ import { Hero } from "@/components/Hero";
 import { NameDetailsSection } from "@/components/NameDetailsSection";
 import { PricingSection } from "@/components/PricingSection";
 import { Metadata } from "next";
-import { BUSINESS_NAMES_DATA } from "@/lib/name-data";
+import { getBusinessNames } from "@/lib/name-data";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 interface NamePageProps {
   params: Promise<{
@@ -12,8 +13,9 @@ interface NamePageProps {
 }
 
 export async function generateStaticParams() {
-  return BUSINESS_NAMES_DATA.map((item) => ({
-    name: item.name.toLowerCase(),
+  const names = await getBusinessNames();
+  return names.map((item) => ({
+    name: item.slug || item.name.toLowerCase().replace(/\s+/g, '-'),
   }));
 }
 
@@ -87,6 +89,13 @@ export default async function NameDetailPage({ params }: NamePageProps) {
 
   return (
     <div className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Business Names", item: "/names" },
+          { name: name, item: `/names/${rawName}` },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}

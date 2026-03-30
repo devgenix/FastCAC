@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { BlogPostLayout } from "@/components/blog/BlogPostLayout";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -45,6 +46,13 @@ export default function BlogPostPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+          { name: "CAC Registration Requirements: What Documents Do You Need in 2026?", item: "/blog/cac-registration-requirements" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

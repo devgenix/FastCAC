@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { BLOG_POSTS } from "@/lib/blog";
 import { BlogCard } from "@/components/BlogCard";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "FastCAC Blog — Scaling Your Business in Nigeria",
@@ -32,6 +33,12 @@ export const metadata: Metadata = {
 export default function BlogIndexPage() {
   return (
     <div className="min-h-screen bg-surface">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+        ]}
+      />
       {/* Hero Section */}
       <section className="pt-24 pb-16 lg:pt-48 lg:pb-32 bg-surface-container/30 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />

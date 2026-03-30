@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { BlogPostLayout } from "@/components/blog/BlogPostLayout";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "How to Choose a Great Business Name | FastCAC Blog",
@@ -74,6 +75,13 @@ export default function BlogPostPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+          { name: "How to Choose a Great Business Name", item: "/blog/how-to-choose-a-business-name" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
