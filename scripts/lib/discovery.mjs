@@ -6,15 +6,49 @@ const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
 const AIRTABLE_TABLE_ID = process.env.AIRTABLE_TABLE_ID;
 const AIRTABLE_PAT = process.env.AIRTABLE_PAT;
 
+/**
+ * Normalizes a string into a URL-friendly slug.
+ * Matches logic in src/lib/slug-utils.ts
+ */
+function slugify(text) {
+  if (!text) return "";
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
 async function fetchAirtableNames() {
+  let allRecords = [];
+  let offset = undefined;
+  
   try {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`;
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${AIRTABLE_PAT}` },
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.records || [];
+    do {
+      // Only fetch records where Status is 'Available' to ensure sitemap matches visible pages
+      const filterByFormula = encodeURIComponent("{Status} = 'Available'");
+      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}?filterByFormula=${filterByFormula}${offset ? `&offset=${offset}` : ""}`;
+      
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${AIRTABLE_PAT}` },
+      });
+      
+      if (!res.ok) {
+        console.warn(`Airtable fetch failed with status: ${res.status}`);
+        break;
+      }
+      
+      const data = await res.json();
+      allRecords = [...allRecords, ...(data.records || [])];
+      offset = data.offset;
+    } while (offset);
+    
+    console.log(`Discovered ${allRecords.length} available business names from Airtable.`);
+    return allRecords;
   } catch (err) {
     console.warn("Failed to fetch internal airtable records for discovery:", err);
     return [];
@@ -23,7 +57,6 @@ async function fetchAirtableNames() {
 
 /**
  * Dynamically discovers all application URLs.
- * In the future, this will fetch from Airtable.
  */
 export async function getAppUrls() {
   // 1. Static Pages
@@ -48,7 +81,8 @@ export async function getAppUrls() {
   const nameUrls = airtableRecords.map((item) => {
     const fields = item.fields || {};
     const name = fields["Name"] || "";
-    const slug = fields["Slug"] || name.toLowerCase().replace(/\s+/g, '-');
+    // Favor explicit slug, fallback to generated one
+    const slug = (fields["Slug"] || slugify(name)).toLowerCase().trim();
     const lastModified = fields["Last Modified"] || item.createdTime;
     
     return {
@@ -57,7 +91,7 @@ export async function getAppUrls() {
       changeFrequency: "weekly",
       priority: 0.7,
     };
-  }).filter((i) => !i.url.endsWith("/")); // Ensure valid URL
+  }).filter((i) => i.url && !i.url.endsWith("/names/")); // Ensure valid URL
 
   return [...staticUrls, ...blogUrls, ...nameUrls];
 }

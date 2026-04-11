@@ -1,4 +1,5 @@
 import { fetchAirtableRecords } from "./airtable";
+import { getBusinessSlug } from "./slug-utils";
 
 export interface BusinessName {
   id: string;
@@ -12,8 +13,6 @@ export interface BusinessName {
   slug?: string;
   logo?: string;
 }
-
-
 
 /**
  * Fetches all matching business names from Airtable.
@@ -29,16 +28,19 @@ export async function getBusinessNames(): Promise<BusinessName[]> {
     // Map Airtable records to the BusinessName interface
     return records.map((record: any) => {
       const fields = record.fields || {};
+      const name = fields["Name"] || "";
+      const slugField = fields["Slug"] || "";
+      
       return {
         id: record.id,
-        name: fields["Name"] || "",
+        name: name,
         domain: fields["Domain"] || "",
         category: fields["Category"] || "Other",
         tagline: fields["Tagline"] || "",
         isPremium: Boolean(fields["Is Premium"]),
         description: fields["Description"] || "",
         lastModified: fields["Last Modified"] || record.createdTime,
-        slug: fields["Slug"] || "",
+        slug: getBusinessSlug({ Name: name, Slug: slugField }),
         logo: fields["Logo"] && Array.isArray(fields["Logo"]) && fields["Logo"].length > 0 
           ? fields["Logo"][0].url 
           : undefined,

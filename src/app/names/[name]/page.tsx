@@ -5,6 +5,7 @@ import { PricingSection } from "@/components/PricingSection";
 import { Metadata } from "next";
 import { getBusinessNames } from "@/lib/name-data";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { getBusinessSlug } from "@/lib/slug-utils";
 
 interface NamePageProps {
   params: Promise<{
@@ -15,7 +16,7 @@ interface NamePageProps {
 export async function generateStaticParams() {
   const names = await getBusinessNames();
   return names.map((item) => ({
-    name: item.slug || item.name.toLowerCase().replace(/\s+/g, '-'),
+    name: getBusinessSlug({ Name: item.name, Slug: item.slug }),
   }));
 }
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: NamePageProps): Promise<Metad
     title: `Claim ${name} — Business Name & CAC Registration`,
     description: `Register your business as ${name} with CAC, get a professional logo and a website in 5 days for ₦100k.`,
     alternates: {
-      canonical: `/names/${rawName}`,
+      canonical: `https://fastcac.com/names/${rawName}`,
     },
   };
 }

@@ -12,6 +12,7 @@ interface BusinessNameCardProps {
   onSearchCac?: (name: string) => void;
   isVerifying?: boolean;
   logo?: string;
+  slug?: string;
 }
 
 export const BusinessNameCard = ({ 
@@ -21,12 +22,13 @@ export const BusinessNameCard = ({
   tagline, 
   onSearchCac,
   isVerifying,
-  logo
+  logo,
+  slug
 }: BusinessNameCardProps) => (
   <div className="w-full h-full bg-white border border-outline/10 rounded-2xl shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden flex flex-col">
     {/* Main Link that covers the card */}
     <Link
-      href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
+      href={`/names/${slug || name.toLowerCase().replace(/\s+/g, '-')}`}
       className="absolute inset-0 z-0"
       aria-label={`View details for ${name}`}
     />
@@ -63,7 +65,7 @@ export const BusinessNameCard = ({
       {/* Footer buttons (interactive) */}
       <div className="flex gap-2 pointer-events-auto pt-2 mt-auto">
         <Link 
-          href={`/names/${name.toLowerCase().replace(/\s+/g, '-')}`}
+          href={`/names/${slug || name.toLowerCase().replace(/\s+/g, '-')}`}
           className="flex-1 bg-on-surface text-white py-3 rounded-xl font-headline text-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors relative z-20"
         >
           <span>👉 Get Name</span>
