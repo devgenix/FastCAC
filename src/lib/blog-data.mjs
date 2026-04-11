@@ -98,4 +98,13 @@ export const BLOG_POSTS_DATA = [
     description: "Don't let your business name be struck off. Learn how to file annual returns in 2026, the official deadlines, and the penalties for late filing you need to avoid.",
     thumbnail: "/images/blog/cac-annual-returns-guide.png",
   },
+  {
+    title: "How Much is CAC Registration in Nigeria | 2026 Guide",
+    slug: "how-much-is-cac-registration-nigeria-2026",
+    date: "Apr 14, 2026",
+    readTime: "8 min read",
+    category: "Finance",
+    description: "The complete 2026 breakdown of CAC registration costs in Nigeria. From Business Names to Limited Liability Companies and NGOs.",
+    thumbnail: "/images/blog/how-much-is-cac-registration-nigeria-2026.png",
+  },
 ];
