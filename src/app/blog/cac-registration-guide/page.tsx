@@ -93,6 +93,7 @@ export default function BlogPostPage() {
         date="March 21, 2026"
         readTime="8 min read"
         tocItems={tocItems}
+        currentSlug="cac-registration-guide"
         author={author}
       >
         <div className="space-y-12">

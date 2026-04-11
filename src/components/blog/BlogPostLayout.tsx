@@ -2,7 +2,9 @@
 
 import React, { ReactNode } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { TableOfContents } from "./TableOfContents";
+import { MorePosts } from "./MorePosts";
 import { AuthorBio } from "./AuthorBio";
 import { ArrowRight } from "@/components/Icons";
 import { cn } from "@/lib/utils";
@@ -33,6 +35,8 @@ export function BlogPostLayout({
   tocItems,
   author,
 }: BlogPostLayoutProps) {
+  const pathname = usePathname();
+  const currentSlug = pathname.split("/").pop() || "";
   return (
     <div className="min-h-screen pt-24 pb-20">
       {/* Background decoration */}
@@ -41,7 +45,7 @@ export function BlogPostLayout({
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
       </div>
 
-      <article className="max-w-[1320px] mx-auto section-px">
+      <article className="max-w-[1440px] mx-auto section-px">
         <a 
           href="/blog" 
           className="inline-flex items-center text-sm font-mono text-on-surface/65 hover:text-primary transition-colors mb-8 group"
@@ -82,13 +86,18 @@ export function BlogPostLayout({
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 relative">
-          {/* Main Content */}
-          <div className="flex-1 max-w-[800px]">
-            <div className="prose prose-lg prose-primary max-w-none font-body text-on-surface/80">
-              {children}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 relative">
+          {/* LEFT SIDEBAR: Navigation (TOC) */}
+          <aside className="hidden lg:block lg:col-span-2">
+            <div className="sticky top-32">
+              <TableOfContents items={tocItems} />
             </div>
+          </aside>
 
+          {/* MAIN CONTENT */}
+          <div className="lg:col-span-7 prose prose-lg prose-primary max-w-none font-body text-on-surface/80">
+            {children}
+            
             <hr className="my-16 border-outline/10" />
 
             {/* Author Section */}
@@ -125,9 +134,14 @@ export function BlogPostLayout({
             </div>
           </div>
  
-          {/* Sidebar */}
-          <aside className="w-full lg:w-64 shrink-0">
-            <TableOfContents items={tocItems} />
+          {/* RIGHT SIDEBAR: More Stories */}
+          <aside className="lg:col-span-3">
+            <div className="sticky top-32 space-y-12">
+              <div className="lg:hidden">
+                <TableOfContents items={tocItems} />
+              </div>
+              <MorePosts currentSlug={currentSlug} />
+            </div>
           </aside>
         </div>
       </article>
