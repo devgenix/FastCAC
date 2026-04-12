@@ -19,7 +19,7 @@ export function MorePosts({ currentSlug }: MorePostsProps) {
     <section className="mt-16 space-y-8 animate-fade-up [animation-delay:800ms]">
       <div className="flex items-center gap-4">
         <h3 className="font-headline font-black italic text-xl tracking-tighter uppercase whitespace-nowrap">
-          More <span className="text-primary">Stories</span>
+          More <span className="text-primary">Reads</span>
         </h3>
         <div className="h-[2px] flex-grow bg-outline/10"></div>
       </div>

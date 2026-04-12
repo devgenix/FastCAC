@@ -38,9 +38,9 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <div className="hidden lg:block sticky top-32 h-fit w-64">
-      <div className="text-sm font-mono text-primary uppercase tracking-widest mb-6">Contents</div>
-      <nav className="space-y-4">
+    <div className="hidden lg:block sticky top-32 h-fit max-w-[200px]">
+      <div className="text-[10px] font-mono text-primary uppercase tracking-[0.2em] mb-6">Contents</div>
+      <nav className="space-y-4 pr-4">
         {items.map((item) => (
           <a
             key={item.id}

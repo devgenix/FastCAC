@@ -45,7 +45,7 @@ export function BlogPostLayout({
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
       </div>
 
-      <article className="max-w-[1440px] mx-auto section-px">
+      <article className="max-w-[1320px] mx-auto section-px">
         <a 
           href="/blog" 
           className="inline-flex items-center text-sm font-mono text-on-surface/65 hover:text-primary transition-colors mb-8 group"
