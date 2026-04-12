@@ -5,12 +5,12 @@ import { Check } from "@/components/Icons";
 import React, { useState, useEffect } from "react";
 import { waLink, WA_MESSAGES, getNameMessage } from "@/lib/whatsapp";
 
-type PackageType = "starter" | "pro" | "full";
+type PackageType = "registration" | "starter" | "full";
 
 const PRICES = {
+  registration: 40000,
   starter: 100000,
-  pro: 200000,
-  full: 400000,
+  full: 200000,
 };
 
 const formatPrice = (price: number) => {
@@ -32,48 +32,77 @@ const PACKAGE_CONFIG: Record<PackageType, {
   highlighted?: boolean;
   isPlus?: boolean;
   features: string[];
+  subOptions?: {
+    id: string;
+    label: string;
+    features: string[];
+    waMessage: string;
+    stickyMessage: string;
+  }[];
 }> = {
+  registration: {
+    title: "CAC Registration Only",
+    cta: "Register Now — ₦40,000",
+    stickyLabel: "Register Now",
+    waMessage: WA_MESSAGES.pricingRegistration,
+    stickyMessage: WA_MESSAGES.stickyRegistration,
+    features: [
+      "CAC-registered Business Name",
+      "Official CAC Certificate + TIN",
+      "Digital Certificate Delivery",
+      "Government Fees Included",
+    ],
+  },
   starter: {
-    title: "Name, Logo, Website & CAC",
-    cta: "Get Started — ₦100,000",
-    stickyLabel: "Get Started",
+    title: "Starter Bundle",
+    cta: "Claim Offer — ₦100,000",
+    stickyLabel: "Claim Offer",
     waMessage: WA_MESSAGES.pricingStarter,
     stickyMessage: WA_MESSAGES.stickyStarter,
     badge: "Most Popular",
     highlighted: true,
-    features: [
-      "CAC-registered Business Name",
-      "Official CAC Certificate + TIN",
-      "Professional Logo & Brand Colors",
-      "1-page Business Website",
-      "Business Domain (.com.ng / .ng)",
-    ],
-  },
-  pro: {
-    title: "Established Business",
-    cta: "Start Pro — ₦200,000",
-    stickyLabel: "Start Pro",
-    waMessage: WA_MESSAGES.pricingPro,
-    stickyMessage: WA_MESSAGES.stickyPro,
-    features: [
-      "Everything in Starter+",
-      "Business Email (yourname@yourbiz.com)",
-      "Multi-page Professional Website",
-      "Social Media Profile Setup",
-      "Business Domain (.com)",
+    features: [], // Handled by subOptions
+    subOptions: [
+      {
+        id: "starter",
+        label: "Biz Name + Web",
+        waMessage: WA_MESSAGES.pricingStarter,
+        stickyMessage: WA_MESSAGES.stickyStarter,
+        features: [
+          "Registered Business Name",
+          "Professional Logo & Branding",
+          "1-page Business Website",
+          "Business Domain (.com.ng / .ng)",
+          "Official CAC Cert + TIN",
+        ],
+      },
+      {
+        id: "ltd_only",
+        label: "Company (Ltd) Only",
+        waMessage: WA_MESSAGES.pricingLtdOnly,
+        stickyMessage: WA_MESSAGES.stickyLtdOnly,
+        features: [
+            "CAC Company Incorporation (Ltd)",
+            "Official CAC Certificate + TIN",
+            "Certified True Copies (CTC)",
+            "Memo & Articles of Association",
+            "Government Fees Included",
+        ],
+      },
     ],
   },
   full: {
     title: "Full Company, Fully Done",
-    cta: "Go All-In — ₦400,000",
+    cta: "Go All-In — ₦200,000",
     stickyLabel: "Go All-In",
     waMessage: WA_MESSAGES.pricingFull,
     stickyMessage: WA_MESSAGES.stickyFull,
-    isPlus: true,
+    isPlus: false,
     features: [
-      "Everything in Business Pro+",
-      "CAC Company Incorporation (Ltd)",
+      "Everything in Company Ltd Package",
       "Premium Brand Identity Package",
+      "Multi-page Professional Website",
+      "Business Email (yourname@yourbiz.com)",
       "Corporate Bank Account Opening",
     ],
   },
@@ -81,6 +110,7 @@ const PACKAGE_CONFIG: Record<PackageType, {
 
 export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
   const [selectedPackage, setSelectedPackage] = useState<PackageType>("starter");
+  const [activeSubOption, setActiveSubOption] = useState<string>("starter");
   const [isStickyVisible, setIsStickyVisible] = useState(false);
 
   // Show sticky CTA once the user scrolls past the Hero (~400px)
@@ -94,10 +124,16 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
   }, []);
 
   const selected = PACKAGE_CONFIG[selectedPackage];
+  const currentSubOption = selected.subOptions?.find(opt => opt.id === activeSubOption);
 
   const getWaLink = (packageType: PackageType, defaultMessage: string) => {
+    let typeToUse: string = packageType;
+    if (packageType === "starter") {
+      typeToUse = activeSubOption;
+    }
+
     if (selectedName) {
-      return waLink(getNameMessage(selectedName, packageType));
+      return waLink(getNameMessage(selectedName, typeToUse));
     }
     return waLink(defaultMessage);
   };
@@ -112,7 +148,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
             Join{" "}
             <span className="text-primary">1,200+ businesses.</span>
             <br className="hidden md:block" />
-            Start from &#x20A6;100k.
+            Start from &#x20A6;40k.
           </h2>
           <p className="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto font-medium">
             Name, logo, website &amp; CAC registration — all done for you. Government fees included. No hidden charges.
@@ -128,13 +164,16 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
               title={config.title}
               price={PRICES[type]}
               badge={config.badge}
-              features={config.features}
+              features={config.subOptions ? (config.subOptions.find(o => o.id === activeSubOption)?.features || []) : config.features}
               cta={config.cta}
-              waLink={getWaLink(type, config.waMessage)}
+              waLink={getWaLink(type, config.subOptions ? (config.subOptions.find(o => o.id === activeSubOption)?.waMessage || config.waMessage) : config.waMessage)}
               isSelected={selectedPackage === type}
               onSelect={() => setSelectedPackage(type)}
               highlighted={config.highlighted}
               isPlus={config.isPlus}
+              subOptions={config.subOptions}
+              activeSubOption={activeSubOption}
+              onSubOptionSelect={setActiveSubOption}
             />
           ))}
         </div>
@@ -165,7 +204,7 @@ export const PricingSection = ({ selectedName }: { selectedName?: string }) => {
               {formatPrice(PRICES[selectedPackage])}
             </div>
           </div>
-          <Link href={getWaLink(selectedPackage, selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
+          <Link href={getWaLink(selectedPackage, currentSubOption?.stickyMessage || selected.stickyMessage)} target="_blank" rel="noopener noreferrer">
             <button className="bg-primary text-white px-8 py-5 rounded-xl font-black shadow-[0_8px_20px_rgba(0,122,65,0.3)] active:scale-95 transition-all text-sm uppercase tracking-wider">
               {selected.stickyLabel} →
             </button>
@@ -182,12 +221,15 @@ const PricingCard = ({
   price,
   features,
   cta,
-  waLink: link,
+  waLink,
   isSelected,
   onSelect,
   badge,
   highlighted,
   isPlus,
+  subOptions,
+  activeSubOption,
+  onSubOptionSelect,
 }: {
   type: PackageType;
   title: string;
@@ -200,10 +242,12 @@ const PricingCard = ({
   badge?: string;
   highlighted?: boolean;
   isPlus?: boolean;
+  subOptions?: any[];
+  activeSubOption?: string;
+  onSubOptionSelect?: (id: string) => void;
 }) => (
   <div
     onClick={onSelect}
-// ... (rest of PricingCard unchanged)
     onKeyDown={(e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -232,6 +276,28 @@ const PricingCard = ({
       </div>
     </div>
 
+    {subOptions && (
+      <div className="flex p-1 bg-slate-100 rounded-xl mb-8">
+        {subOptions.map((opt) => (
+          <button
+            key={opt.id}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSubOptionSelect?.(opt.id);
+              onSelect();
+            }}
+            className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all ${
+              activeSubOption === opt.id
+                ? "bg-white text-primary shadow-sm"
+                : "text-slate-500 hover:text-slate-700"
+            }`}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+    )}
+
     <div className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-grow">
       {features.map((feature, i) => (
         <div key={i} className="flex items-center gap-3">
@@ -244,7 +310,7 @@ const PricingCard = ({
     </div>
 
     <Link
-      href={link}
+      href={waLink}
       target="_blank"
       rel="noopener noreferrer"
       onClick={(e) => e.stopPropagation()}

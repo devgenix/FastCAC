@@ -16,8 +16,8 @@ interface HeroProps {
 export function Hero({ title, subtitle, ctaText, waMessage, selectedName }: HeroProps) {
   const defaultTitle = (
     <>
-      Business Name, Logo, Website &amp; CAC —
-      <span className="italic font-mono"> For &#x20A6;100k</span>
+      Register Your Business + Logo & Website —
+      <span className="italic font-mono"> From &#x20A6;40k</span>
     </>
   );
 
@@ -65,7 +65,7 @@ export function Hero({ title, subtitle, ctaText, waMessage, selectedName }: Hero
                   className="w-full sm:w-auto"
                 >
                   <Button className="w-full bg-primary text-white hover:opacity-90 px-8 py-6 h-auto rounded-full font-medium text-lg shadow-xl shadow-black/5 transition-all active:scale-95 group">
-                    {ctaText || "Get My Business Started — ₦100k"}
+                    {ctaText || "Get My Business Started — ₦40k"}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

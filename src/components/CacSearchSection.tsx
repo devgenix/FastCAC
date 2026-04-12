@@ -134,12 +134,24 @@ export function CacSearchSection() {
               <Info className="w-3 h-3 flex-shrink-0" /> <span className="flex-1">Data provided by the Corporate Affairs Commission.</span>
             </p>
             
-            <div className="pt-2">
-              {/* Find/Request a name service (Secondary action) */}
+            <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Pro Tip Card */}
+              <div className="p-4 rounded-xl bg-white border border-outline/10 shadow-sm flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-primary">
+                  <div className="p-1 px-2 rounded-md bg-primary/10 text-[9px] font-mono font-black uppercase tracking-widest">Guide</div>
+                  <span className="text-[10px] font-black uppercase tracking-tight font-headline">Naming Suffixes</span>
+                </div>
+                <p className="text-[10px] text-on-surface/60 leading-relaxed font-medium font-body">
+                  For Business Names, use <span className="text-on-surface font-bold">Ventures</span> or <span className="text-on-surface font-bold">Enterprises</span>. 
+                  For companies, use <span className="text-on-surface font-bold">Limited</span> or <span className="text-on-surface font-bold">Ltd</span>.
+                </p>
+              </div>
+
+              {/* Action Button */}
               <button
                 type="button"
                 onClick={() => router.push('/names#names-search')}
-                className="w-full flex items-center justify-center py-4 rounded-xl border border-primary/20 bg-primary/5 text-primary text-sm font-headline font-bold transition-all hover:bg-primary/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                className="w-full flex items-center justify-center p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary text-sm font-headline font-bold transition-all hover:bg-primary/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 Find or Create a Custom Name <ArrowRight className="ml-2 w-4 h-4" />
               </button>

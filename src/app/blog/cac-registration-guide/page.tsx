@@ -93,7 +93,6 @@ export default function BlogPostPage() {
         date="March 21, 2026"
         readTime="8 min read"
         tocItems={tocItems}
-        currentSlug="cac-registration-guide"
         author={author}
       >
         <div className="space-y-12">
@@ -145,9 +144,9 @@ export default function BlogPostPage() {
               3. Current <span className="text-primary italic">Fee Schedule</span>
             </h2>
             <p className="text-on-surface/70 leading-relaxed text-lg">
-              Effective late 2025, the CAC updated its fee structure. For a standard <strong>Business Name</strong>, 
-              the registration fee is now <strong>₦20,000</strong>. Private Limited Companies (LTD) start 
-              at higher tiers depending on shared capital (minimum ₦100,000 shared capital for local owners).
+              Effective late 2025, the CAC updated its fee structure. At FastCAC, we&apos;ve bundled these government fees into flat, all-inclusive packages. 
+              A standard <strong>Business Name</strong> registration now starts at <strong>₦40,000</strong> (all-in), while 
+              full <strong>Private Limited Companies (Ltd)</strong> start at <strong>₦100,000</strong>.
             </p>
           </section>
 

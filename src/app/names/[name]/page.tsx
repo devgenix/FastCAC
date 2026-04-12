@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: NamePageProps): Promise<Metad
 
   return {
     title: `Claim ${name} — Business Name & CAC Registration`,
-    description: `Register your business as ${name} with CAC, get a professional logo and a website in 5 days for ₦100k.`,
+    description: `Register your business as ${name} with CAC, get a professional logo and a website from ₦40k.`,
     alternates: {
       canonical: `https://fastcac.com/names/${rawName}`,
     },
@@ -67,7 +67,7 @@ export default async function NameDetailPage({ params }: NamePageProps) {
             "@type": "Service",
             "name": "Standard Business Registration Package"
           },
-          "price": "100000",
+          "price": "40000",
           "priceCurrency": "NGN"
         }
       ]

@@ -19,7 +19,7 @@ const testimonials = [
     avatar: "EN",
     color: "from-blue-400 to-indigo-500",
     quote:
-      "Other agencies wanted ₦80k just for CAC filing, then another ₦150k for a website, and another ₦50k for a logo. FastCAC gave me all of that for ₦100k. The quality is genuinely premium. Highly recommend.",
+      "Other agencies were charging crazy fees just for basic filing. I got the full bundle — registration, logo, and website — for just ₦100k with FastCAC. The quality is genuinely premium. Highly recommend.",
   },
   {
     name: "Fatima Bello",

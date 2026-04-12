@@ -30,16 +30,24 @@ const faqs = [
     a: "The Starter package includes a professional 1-page business website with your company details, branding, and contact information. The Business Pro package upgrades this to a multi-page website. All websites are mobile-friendly and go live on your custom domain.",
   },
   {
-    q: "Does the Starter package include a TIN?",
-    a: "Yes. CAC registration automatically generates a Tax Identification Number (TIN) for your business. It is included in your official CAC certificate — you don't need to apply for it separately.",
+    q: "What is the starting price for registration?",
+    a: "Our basic Business Name registration starts at just ₦40,000. This includes all government fees, your official CAC certificate, and your Tax Identification Number (TIN).",
   },
   {
-    q: "What if I already have a business name in mind?",
-    a: "Perfect — just share it with us. We'll check if it's available on the CAC portal. If it is, we register it. If not, we'll suggest close alternatives that are available.",
+    q: "What's the difference between the ₦40k and ₦100k packages?",
+    a: "The ₦40k package is for CAC registration only. The ₦100k Starter Bundle includes registration PLUS a professional logo, a 1-page business website, and a custom domain. Alternatively, you can choose a Limited Company (Ltd) registration for ₦100k.",
   },
   {
-    q: "What is the difference between the Starter and Full Setup packages?",
-    a: "The Starter (₦100k) gives you a Business Name registration — ideal for sole traders and small businesses. The Full Setup (₦400k+) includes a full Limited Liability Company (Ltd) incorporation — ideal for those seeking investment, tenders, or formal corporate contracts. Both include branding and a website.",
+    q: "Does the registration include a TIN?",
+    a: "Yes. Every registration package — whether Business Name (₦40k) or Ltd Company (₦100k+) — automatically generates a Tax Identification Number (TIN). It is included in your official CAC certificate.",
+  },
+  {
+    q: "What is the difference between Business Name and Limited Company (Ltd)?",
+    a: "A Business Name (₦40k) is ideal for sole traders and small shops. A Limited Company (Ltd) (₦100k-₦200k) creates a separate legal entity, which is better for raising investment, bidding for large contracts, and protecting personal assets.",
+  },
+  {
+    q: "Can I upgrade my package later?",
+    a: "Yes! If you start with basic registration now, you can always come back to us later for logo design, website development, or upgrading your business structure as you grow.",
   },
   {
     q: "Can I get a refund if I change my mind?",

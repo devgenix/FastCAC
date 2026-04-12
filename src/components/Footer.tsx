@@ -21,7 +21,7 @@ export function FinalCTA() {
               <span className="underline decoration-secondary decoration-4 underline-offset-8">Today</span>
             </h2>
             <p className="text-lg lg:text-xl text-on-surface/70 mb-12 max-w-2xl mx-auto font-body">
-              Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — in 5 days or less for ₦100,000</span>
+              Get your business name, logo, website, and CAC certificate <span className="font-mono text-secondary font-bold"> — starting from ₦40,000</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -39,6 +39,18 @@ export function FinalCTA() {
                 <Button variant="outline" className="w-full h-14 px-10 rounded-xl font-mono text-xs tracking-widest uppercase transition-all border-outline/20 hover:bg-surface-container-high">
                   {isNamesPage ? "I want a business name" : "Get Business Names"}
                 </Button>
+              </Link>
+            </div>
+
+            {/* Competitive Feature: Sample Proof */}
+            <div className="pt-4">
+              <Link 
+                href={waLink("Hi Team! I'd like to see a sample of the CAC certificate and branding package you delivered for other clients.")} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary hover:underline transition-all font-bold"
+              >
+                See Sample Results & Certificate →
               </Link>
             </div>
           </div>
