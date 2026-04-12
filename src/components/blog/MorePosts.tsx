@@ -36,6 +36,7 @@ export function MorePosts({ currentSlug }: MorePostsProps) {
                 src={post.thumbnail}
                 alt={post.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
