@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { TableOfContents } from "./TableOfContents";
 import { MorePosts } from "./MorePosts";
 import { AuthorBio } from "./AuthorBio";
+import { BlogShare } from "./BlogShare";
 import { ArrowRight } from "@/components/Icons";
 import { cn } from "@/lib/utils";
 
@@ -97,6 +98,8 @@ export function BlogPostLayout({
           {/* MAIN CONTENT */}
           <div className="lg:col-span-7 prose prose-lg prose-primary max-w-none font-body text-on-surface/80">
             {children}
+            
+            <BlogShare title={title} />
             
             <hr className="my-16 border-outline/10" />
 
